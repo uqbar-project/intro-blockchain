@@ -1,5 +1,3 @@
-<iframe width="560" height="315" src="https://www.youtube.com/embed/a-a-5ms5600" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 # Introducción a Smart Contract
 
 Un contrato legal se libra entre dos partes, donde la mayoría de las veces es necesario un tercero como garante de ese acuerdo: escribanos, bancos, inmobiliarias y muchas más entidades se encargan día a día de esta tarea. 
