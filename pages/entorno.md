@@ -14,6 +14,8 @@ Asumimos que tenés instalados en tu máquina
 
 Las tecnologías que vamos a instalar son
 
-* **Geth** (go-ethereum): [Ethereum](https://www.ethereum.org/) es una plataforma open-source que soporta  _smart contracts_ entre pares siguiendo el modelo de Blockchain. Existen varios lenguajes que soportan ethereum, C y Python son algunos, nosotros utilizaremos el que está basado en el lenguaje [Go](https://golang.org/). Para instalarlo [seguí estos pasos](https://github.com/ethereum/go-ethereum/wiki/Installing-Geth)
+* **Geth** (go-ethereum): la plataforma Ethereum implementada en el lenguaje [Go](https://golang.org/). Para instalarlo [seguí estos pasos](https://github.com/ethereum/go-ethereum/wiki/Installing-Geth)
 
 * 
+
+[Volver a la página central](../README.md)
