@@ -34,17 +34,11 @@ Existen denominaciones para diferentes valores, que podemos ver en la siguiente 
 
 Para más información recomendamos ver [esta tabla](https://etherconverter.online/)
 
-## Tipos de mensaje
-
-Una vez que accedemos a una red privada de Ethereum, podemos enviar un mensaje, lo que implica procesar un smart contract con valores concretos. Los tipos de mensaje que existen son:
-
-- pasar ether 
-
 ## Circuito de flujo de un mensaje
 
-Los smart contracts se agrupan hasta formar un bloque, y entonces
+https://github.com/ethereum/wiki/wiki/Ethereum-Development-Tutorial
 
-Cada mensaje que e
+Una vez que accedemos a una red privada de Ethereum, podemos enviar un mensaje, lo que implica procesar un smart contract con valores concretos. Estos mensajes se agrupan hasta formar un bloque, entonces 
 * 
 
 contar nodo Geth que tiene EVM => que corre Smart Contracts
