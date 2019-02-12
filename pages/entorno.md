@@ -31,6 +31,14 @@ Para más detalles recomendamos [ir a la página específica de instalación](ht
 $ npm install -g solc
 ```
 
+* [**Ganache**](https://truffleframework.com/ganache): una aplicación que permite visualizar cuentas, bloques, transacciones y logs en forma visual. También hay una versión por consola:
+
+```bash
+$ npm install -g ganache-cli
+```
+
+Para más información recomendamos leer [esta página](https://truffleframework.com/docs/ganache/quickstart).
+
 ## Configuración
 
 ### Creación del bloque inicial de la blockchain
