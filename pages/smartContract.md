@@ -9,6 +9,6 @@ Algunos ejemplos:
 - una billetera virtual, que no permite transferir más fondos de lo que tiene la cuenta
 - en un sistema de votación, un voto se representa con un _smart contract_ que impide votar a una persona incapacitada, o que sufrague dos veces a una persona que ya emitió su voto
 
-![smart contract](../images/smartContract.png)
+![smart contract](../images/smartContract2.png)
 
 [Volver a la página central](../README.md)
