@@ -40,18 +40,22 @@ Una vez que accedemos a una red privada de Ethereum, podemos enviar un mensaje, 
 
 - pasar ether 
 
-## Circuito de flujo de un mensaje
+## Circuito de flujo de un mensaje => Proof of Work
 
-Los smart contracts se agrupan hasta formar un bloque, y entonces
+![image](../images/Blockchain-Flow-Diagram.jpg)
 
-Cada mensaje que e
-* 
+Los smart contracts se agrupan en transacciones que forman un bloque, y entonces se crea un bloque que se agregará al resto de los bloques que conforman la cadena con la información (por eso el término **blockchain**).
 
-contar nodo Geth que tiene EVM => que corre Smart Contracts
-* qué es el ether => lo que se necesita para correr un Smart Contract, porque el procesamiento sale guita
-* concepto de gas en la red privada, cuenta
+Cada transacción es validada por un proceso llamado **minero**. Este mecanismo de validación
 
+* establece un mecanismo de confianza (consenso) entre todos los nodos
+* evita fraudes o información maliciosa, ya que solamente un bloque **verificado** se puede agregar a la cadena de bloques reconocida
+
+### En qué consiste la validación: **Proof of Work**
+
+El **proof of work** consiste en resolver un algoritmo matemático no trivial. Varios nodos compiten y el primero que lo resuelve es recompensado con un porcentaje de _ether_ de comisión. El algoritmo es asimétrico y solo puede resolverse por fuerza bruta, de esa manera el _ether_ funciona como incentivo para que la red sea segura y no necesite intermediarios.
 
 ## Más información
 
-* [este artículo](https://cryptodigestnews.com/blockchain-basics-what-is-evm-52d83616764)
+* [este artículo cuenta la forma básica de trabajo de la Ethereum Virtual Machine](https://cryptodigestnews.com/blockchain-basics-what-is-evm-52d83616764)
+* [este artículo profundiza sobre la diferencia entre la Proof of Work vs. Proof of Stake](https://blockgeeks.com/guides/proof-of-work-vs-proof-of-stake/)
