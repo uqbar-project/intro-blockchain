@@ -2,12 +2,11 @@
 
 [Ethereum](https://www.ethereum.org/) es una plataforma open-source que soporta  _smart contracts_ entre pares siguiendo el modelo de Blockchain.
 
-![image](../images/EthEcosys2.png)
-
 A continuación vamos a contar los principales conceptos de esta arquitectura:
 
 * objetivo principal
- * smart contract, transacción
+  * smart contract
+  * transacción
 * nodos mineros y EVM
 * ether, gas, medida
 * transacción, bloque, blockchain
@@ -18,19 +17,29 @@ A continuación vamos a contar los principales conceptos de esta arquitectura:
 
 Los objetivos de Ethereum son descentralizar la web, eliminando intermediarios y organismos reguladores. Por lo tanto la arquitectura tiene un esquema _peer-to-peer_, donde cada nodo tiene la misma importancia que los demás en una red Ethereum (en lugar de tener un servidor como fuente central de información).
 
-Un smart contract define una relación contractual entre pares, que se instancia mediante un mensaje o **transacción**. TODO: ejemplo.
+Un smart contract define una relación contractual entre pares, que se instancia mediante un mensaje o **transacción**. Algunos ejemplos posibles de transacción son: un voto electrónico, el valor de venta de una propiedad, el currículum de una persona, el sueldo promedio para un determinado oficio, una billetera electrónica, etc.
 
 ## Nodos
 
-## Ethereum Virtual Machine (EVM)
+### Nodos mineros
 
-Cada nodo tiene instalado un ambiente donde se procesan los smart contracts: la Ethereum Virtual Machine (EVM), que trabaja a nivel bytecodes. Esto implica que un Smart Contract puede estar escrito en [Solidity](https://solidity.readthedocs.io/en/v0.5.3/), [Serpent](https://github.com/ethereum/wiki/wiki/Serpent), [Viper](https://vyper.readthedocs.io/en/latest/), [Lisk](https://lisk.io/) o Chain, cualquiera de estos lenguajes se compila a un bytecode que la máquina virtual de Ethereum puede interpretar.
+Algunos nodos llamados **mineros** cumplen las siguientes funciones:
+
+* validan las transacciones que se generan
+* las agregan a la _blockchain_
+* y notifican a los demás nodos mineros (evitando duplicar información)
+
+Más adelante describiremos con más profundidad el proceso, por el momento es importante saber que cada nodo contiene exactamente la misma información que los demás. Esta redundancia permite asegurar que aunque se caigan los nodos, la _blockchain_ es tolerante a fallos.
+
+### Ethereum Virtual Machine (EVM)
+
+Otros nodos tiene instalado un ambiente donde se procesan los smart contracts: la Ethereum Virtual Machine (EVM), que trabaja a nivel bytecodes. Esto implica que un Smart Contract puede estar escrito en [Solidity](https://solidity.readthedocs.io/en/v0.5.3/), [Serpent](https://github.com/ethereum/wiki/wiki/Serpent), [Viper](https://vyper.readthedocs.io/en/latest/), [Lisk](https://lisk.io/) o Chain, cualquiera de estos lenguajes se compila a un bytecode que la máquina virtual de Ethereum puede interpretar.
 
 ## Ether
 
-El _ether_ es una criptomoneda (también llamado cripto-combustible) que sirve para el intercambio de mensajes dentro de la red Ethereum. Cada vez que queremos procesar un smart contract en la EVM, esto implica un costo computacional que debe pagar el cliente (el que origina ese mensaje), evaluado en una cierta cantidad de _ether_.
+El _ether_ es una criptomoneda (también llamado cripto-combustible) que sirve para el intercambio de mensajes dentro de la red Ethereum. Cada vez que queremos procesar una transacción en la EVM, esto implica un costo computacional que debe pagar el cliente (el que origina la transacción), evaluado en una cierta cantidad de _ether_.
 
-El valor del _ether_ varía como cualquier otra moneda, podemos ver [el valor actual en varios sitios web](https://coinmarketcap.com/es/currencies/ethereum/).
+Al igual que cualquier otra moneda, el _ether_ tiene una cotización que puede consultarse en varios sitios web, por ejemplo [aquí](https://coinmarketcap.com/es/currencies/ethereum/).
 
 ### Medidas de ether
 
@@ -46,10 +55,11 @@ Existen denominaciones para diferentes valores, que podemos ver en la siguiente 
 
 Para más información recomendamos ver [esta tabla](https://etherconverter.online/)
 
-
 ## Circuito de flujo de un mensaje
 
-![image](../images/Blockchain-Flow-Diagram.jpg)
+![image](../images/transactionWorkflow.png)
+
+[](https://medium.com/coinmonks/https-medium-com-ritesh-modi-solidity-chapter1-63dfaff08a11)
 
 https://github.com/ethereum/wiki/wiki/Ethereum-Development-Tutorial
 
