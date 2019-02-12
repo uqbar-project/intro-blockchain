@@ -7,7 +7,9 @@ A continuación vamos a contar los principales conceptos de esta arquitectura:
 * objetivo principal
   * smart contract
   * transacción
-* nodos mineros y EVM
+* nodos
+  * mineros 
+  * ejecutores de contratos, Ethereum Virtual Machine
 * ether, gas, medida
 * transacción, bloque, blockchain
 * proof of work / proof of stake
@@ -31,7 +33,7 @@ Algunos nodos llamados **mineros** cumplen las siguientes funciones:
 
 Más adelante describiremos con más profundidad el proceso, por el momento es importante saber que cada nodo contiene exactamente la misma información que los demás. Esta redundancia permite asegurar que aunque se caigan los nodos, la _blockchain_ es tolerante a fallos.
 
-### Ethereum Virtual Machine (EVM)
+### Nodos que ejecutan contratos
 
 Otros nodos tiene instalado un ambiente donde se procesan los smart contracts: la Ethereum Virtual Machine (EVM), que trabaja a nivel bytecodes. Esto implica que un Smart Contract puede estar escrito en [Solidity](https://solidity.readthedocs.io/en/v0.5.3/), [Serpent](https://github.com/ethereum/wiki/wiki/Serpent), [Viper](https://vyper.readthedocs.io/en/latest/), [Lisk](https://lisk.io/) o Chain, cualquiera de estos lenguajes se compila a un bytecode que la máquina virtual de Ethereum puede interpretar.
 
@@ -65,7 +67,7 @@ https://github.com/ethereum/wiki/wiki/Ethereum-Development-Tutorial
 
 Una vez que accedemos a una red privada de Ethereum, podemos enviar un mensaje, lo que implica procesar un smart contract con valores concretos. Estos mensajes se agrupan hasta formar un bloque, entonces 
 
-## Mineros
+## Proceso minero en detalle
 
 Cada transacción es validada por un proceso llamado **minero**. Este mecanismo de validación
 
