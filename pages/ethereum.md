@@ -4,11 +4,23 @@
 
 ![image](../images/EthEcosys2.png)
 
-A continuación vamos a contar las principales características de este proyecto.
+A continuación vamos a contar los principales conceptos de esta arquitectura:
 
-## Descentralización en nodos de igual jerarquía
+* objetivo principal
+ * smart contract, transacción
+* nodos mineros y EVM
+* ether, gas, medida
+* transacción, bloque, blockchain
+* proof of work / proof of stake
+* repaso del circuito de una transacción en la blockchain
+
+## Objetivo principal de la blockchain
 
 Los objetivos de Ethereum son descentralizar la web, eliminando intermediarios y organismos reguladores. Por lo tanto la arquitectura tiene un esquema _peer-to-peer_, donde cada nodo tiene la misma importancia que los demás en una red Ethereum (en lugar de tener un servidor como fuente central de información).
+
+Un smart contract define una relación contractual entre pares, que se instancia mediante un mensaje o **transacción**. TODO: ejemplo.
+
+## Nodos
 
 ## Ethereum Virtual Machine (EVM)
 
@@ -34,17 +46,16 @@ Existen denominaciones para diferentes valores, que podemos ver en la siguiente 
 
 Para más información recomendamos ver [esta tabla](https://etherconverter.online/)
 
-## Tipos de mensaje
 
-Una vez que accedemos a una red privada de Ethereum, podemos enviar un mensaje, lo que implica procesar un smart contract con valores concretos. Los tipos de mensaje que existen son:
-
-- pasar ether 
-
-## Circuito de flujo de un mensaje => Proof of Work
+## Circuito de flujo de un mensaje
 
 ![image](../images/Blockchain-Flow-Diagram.jpg)
 
-Los smart contracts se agrupan en transacciones que forman un bloque, y entonces se crea un bloque que se agregará al resto de los bloques que conforman la cadena con la información (por eso el término **blockchain**).
+https://github.com/ethereum/wiki/wiki/Ethereum-Development-Tutorial
+
+Una vez que accedemos a una red privada de Ethereum, podemos enviar un mensaje, lo que implica procesar un smart contract con valores concretos. Estos mensajes se agrupan hasta formar un bloque, entonces 
+
+## Mineros
 
 Cada transacción es validada por un proceso llamado **minero**. Este mecanismo de validación
 
