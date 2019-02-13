@@ -4,10 +4,10 @@
 
 A continuación vamos a contar los principales conceptos de esta arquitectura:
 
-* objetivo principal
-  * smart contract
-  * transacción
-* nodos
+* Objetivo Principal
+  * Smart Contract
+  * Transacción
+* Nodos
   * mineros 
   * ejecutores de contratos, Ethereum Virtual Machine
 * ether, gas, medida
@@ -19,15 +19,15 @@ A continuación vamos a contar los principales conceptos de esta arquitectura:
 
 Los objetivos de Ethereum son descentralizar la web, eliminando intermediarios y organismos reguladores. Por lo tanto la arquitectura tiene un esquema _peer-to-peer_, donde cada nodo tiene la misma importancia que los demás en una red Ethereum (en lugar de tener un servidor como fuente central de información).
 
-Un smart contract define una relación contractual entre pares, que se instancia mediante un mensaje o **transacción**. Algunos ejemplos posibles de transacción son: un voto electrónico, el valor de venta de una propiedad, el currículum de una persona, el sueldo promedio para un determinado oficio, una billetera electrónica, etc.
+Un smart contract define una relación contractual entre pares, que se instancia con datos a partir de una **transacción**. Algunos ejemplos posibles son: votar a un candidato, el valor de venta de una propiedad, el currículum de una persona, el sueldo promedio de un oficio determinado, una billetera electrónica, etc.
 
 ## Nodos
 
 ### Nodos mineros
 
-Algunos nodos llamados **mineros** cumplen las siguientes funciones:
+Algunos nodos llamados **mineros**, tienen una gran capacidad de procesamiento, y cumplen las siguientes funciones:
 
-* validan las transacciones que se generan
+* reciben transacciones nuevas que llegan y verifican su validez
 * las agregan a la _blockchain_
 * y notifican a los demás nodos mineros (evitando duplicar información)
 
@@ -35,7 +35,9 @@ Más adelante describiremos con más profundidad el proceso, por el momento es i
 
 ### Nodos que ejecutan contratos
 
-Otros nodos tiene instalado un ambiente donde se procesan los smart contracts: la Ethereum Virtual Machine (EVM), que trabaja a nivel bytecodes. Esto implica que un Smart Contract puede estar escrito en [Solidity](https://solidity.readthedocs.io/en/v0.5.3/), [Serpent](https://github.com/ethereum/wiki/wiki/Serpent), [Viper](https://vyper.readthedocs.io/en/latest/), [Lisk](https://lisk.io/) o Chain, cualquiera de estos lenguajes se compila a un bytecode que la máquina virtual de Ethereum puede interpretar.
+Otros nodos tienen instalado un ambiente donde se procesan los smart contracts: la Ethereum Virtual Machine (EVM), que trabaja a nivel bytecodes. Un Smart Contract puede estar escrito en diferentes lenguajes: [Solidity](https://solidity.readthedocs.io/en/v0.5.3/), [Serpent](https://github.com/ethereum/wiki/wiki/Serpent), [Viper](https://vyper.readthedocs.io/en/latest/), [Lisk](https://lisk.io/) o Chain, cualquiera de estos lenguajes se compila a un bytecode que la máquina virtual de Ethereum puede interpretar.
+
+Un nodo ejecutor puede también ser minero.
 
 ## Ether
 

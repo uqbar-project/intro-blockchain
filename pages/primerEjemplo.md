@@ -1,0 +1,1 @@
+https://rubygarage.org/blog/ethereum-smart-contract-tutorial
