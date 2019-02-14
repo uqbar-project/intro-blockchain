@@ -17,7 +17,7 @@ A continuación vamos a contar los principales conceptos de esta arquitectura:
 * Transacciones
   * Gas
   * Gas price y start gas
-* repaso del circuito de una transacción en la blockchain
+* Circuito de una Transacción en la Blockchain
   * proof of work / proof of stake
 
 ## Objetivo principal de la blockchain
@@ -78,16 +78,26 @@ Para más información recomendamos ver [esta tabla](https://etherconverter.onli
 
 ## Cuentas
 
-Existen dos tipos de cuentas de Ethereum:
+Por el momento existen dos tipos de cuentas de Ethereum:
 
-* **cuentas externas** (EOA: Externally Owned Accounts), que pertenecen a personas físicas, tienen una clave privada.
-* **cuentas de contrato** (Contract Accounts), controladas por un Smart Contract a través del código.
+* **cuentas externas** (EOA: Externally Owned Accounts), que pertenecen a personas físicas, se identifican por la clave privada de dicha cuenta (técnicamente por los primeros 160 caracteres).
+* **cuentas de contrato** (Contract Accounts), las que pertenecen a un Smart Contract, no tienen clave privada sino una dirección pública o _address_ y almacenan código.
+
+Está la idea de unificar las cuentas para que incluso las cuentas de personas estén regidas por código para accederlo. En los próximos años seguramente tendremos novedades.
 
 ## Transacciones
 
-Las transacciones son funciones que toman un estado inicial (S) y producen un cambio final (S') que modifica la blockchain. 
+Las transacciones son funciones que toman un estado inicial (S) y producen un cambio final (S') que modifica la blockchain. Algunas de esas funciones incluyen
 
-Cada una de las operaciones tienen un determinado costo computacional, por ejemplo leer un valor y asignarlo en la memoria, crear una cuenta, transferir una determinada cantidad de ether a otra cuenta, o incluso realizar un ciclo o _loop_, tienen distintos valores que se miden en **gas**, como explicaremos a continuación.
+* transferir ether de una cuenta a otra (cualesquiera sean)
+* el _deploy_ de un Smart Contract por parte de una cuenta externa (así es como se crean)
+* ejecutar una llamada a otra función de un smart contract
+
+Cuando repasemos el circuito de una transacción veremos su estructura.
+
+### Costo computacional
+
+Cada una de las operaciones involucradas en una transacción tienen un determinado costo computacional, por ejemplo leer un valor y asignarlo en la memoria, crear una cuenta, transferir ether, o incluso realizar un ciclo o _loop_, tienen distintos valores que se miden en **gas**, como explicaremos a continuación.
 
 ### Gas
 
@@ -97,21 +107,66 @@ Dado que el ether como toda moneda puede fluctuar mucho su valor, se trabaja en 
 
 La analogía anterior no es exacta, ya que la cantidad de ether que vamos a pagar para que un minero procese y firme la transacción no está regulada, sino que se define en el smart contract a partir de un valor que es **gas price**. Aquí indicamos cuánto estamos dispuestos de ether por unidad de `gas`: como resultado, mientras más estemos dispuestos a pagar, más rápidamente será procesada la transacción, ya que los mineros eligen primero las transacciones que más pagan.
 
-Por otra parte, como queremos evitar ciclos infinitos, tenemos otro valor importante, el **start gas** que indica la cantidad máxima de gas que vamos a pagar por una operación. Si nos encontramos haciendo un loop en donde nos olvidamos de incrementar el índice, en algún momento excederemos el máximo permitido y por lo tanto un smart contract que tiene vulnerabilidades solo nos costará un valor acotado, ya que la EVM hará un rollback de la transacción cobrando únicamente el gas máximo establecido como límite. 
+Por otra parte, como queremos evitar ciclos infinitos, tenemos otro valor importante, el **start gas** que indica la cantidad máxima de gas que vamos a pagar por una operación. Si nos encontramos haciendo un loop en donde nos olvidamos de incrementar el índice, en algún momento excederemos el máximo permitido y por lo tanto un smart contract que tiene vulnerabilidades solo nos costará un valor acotado, ya que la EVM hará un rollback de la transacción cobrando únicamente el gas máximo establecido como límite.
 
-## Circuito de flujo de un mensaje
+Para más información pueden ver este [artículo que cuenta en profundidad la diferencia entre gas y ether con ejemplos prácticos](https://blockgeeks.com/guides/ethereum-gas-step-by-step-guide/).
+
+## Circuito de flujo de una transacción
 
 ![image](../images/transactionWorkflow.png)
 
-[](https://medium.com/coinmonks/https-medium-com-ritesh-modi-solidity-chapter1-63dfaff08a11)
+### Estructura de una transacción
 
-Una vez que accedemos a una red privada de Ethereum, podemos enviar un mensaje, lo que implica procesar un smart contract con valores concretos. Estos mensajes se agrupan hasta formar un bloque, entonces 
+Todo comienza cuando se genera una transacción, que contiene la siguiente estructura
 
-### En qué consiste la validación: **Proof of Work**
+* **from/quién la origina**
+* **to/a quién se dirige:** en el caso de la transferencia es la cuenta de destino, en el caso de la creación de un smart contract este campo está vacío
+* **value:** la cantidad de ether a transferir, en el caso de una transferencia
+* **input:** apunta al bytecode a ejecutar dentro de la EVM para controlar la transacción
+* **blockhash** y **blocknumber**, inicialmente vacíos, cuando una transacción luego se agrupa contiene el identificador o hash del bloque y qué orden ocupa (blocknumber).
+* **gas** o **start gas**: la cantidad de gas que quien origina la transacción envía para procesar el smart contract. Es conveniente proveer el suficiente gas para hacer todas las operaciones, de lo contrario la transacción se echará para atrás e igualmente será necesario pagar a los mineros el costo computacional.
+* **gas price**: el precio que estamos dispuesto a pagar por el gas, como hemos visto anteriormente.
 
-El **proof of work** consiste en resolver un algoritmo matemático no trivial. Varios nodos compiten y el primero que lo resuelve es recompensado con un porcentaje de _ether_ de comisión. El algoritmo es asimétrico y solo puede resolverse por fuerza bruta, de esa manera el _ether_ funciona como incentivo para que la red sea segura y no necesite intermediarios.
+entre otros datos.
 
-## Más información
+### Agrupando la transacción en un bloque
+
+Cuando una transacción se crea, es recibida por todos los nodos mineros de la red, que las agrupan hasta formar un bloque. Cada bloque contiene
+
+* un **hash**, que se basa en el encadenamiento de hashes de las transacciones, acompañado de los campos **difficulty** y **nonce** que explicaremos a continuación
+* **gas used**, que se refiere a la cantidad de combustible utilizado para procesar las transacciones que están en el bloque
+* **gas limit**, el máximo de combustible permitido: esto evita que en un mismo bloque haya muchas transacciones que sean computacionalmente costosas, ya que pasarán a formar parte del próximo bloque. Por ejemplo, si el gas limit es 1.000, y el gas used es 800, si tenemos una transacción de 250 no formará parte de ese bloque.
+* **miner**, el proceso que a la larga será el ganador del proceso de minado
+* **number**, el número correlativo que ocupa el bloque en la _blockchain_
+* **parent hash**, o puntero al bloque anterior
+* **transactions**, apuntando al conjunto de transacciones que conforman el bloque. Por una cuestión de optimización, se trabaja con un árbol binario o **Merkel tree** que permite rápidamente validar el conjunto de transacciones dentro del bloque. Para profundizar más pueden leer [este artículo](https://hackernoon.com/merkle-tree-introduction-4c44250e2da7)
+* **timestamp**, con el momento de creación del bloque
+
+### Firma de la transacción y el bloque
+
+Todos los mineros compiten para ver quién puede crear un bloque válido lo más rápido posible, lo que consiste en resolver un desafío que es el **algoritmo de consenso**. Supongamos que la información que guarda una transacción es "Joni -> Dodain 4 ether", eso produce el siguiente hash
+
+```
+5a04f4d588d8c8c82a4a5a0eeb9eb80af1d4f115395fb21d44f3dcb253977b5a
+```
+
+pero si le agregamos el valor "K", esto produce que el dato sea "Joni -> Dodain 4 etherK" y el hash cambie a
+
+```
+00823dec910b4b60ee5d176bab6cc0f40e301b4d54727537de4973ab864b8e64
+```
+
+Lo que hace cada minero es tomar la información de la transacción + un valor aleatorio de dígitos alfanuméricos y ver qué hash sale. El desafío se resuelve cuando encontramos un hash válido, es decir, cuando el hash **comienza con una serie de x 0 al comienzo de la cadena de caracteres**. Entonces la **dificultad** es la cantidad de ceros iniciales que buscamos y el campo **nonce** son los dígitos necesarios para crear un hash válido. Si la dificultad que buscamos es 2, entonces el nonce posible para la transacción que acabamos de ver en el ejemplo puede ser "K".
+
+La resolución de este desafío o **proof of work** (PoW) requiere únicamente fuerza bruta, lo que permite a cualquier minero potencialmente ganar el combate por el bloque.
+
+### Qué pasa cuando gana un minero
+
+TODO
+
+Para más información, recomendamos leer [este artículo de Ritesh Modi sobre Ethereum](https://medium.com/coinmonks/https-medium-com-ritesh-modi-solidity-chapter1-63dfaff08a11).
+
+## Bibliografía
 
 * [el White Paper de Ethereum](https://github.com/ethereum/wiki/wiki/White-Paper), que sirve como introducción
 * [el Yellow Paper de Ethereum](https://ethereum.github.io/yellowpaper/paper.pdf), de Gavin Wood, que cuenta detalles de implementación
