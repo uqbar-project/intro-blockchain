@@ -18,7 +18,9 @@ A continuación vamos a contar los principales conceptos de esta arquitectura:
   * Gas
   * Gas price y start gas
 * Circuito de una Transacción en la Blockchain
-  * proof of work / proof of stake
+  * Proof of Work
+  * Proof of Stake
+* Esquemas de Seguridad
 
 ## Objetivo principal de la blockchain
 
@@ -133,7 +135,7 @@ entre otros datos.
 
 Cuando una transacción se crea, es recibida por todos los nodos mineros de la red, que las agrupan hasta formar un bloque. Cada bloque contiene
 
-* un **hash**, que se basa en el encadenamiento de hashes de las transacciones, acompañado de los campos **difficulty** y **nonce** que explicaremos a continuación
+* un **hash**, acompañado de los campos **difficulty** y **nonce** que explicaremos a continuación
 * **gas used**, que se refiere a la cantidad de combustible utilizado para procesar las transacciones que están en el bloque
 * **gas limit**, el máximo de combustible permitido: esto evita que en un mismo bloque haya muchas transacciones que sean computacionalmente costosas, ya que pasarán a formar parte del próximo bloque. Por ejemplo, si el gas limit es 1.000, y el gas used es 800, si tenemos una transacción de 250 no formará parte de ese bloque.
 * **miner**, el proceso que a la larga será el ganador del proceso de minado
@@ -142,29 +144,75 @@ Cuando una transacción se crea, es recibida por todos los nodos mineros de la r
 * **transactions**, apuntando al conjunto de transacciones que conforman el bloque. Por una cuestión de optimización, se trabaja con un árbol binario o **Merkel tree** que permite rápidamente validar el conjunto de transacciones dentro del bloque. Para profundizar más pueden leer [este artículo](https://hackernoon.com/merkle-tree-introduction-4c44250e2da7)
 * **timestamp**, con el momento de creación del bloque
 
-### Firma de la transacción y el bloque
+### Proof of work para un bloque
 
-Todos los mineros compiten para ver quién puede crear un bloque válido lo más rápido posible, lo que consiste en resolver un desafío que es el **algoritmo de consenso**. Supongamos que la información que guarda una transacción es "Joni -> Dodain 4 ether", eso produce el siguiente hash
+Todos los mineros compiten para ver quién puede crear un bloque válido lo más rápido posible, lo que consiste en resolver un desafío que es el **algoritmo de consenso**. Para explicar cómo funciona dicho algoritmo, imaginemos que tenemos un campo alfanumérico, por ejemplo "Joni -> Dodain 4 ether", lo que produce el siguiente hash
 
 ```
 5a04f4d588d8c8c82a4a5a0eeb9eb80af1d4f115395fb21d44f3dcb253977b5a
 ```
 
-pero si le agregamos el valor "K", esto produce que el dato sea "Joni -> Dodain 4 etherK" y el hash cambie a
+si le agregamos el valor "K", esto produce que el dato sea "Joni -> Dodain 4 etherK" y el hash cambie a
 
 ```
 00823dec910b4b60ee5d176bab6cc0f40e301b4d54727537de4973ab864b8e64
 ```
 
-Lo que hace cada minero es tomar la información de la transacción + un valor aleatorio de dígitos alfanuméricos y ver qué hash sale. El desafío se resuelve cuando encontramos un hash válido, es decir, cuando el hash **comienza con una serie de x 0 al comienzo de la cadena de caracteres**. Entonces la **dificultad** es la cantidad de ceros iniciales que buscamos y el campo **nonce** son los dígitos necesarios para crear un hash válido. Si la dificultad que buscamos es 2, entonces el nonce posible para la transacción que acabamos de ver en el ejemplo puede ser "K".
+Lo que hace cada minero es generar un hash del bloque combinando de a pares los hashes de todas las transacciones que lo conforman + un valor aleatorio de dígitos alfanuméricos y ver qué hash sale. El desafío se resuelve cuando encontramos un hash válido, es decir, cuando el hash **comienza con una serie de una determinada cantidad de ceros al comienzo de la cadena de caracteres**. Entonces la **dificultad** es la cantidad de ceros iniciales que buscamos y el campo **nonce** son los dígitos necesarios para crear un hash válido. Si la dificultad que buscamos es 2, entonces el valor _nonce_ posible para la transacción que acabamos de ver en el ejemplo puede ser "K".
 
-La resolución de este desafío o **proof of work** (PoW) requiere únicamente fuerza bruta, lo que permite a cualquier minero potencialmente ganar el combate por el bloque.
+La resolución de este desafío o **proof of work** (PoW) requiere únicamente fuerza bruta, lo que permite potencialmente a cualquier minero ganar el combate por el bloque.
 
 ### Qué pasa cuando gana un minero
 
-TODO
+Cuando un minero obtiene el hash adecuado para el bloque
+
+* actualiza el campo _nonce_ en el bloque con el valor que resolvió la _proof of work_ (hay otro campo _nonce_ en la transacción pero permite evitar duplicados en el envío)
+* luego agrega el nuevo bloque a la blockchain, esto implica relacionar el último bloque con el anterior y viceversa
+* cobra su comisión o _fee_ (esta es la única forma de generar ether de la nada, por eso la palabra minero recuerda la idea de "extracción" de un mineral escaso)
+* y por último dispara un broadcast a todos los otros nodos mineros, quienes ejecutarán la validación del bloque con el nuevo campo _nonce_ (operación que es rápida contra lo costoso que es encontrar la _proof of work_) y agregarán el bloque en la blockchain propia de cada nodo.
+
+![image](../images/overallProcess.png)
 
 Para más información, recomendamos leer [este artículo de Ritesh Modi sobre Ethereum](https://medium.com/coinmonks/https-medium-com-ritesh-modi-solidity-chapter1-63dfaff08a11).
+
+## Ataques a la blockchain
+
+### Direct Denial of Service
+
+![image](unages/ddos-attack.png)
+
+En este caso el hacker intenta colar transacciones inválidas a un nodo minero que es la víctima. Este tipo de ataques son frecuentes, pero no produce ningún tipo de pérdida más que la caída del servicio del nodo minero hasta que logra bloquear los ingresos de máquinas infectadas o _zombies_, ya que todas las transacciones son validadas.
+
+### 51% Attack
+
+Otra de las formas posibles para hackear la blockchain consiste en interceptar una transacción y modificar información sensible. Por ejemplo, el usuario Jorge Luis paga 100 ether en concepto de una notebook usada a Fernando. Pero podría interceptar la transacción y modificar el 100 por un 0. Esto produciría que el hash de esa transacción variara drásticamente, con lo que como consecuencia también el hash del bloque se modificará (en el ejemplo de abajo, de W10 pasa a PP4).
+
+![image](blockchain_changed.png)
+
+Como los mineros rápidamente generan nuevos bloques que deben apuntar al bloque anterior, es fácilmente detectable el bloque fraudulento. Para tener éxito, el hacker debe generar tantos bloques falsos como bloques nuevos se hayan añadido a la blockchain:
+
+![image](51_attack.png)
+
+Para lograr este objetivo, debería tener una capacidad mayor a la del resto de los mineros del mundo: por este motivo se lo conoce como **"51% attack"**. No obstante, esta estrategia tiene muchos puntos en contra
+
+1) Necesita una capacidad de procesamiento cuyo costo excede notablemente el beneficio
+2) Dado que no es posible ejercer el control de la blockchain por tiempo indefinido, seguramente se darían de baja los nodos mineros, pero además se reconstruiría la blockchain partiendo de un backup anterior al ataque,
+3) sin contar que el perjuicio a la criptomoneda hace que pierda el sentido seguir invirtiendo tanto esfuerzo y dinero.
+
+Para más información pueden leer estos artículos
+
+* [diferentes tipos de ataque](https://medium.com/coinmonks/what-is-a-51-attack-or-double-spend-attack-aa108db63474).
+* [vulnerabilidades en Ethereum](https://medium.com/coinmonks/blockchain-for-beginners-what-is-blockchain-519db8c6677a).
+
+
+### Proof of Stake
+
+Recientemente Ethereum informó que va a reemplazar el sistema _Proof of Work_ por un algoritmo llamado **Proof of Stake** (PoS), que consiste en eliminar la competencia de mineros y elegir por algún mecanismo determinístico quién genera los nuevos bloques en base a su "prosperidad", asumiendo que el principal interesado en conservar la confianza (y por tanto, el valor) de la criptomoneda es el mejor responsable posible para garantizar las transacciones. Dado que los poseedores de criptomonedas cuentan con una ventaja comparativa enorme respecto de sus competidores, algunas variantes más recientes tratan de democratizar la elección del creador tomando en cuenta el tiempo en el que no fueron seleccionados, números al azar, etc. Es importante señalar que **no hay recompensa por agregar bloques a la cadena**.
+
+El objetivo que está detrás principalmente, es disminuir la necesidad de procesamiento que implica una altísima cantidad de consumo energético (se prevé que en 2020 se estará usando la misma cantidad de energía que Dinamarca). 
+
+Por otra parte, aun hay interrogantes que no quedan claros respecto a cómo responderá ante ataques maliciosos (como un _51% attack_), o cómo se comporta para manejar un algoritmo de consenso descentralizado. Veremos a futuro cómo se desarrollan los avances en este sentido.
+
 
 ## Bibliografía
 
