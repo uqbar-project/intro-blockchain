@@ -82,4 +82,9 @@ $ mkdir data                             # creamos el directorio data...
 $ geth --datadir data init genesis.json  # ...e inicializamos la blockchain en esa carpeta
 ```
 
-[Volver a la página central](../README.md)
+Aunque `data` es bastante representativo, elijan el nombre que quieran.
+
+Ahora podés
+
+* [Levantar la red Ethereum local](./startupEthereumLocal.md)
+* [Volver a la página central](../README.md)
