@@ -179,7 +179,7 @@ Para más información, recomendamos leer [este artículo de Ritesh Modi sobre E
 
 ### Direct Denial of Service
 
-![image](unages/ddos-attack.png)
+![image](../images/ddos-attack.png)
 
 En este caso el hacker intenta colar transacciones inválidas a un nodo minero que es la víctima. Este tipo de ataques son frecuentes, pero no produce ningún tipo de pérdida más que la caída del servicio del nodo minero hasta que logra bloquear los ingresos de máquinas infectadas o _zombies_, ya que todas las transacciones son validadas.
 
@@ -187,11 +187,11 @@ En este caso el hacker intenta colar transacciones inválidas a un nodo minero q
 
 Otra de las formas posibles para hackear la blockchain consiste en interceptar una transacción y modificar información sensible. Por ejemplo, el usuario Jorge Luis paga 100 ether en concepto de una notebook usada a Fernando. Pero podría interceptar la transacción y modificar el 100 por un 0. Esto produciría que el hash de esa transacción variara drásticamente, con lo que como consecuencia también el hash del bloque se modificará (en el ejemplo de abajo, de W10 pasa a PP4).
 
-![image](blockchain_changed.png)
+![image](../images/blockchain_changed.png)
 
 Como los mineros rápidamente generan nuevos bloques que deben apuntar al bloque anterior, es fácilmente detectable el bloque fraudulento. Para tener éxito, el hacker debe generar tantos bloques falsos como bloques nuevos se hayan añadido a la blockchain:
 
-![image](51_attack.png)
+![image](../images/51_attack.png)
 
 Para lograr este objetivo, debería tener una capacidad mayor a la del resto de los mineros del mundo: por este motivo se lo conoce como **"51% attack"**. No obstante, esta estrategia tiene muchos puntos en contra
 
