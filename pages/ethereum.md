@@ -19,8 +19,12 @@ A continuación vamos a contar los principales conceptos de esta arquitectura:
   * Gas price y start gas
 * Circuito de una Transacción en la Blockchain
   * Proof of Work
-  * Proof of Stake
-* Esquemas de Seguridad
+* Ataques a la seguridad
+  * Denial of Service
+  * 51% Attack
+* Proof of Stake
+
+____
 
 ## Objetivo principal de la blockchain
 
