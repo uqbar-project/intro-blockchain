@@ -58,6 +58,10 @@ Algunos nodos llamados _non-miners_ tienen menor capacidad de procesamiento y so
 
 Recientemente se separó la idea de **full node** para nodos que contienen todo el historial de transacciones de blockchain y por lo tanto son totalmente confiables, versus los **light node** que solo contienen el último estado activo de la blockchain. El objetivo que persigue es la escalabilidad de la blockchain conforme crecen exponencialmente las operaciones.
 
+### Para el curioso...
+
+En https://etherscan.io/nodetracker pueden ver todos los nodos alrededor del mundo (en Argentina hay 22...)
+
 ## Ether
 
 El _ether_ es una criptomoneda (también llamado cripto-combustible) que sirve para el intercambio de mensajes dentro de la red Ethereum. Cada vez que queremos procesar una transacción en la EVM, esto implica un costo computacional que debe pagar el cliente (el que origina la transacción), evaluado en una cierta cantidad de _ether_.
@@ -131,6 +135,10 @@ Todo comienza cuando se genera una transacción, que contiene la siguiente estru
 
 entre otros datos.
 
+Si querés investigar, podés ingresar a la dirección https://etherscan.io/txs, y buscar por ejemplo la última transacción haciendo click sobre ella:
+
+![image](../images/trx_structure.png)
+
 ### Agrupando la transacción en un bloque
 
 Cuando una transacción se crea, es recibida por todos los nodos mineros de la red, que las agrupan hasta formar un bloque. Cada bloque contiene
@@ -143,6 +151,10 @@ Cuando una transacción se crea, es recibida por todos los nodos mineros de la r
 * **parent hash**, o puntero al bloque anterior
 * **transactions**, apuntando al conjunto de transacciones que conforman el bloque. Por una cuestión de optimización, se trabaja con un árbol binario o **Merkel tree** que permite rápidamente validar el conjunto de transacciones dentro del bloque. Para profundizar más pueden leer [este artículo](https://hackernoon.com/merkle-tree-introduction-4c44250e2da7)
 * **timestamp**, con el momento de creación del bloque
+
+Podés navegar por la página etherscan hasta llegar a un bloque, como el https://etherscan.io/block/7221830:
+
+![image](../images/block_structure.png)
 
 ### Proof of work para un bloque
 
