@@ -1,5 +1,14 @@
 
-# Levantando la red Ethereum local
+# Iniciando la red Ethereum
+
+Los pasos para tener una red levantada son
+
+* iniciar la red
+* conectarse al nodo por la consola Geth
+* crear una cuenta
+* iniciar el proceso de minado
+
+## Inicio del nodo
 
 Continuando con este [buen tutorial](https://hackernoon.com/set-up-a-private-ethereum-blockchain-and-deploy-your-first-solidity-smart-contract-on-the-caa8334c343d), una vez que [hayas instalado todos los componentes necesarios](./entorno.md), podemos levantar la red Ethereum localmente. Para hacer esto debemos ir al directorio raíz de este proyecto, abrir una terminal y escribir
 
@@ -22,3 +31,101 @@ Otras configuraciones que acabamos de escribir son:
 - **rpc**: habilita HTTP-rpc
 - **rpcapi**: permite utilizar los métodos remotos de web3js en la consola Geth, como veremos a continuación
 
+Esto produce un output similar a éste en nuestra consola
+
+```bash
+INFO [02-16|09:26:09] Maximum peer count                       ETH=0 LES=0 total=0
+INFO [02-16|09:26:09] Starting peer-to-peer node               instance=Geth/v1.8.4-stable-2423ae01/linux-amd64/go1.10
+INFO [02-16|09:26:09] Allocated cache and file handles         database=/home/fernando/workspace/blockchain-2019/intro-blockchain/data/geth/chaindata cache=768 handles=512
+INFO [02-16|09:26:10] Writing default main-net genesis block 
+INFO [02-16|09:26:10] Persisted trie from memory database      nodes=12356 size=2.34mB time=35.681717ms gcnodes=0 gcsize=0.00B gctime=0s livenodes=1 livesize=0.00B
+INFO [02-16|09:26:10] Initialised chain configuration          config="{ChainID: 1 Homestead: 1150000 DAO: 1920000 DAOSupport: true EIP150: 2463000 EIP155: 2675000 EIP158: 2675000 Byzantium: 4370000 Constantinople: <nil> Engine: ethash}"
+INFO [02-16|09:26:10] Disk storage enabled for ethash caches   dir=/home/fernando/workspace/blockchain-2019/intro-blockchain/data/geth/ethash count=3
+INFO [02-16|09:26:10] Disk storage enabled for ethash DAGs     dir=/home/fernando/.ethash                                                     count=2
+INFO [02-16|09:26:10] Initialising Ethereum protocol           versions="[63 62]" network=58343
+INFO [02-16|09:26:10] Loaded most recent local header          number=0 hash=d4e567…cb8fa3 td=17179869184
+INFO [02-16|09:26:10] Loaded most recent local full block      number=0 hash=d4e567…cb8fa3 td=17179869184
+INFO [02-16|09:26:10] Loaded most recent local fast block      number=0 hash=d4e567…cb8fa3 td=17179869184
+INFO [02-16|09:26:10] Regenerated local transaction journal    transactions=0 accounts=0
+INFO [02-16|09:26:10] Starting P2P networking 
+INFO [02-16|09:26:10] RLPx listener up                         self="enode://2a585e1ca4aad8d167446164a05eb1a318dff5f255a35fe215e167df5067d152e566088f90807279d9403697c66e2167104036b3ee49b882fb17f10763363644@[::]:3000?discport=0"
+INFO [02-16|09:26:10] IPC endpoint opened                      url=/home/fernando/workspace/blockchain-2019/intro-blockchain/data/geth.ipc
+INFO [02-16|09:26:10] HTTP endpoint opened                     url=http://127.0.0.1:8543                                                   cors=* vhosts=localhost
+```
+
+## Conectándonos al nodo
+
+Vamos a conectar nuestro primer nodo a la red, utilizando una nueva terminal y el mismo programa `geth`
+
+```
+geth attach http://127.0.0.1:8543
+```
+
+Nos conectamos al equipo local (127.0.0.1) y al puerto que anteriormente definimos en la configuración rpcport.
+
+```bash
+Welcome to the Geth JavaScript console!
+
+instance: Geth/v1.8.4-stable-2423ae01/linux-amd64/go1.10
+ modules: eth:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 web3:1.0
+```
+
+Vemos que el nodo tiene instalados los servicios eth, miner, net, personal, rpc y web3, justamente los que definimos al levantar la red.
+
+## Creando una cuenta
+
+La consola geth permite escribir instrucciones en Javascript dentro de la red, por ejemplo para crear nuestra primera cuenta que represente a una persona:
+
+```bash
+> nuevaCuenta = personal.newAccount('s3cret')
+```
+
+El método [newAccount de personal](https://web3js.readthedocs.io/en/1.0/web3-eth-personal.html#newaccount) permite crear una cuenta, en este caso externa que representaría una persona, pasándole la contraseña (sí, no vamos a usarla en una aplicación http, lo sabemos :)).
+
+Lo que nos devuelve el método es el _address_ de la nueva cuenta: recordemos que las cuentas externas tienen una dirección y una clave privada.
+
+```bash
+> personal.unlockAccount(nuevaCuenta, 's3cret', 15000)
+true
+```
+
+La respuesta nos indica que hemos habilitado la cuenta exitosamente. Y ¿qué podemos hacer con eso? Podemos ver a qué apunta la variable personal
+
+```bash
+> personal
+{
+  listAccounts: ["0xf4a3829a9e96d6bff51fa5df7e409c4579669a39"],
+  listWallets: [{
+  ...
+```
+
+Esto nos da una idea de la estructura interna y de los mensajes que podemos enviarle (los que son funciones). Por ejemplo podemos preguntarle la lista de cuentas:
+
+```bash
+> personal.listAccounts
+["0xf4a3829a9e96d6bff51fa5df7e409c4579669a39"]
+```
+
+Podemos chequear cuánto ether tiene la cuenta que acabamos de crear:
+
+```bash
+> web3.fromWei(eth.getBalance(eth.coinbase), "ether")
+```
+
+## Proceso de minado
+
+Por el momento, nuestro único nodo tiene levantada la EVM (Ethereum Virtual Machine) pero no acepta transacciones; entonces vamos a iniciar el minero para este nodo. Parados siempre en la consola Javascript geth (la segunda terminal), iniciamos dicho proceso:
+
+```bash
+> miner.start()
+null
+```
+
+La respuesta `null` no es muy amigable, pero en la primera terminal vemos reflejada la primera ejecución del proceso minero:
+
+```bash
+INFO [02-16|10:09:59] Starting mining operation 
+INFO [02-16|10:09:59] Commit new mining work                   number=1 txs=0 uncles=0 elapsed=485.43µs
+```
+
+Claro, por el momento no tenemos transacciones (`txs=0`), esto vendrá a continuación.
