@@ -150,3 +150,10 @@ Podemos ver la estructura de nuestro directorio truffle, donde tendremos:
 * un directorio `tests` donde podremos escribir las pruebas unitarias que validen nuestros smart contracts
 * un directorio `migrations` donde tendremos que escribir código en javascript que ayude a Truffle a hacer los deploys a la red Ethereum
 * y un directorio `build` donde dejaremos el resultado de la "compilación"
+
+# Cómo sigo
+
+Podés
+
+* [Ver el primer ejemplo de smart contract, una billetera virtual](./wallet.md)
+* [Volver a la página central](../README.md)
