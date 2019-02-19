@@ -36,7 +36,7 @@ De hecho, [es la configuración que sugiere Truffle](https://truffleframework.co
 
 Veamos el código
 
-```sol
+```js
 pragma solidity ^0.5.0;
 
 /**
