@@ -1,5 +1,5 @@
 
-# Iniciando la red Ethereum
+# Startup del entorno Ethereum local
 
 Los pasos para tener una red levantada son
 
@@ -7,6 +7,7 @@ Los pasos para tener una red levantada son
 * conectarse al nodo por la consola Geth
 * crear una cuenta
 * iniciar el proceso de minado
+* preparar la configuración para desarrollar Smart Contracts
 
 ## Inicio del nodo
 
@@ -131,3 +132,21 @@ INFO [02-16|10:09:59] Commit new mining work                   number=1 txs=0 un
 ```
 
 Claro, por el momento no tenemos transacciones (`txs=0`), esto vendrá a continuación.
+
+## Preparar la configuración para desarrollar Smart Contracts
+
+Por último, vamos a crear un directorio donde podremos desarrollar nuestros smart contracts con la herramienta **Truffle**:
+
+```bash
+$ mkdir truffle   # truffle o cualquier otro nombre que elijan para la carpeta
+$ cd truffle
+$ truffle init    # inicialización de los archivos y directorios de truffle
+```
+
+Podemos ver la estructura de nuestro directorio truffle, donde tendremos:
+
+* un archivo `truffle-config.js` que nos permitirá elegir el lenguaje para compilar los smart contracts (**Solidity**), el framework de testeo unitario (**Mocha**), el puerto y el host al que nos conectaremos para hacer los deploys de los smart contracts, entre otras cosas.
+* un directorio `contracts` donde hay un smart contract que generó Truffle: `Migrations.sol`, y donde estaremos escribiendo nuestras propias definiciones
+* un directorio `tests` donde podremos escribir las pruebas unitarias que validen nuestros smart contracts
+* un directorio `migrations` donde tendremos que escribir código en javascript que ayude a Truffle a hacer los deploys a la red Ethereum
+* y un directorio `build` donde dejaremos el resultado de la "compilación"
