@@ -46,11 +46,12 @@ contract Wallet {
     // mapa
     //   clave => una dirección de Ethereum que representa una persona física
     //   valor => $$$ que tiene
+    // wallet es el nombre de la variable con visibilidad pública
     mapping (address => int256) public wallet;
 
     modifier positive(int256 value) {
         require(value > 0, "El valor a sacar o poner en la billetera debe ser positivo");
-        _;
+        _;  // delegamos la ejecución a la función que la llamó
     }
 
     // poner plata en la billetera
@@ -70,7 +71,44 @@ contract Wallet {
 }
 ```
 
+Algunas observaciones:
+
+* un smart contract tiene ciertas similitudes con una clase, tiene estructura interna y comportamiento definido a partir de funciones
+* en nuestro caso, el dinero que tiene cada persona se almacena en un mapa que relaciona _address_ con un entero que admite negativos. Pueden ver [la lista de tipos que admite Solidity](https://solidity.readthedocs.io/en/latest/types.html). Fíjense que hay una gran cantidad de tipos de dato asociados a números: fixed, ufixed, int256, uint256, int8, int128, etc. y esto tiene que ver con a) el almacenamiento, b) el procesamiento ya que la Virtual Machine nos cobrará más por operaciones que involucren datos más voluminosos que otros.
+* una consecuencia negativa de esto es que el lenguaje está pensado para optimizar el procesamiento: entonces cuando quiero sacar plata y no tengo suficiente efectivo, el mensaje de error es menos representativo de lo que nos gustaría: "No tiene suficiente efectivo". Para mostrar la cantidad de efectivo que tenemos, necesitamos concatenar ese valor con un mensaje de error, y a) solidity no tiene por el momento una operación de concatenación de strings, b) eso obedece a que es una operación costosa, que penaliza a quien envió el mensaje con más gas. Debemos entender esto en el contexto de una base descentralizada, que corre en cientos de miles de nodos con una capacidad de procesamiento acotada.
+* cuando ponemos o sacamos plata, no queremos recibir un valor negativo para ese tipo de operaciones. Lo interesante es que Solidity provee un **modifier**, un decorador que se puede incorporar a una función y que ejecuta código antes o después de ella. Los guiones bajos (`_;`) en el modificador delegan la ejecución a la función que la llamó. Esto permite que escribamos primero alguna validación, o hagamos algo posteriormente.
+* también es interesante la función `require` que es similar al `assert` de algunos frameworks, una forma declarativa de escribir una condición que queremos cumplir y un mensaje de error por el cual salir si esa condición no se satisface
+
+## Testeo de nuestra billetera
+
+### Definición de casos de prueba
+
+Algunas pruebas que podemos hacer
+
+* para probar el retiro de una billetera,
+  * con una billetera de 100 pesos,
+    * el caso feliz: retiramos 20 y nos quedan 80
+    * el caso borde: retiramos 100 y nos queda 0
+    * el caso borde 2: retiramos 0, esperamos un error
+    * el caso inválido 1: queremos retirar -10, esperamos un error
+    * el caso inválido 2: queremos retirar 120, esperamos un error
+* para probar poner plata en una billetera,
+  * con una billetera de 100 pesos,
+    * el caso feliz: ponemos 200 y nos quedan 300
+    * el caso borde: ponemos 0, esperamos un error
+    * el caso inválido: queremos poner -10, esperamos un error
+
+### Implementación
+
+
+
+## Deploy
+
+### Generando el Script
+
+### 
+
+# Otros tutoriales
+
 https://www.codementor.io/swader/developing-for-ethereum-getting-started-with-ganache-l6abwh62j
-
-
 https://rubygarage.org/yblog/ethereum-smart-contract-tutorial
