@@ -15,16 +15,20 @@ contract Wallet {
     }
 
     // poner plata en la billetera
-    function put(int256 howMuch) public positive(howMuch) {
+    function put(int256 howMuch) public 
+        // positive(howMuch)
+        {
         int256 money = wallet[msg.sender];  // por defecto es 0
         money = money + howMuch;
         wallet[msg.sender] = money;
     }
 
     // sacar plata de la billetera
-    function withdraw(int256 howMuch) public positive(howMuch) {
-        int256 money = wallet[msg.sender];  // por defecto es 0
-        require(money >= howMuch, "No hay suficiente efectivo");
+    function withdraw(int256 howMuch) public 
+        //positive(howMuch) 
+        {
+        //int256 money = wallet[msg.sender];  // por defecto es 0
+        //require(money >= howMuch, "No hay suficiente efectivo");
             // podríamos pensar que le falta decir cuánto hay de efectivo, 
             // 1) solidity no trae todavía funciones para concatenar strings
             // 2) deberíamos utilizar alguna biblioteca como 

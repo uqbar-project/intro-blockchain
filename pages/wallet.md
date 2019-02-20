@@ -112,3 +112,4 @@ Algunas pruebas que podemos hacer
 
 https://www.codementor.io/swader/developing-for-ethereum-getting-started-with-ganache-l6abwh62j
 https://rubygarage.org/yblog/ethereum-smart-contract-tutorial
+https://medium.com/bitclave/the-easy-way-to-upgrade-smart-contracts-ba30ba012784
