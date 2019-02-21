@@ -153,7 +153,7 @@ Podemos ver la estructura de nuestro directorio truffle, donde tendremos:
 
 # Cómo sigo
 
-Podés
+Ahora podés
 
 * [Ver el primer ejemplo de smart contract, una billetera virtual](./wallet.md)
 * [Volver a la página central](../README.md)

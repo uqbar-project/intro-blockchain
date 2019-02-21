@@ -11,4 +11,8 @@ Algunos ejemplos:
 
 ![smart contract](../images/smartContract2.png)
 
-[Volver a la página central](../README.md)
+# Cómo sigo
+
+Podés
+
+* [Volver a la página central](../README.md)

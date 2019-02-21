@@ -82,7 +82,9 @@ $ mkdir data                             # creamos el directorio data...
 $ geth --datadir data init genesis.json  # ...e inicializamos la blockchain en esa carpeta
 ```
 
-Aunque `data` es bastante representativo, elijan el nombre que quieran.
+Aunque `data` es bastante representativo, pueden elegir otro nombre si quieren.
+
+## Cómo sigo
 
 Ahora podés
 

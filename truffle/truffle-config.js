@@ -43,10 +43,10 @@ module.exports = {
 
     development: {
       host: "localhost", //our network is running on localhost
-      port: 8543, // port where your blockchain is running
+      port: 8545, // port where your blockchain is running
       network_id: "*",
-      from: "0x023b55d3c8e317d1a8faa3a6b2a19be41771b5d1", // use the account-id generated during the setup process
-      gas: 20000000
+      from: "0x884e8452cd8e45c0A117E6D666C6d1510160441F", // use the account-id generated during the setup process
+      gas: 2000000
     },
 
     // Useful for testing. The `development` name is special - truffle uses it by default

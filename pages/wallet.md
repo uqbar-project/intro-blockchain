@@ -79,37 +79,15 @@ Algunas observaciones:
 * cuando ponemos o sacamos plata, no queremos recibir un valor negativo para ese tipo de operaciones. Lo interesante es que Solidity provee un **modifier**, un decorador que se puede incorporar a una función y que ejecuta código antes o después de ella. Los guiones bajos (`_;`) en el modificador delegan la ejecución a la función que la llamó. Esto permite que escribamos primero alguna validación, o hagamos algo posteriormente.
 * también es interesante la función `require` que es similar al `assert` de algunos frameworks, una forma declarativa de escribir una condición que queremos cumplir y un mensaje de error por el cual salir si esa condición no se satisface
 
-## Testeo de nuestra billetera
-
-### Definición de casos de prueba
-
-Algunas pruebas que podemos hacer
-
-* para probar el retiro de una billetera,
-  * con una billetera de 100 pesos,
-    * el caso feliz: retiramos 20 y nos quedan 80
-    * el caso borde: retiramos 100 y nos queda 0
-    * el caso borde 2: retiramos 0, esperamos un error
-    * el caso inválido 1: queremos retirar -10, esperamos un error
-    * el caso inválido 2: queremos retirar 120, esperamos un error
-* para probar poner plata en una billetera,
-  * con una billetera de 100 pesos,
-    * el caso feliz: ponemos 200 y nos quedan 300
-    * el caso borde: ponemos 0, esperamos un error
-    * el caso inválido: queremos poner -10, esperamos un error
-
-### Implementación
-
-
-
-## Deploy
-
-### Generando el Script
-
-### 
-
 # Otros tutoriales
 
-https://www.codementor.io/swader/developing-for-ethereum-getting-started-with-ganache-l6abwh62j
-https://rubygarage.org/yblog/ethereum-smart-contract-tutorial
-https://medium.com/bitclave/the-easy-way-to-upgrade-smart-contracts-ba30ba012784
+* https://www.codementor.io/swader/developing-for-ethereum-getting-started-with-ganache-l6abwh62j
+* https://rubygarage.org/yblog/ethereum-smart-contract-tutorial
+* https://medium.com/bitclave/the-easy-way-to-upgrade-smart-contracts-ba30ba012784
+
+# Cómo sigo
+
+Podés
+
+* [Ver cómo se resuelve el testeo unitario de la billetera virtual](./walletTest.md)
+* [Volver a la página central](../README.md)
