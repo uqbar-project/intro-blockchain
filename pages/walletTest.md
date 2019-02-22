@@ -19,9 +19,23 @@ Algunas pruebas que podemos hacer
     * el caso borde: ponemos 0, esperamos un error
     * el caso inválido: queremos poner -10, esperamos un error
 
-### Implementación
+## Implementación
 
 Para correrlo, hay que usar ganache o te volvés loco con `Missing trie node`
+
+## Ejecutando los tests
+
+Levantamos primero la aplicación Ganache:
+
+![image](../images/ganache.png)
+
+En la consola escribimos
+
+```bash
+$ cd truffle
+$ truffle compile
+$ truffle test ./test/wallet.js
+```
 
 ## Deploy
 

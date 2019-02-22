@@ -11,7 +11,7 @@ contract Wallet {
 
     // validación general para poner o sacar
     modifier positive(int256 value) {
-        require(value > 0, "El valor a sacar o poner en la billetera debe ser positivo");
+        require(value > 0, "Value must be positive");
         _;
     }
 
@@ -25,7 +25,7 @@ contract Wallet {
     // sacar plata de la billetera
     function withdraw(address owner, int256 howMuch) public positive(howMuch) {
         int256 money = wallet[owner];  // por defecto es 0
-        require(money >= howMuch, "No hay suficiente efectivo");
+        require(money >= howMuch, "Not enough cash");
         money = money - howMuch;
         wallet[owner] = money;
     }

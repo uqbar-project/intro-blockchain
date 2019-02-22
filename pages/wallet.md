@@ -21,7 +21,7 @@ A partir de aquí desarrollaremos
 
 ### El lenguaje del smart contract
 
-Utilizaremos el lenguaje **Solidity** que es el más estable en la comunidad, y que tiene muchas reminiscencias de javascript. Toda la documentación se accede a partir de [este link]((https://solidity.readthedocs.io/)).
+Utilizaremos el lenguaje **Solidity** que es el más estable en la comunidad, y que tiene muchas reminiscencias de javascript. Toda la documentación se accede a partir de [este link](https://solidity.readthedocs.io/)).
 
 ### IDE
 
@@ -49,23 +49,25 @@ contract Wallet {
     // wallet es el nombre de la variable con visibilidad pública
     mapping (address => int256) public wallet;
 
+    // validación general para poner o sacar
     modifier positive(int256 value) {
-        require(value > 0, "El valor a sacar o poner en la billetera debe ser positivo");
+        require(value > 0, "Value must be positive");
         _;  // delegamos la ejecución a la función que la llamó
     }
 
     // poner plata en la billetera
-    function put(int256 howMuch) public positive(howMuch) {
-        int256 money = wallet[msg.sender];  // por defecto es 0
+    function put(address owner, int256 howMuch) public positive(howMuch) {
+        int256 money = wallet[owner];  // por defecto es 0
         money = money + howMuch;
-        wallet[msg.sender] = money;
+        wallet[owner] = money;
     }
 
     // sacar plata de la billetera
-    function withdraw(int256 howMuch) public positive(howMuch) {
-        int256 money = wallet[msg.sender];  // por defecto es 0
-        require(money >= howMuch, "No hay suficiente efectivo");
-        this.put(howMuch * (-1));
+    function withdraw(address owner, int256 howMuch) public positive(howMuch) {
+        int256 money = wallet[owner];  // por defecto es 0
+        require(money >= howMuch, "Not enough cash");
+        money = money - howMuch;
+        wallet[owner] = money;
     }
 
 }
