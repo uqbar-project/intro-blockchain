@@ -32,6 +32,63 @@ La propuesta oficial de Ethereum es trabajar con un IDE online llamado [Remix](h
 
 De hecho, [es la configuración que sugiere Truffle](https://truffleframework.com/tutorials/configuring-visual-studio-code).
 
+## Inicialización de Truffle
+
+[Truffle](https://truffleframework.com/docs/truffle/overview) es un entorno de desarrollo para la EVM (Ethereum Virtual Machine) que nos va a facilitar la compilación, prueba y despliegue de nuestros smart contracts. Para eso, vamos a crear un directorio truffle y ejecutaremos el script de inicialización:
+
+```bash
+$ mkdir truffle
+$ cd truffle
+$ truffle init
+```
+
+Esto nos genera una carpeta truffle con los siguientes subdirectorios:
+
+* **build**: donde estarán los smart contracts "compilados" a JSON para las EVM
+* **contracts**: donde iremos ubicando nuestros propios smart contracts
+* **migrations**: crearemos scripts en javascript para deployar los smart contracts en las EVM de prueba
+* **test**: los tests unitarios escritos en javascript nos permitirán validar nuestros smart contracts
+* además, el archivo `truffle-config.js` contiene información importante, como a cuál EVM nos vamos a conectar para trabajar. Una vez que hayamos instalado ganache, la configuración que debemos seguir es la siguiente
+
+```js
+module.exports = {
+  /**
+   * Networks define how you connect to your ethereum client and let you set the
+   * defaults web3 uses to send transactions. If you don't specify one truffle
+   * will spin up a development blockchain for you on port 9545 when you
+   * run `develop` or `test`. You can ask a truffle command to use a specific
+   * network from the command line, e.g
+   *
+   * $ truffle test --network <network-name>
+   */
+
+  networks: {
+    rpc: {
+      host: "localhost",
+      port: 8543
+    },
+
+    development: {
+      host: "localhost", //our network is running on localhost
+      port: 8545, // port where your blockchain is running
+      network_id: "*",
+      from: "0x884e8452cd8e45c0A117E6D666C6d1510160441F", // use the account-id generated during the setup process
+      gas: 2000000
+    },
+
+    ...
+```
+
+Dejamos toda la configuración por defecto, pero debemos cambiar
+
+* el puerto donde esté levantado Ganache (8545 en nuestro caso)
+* la configuración **from** debe utilizar la primera cuenta que aparezca en la lista de cuentas de Ganache
+* el gas puede ser necesario ajustarlo en base a la complejidad computacional del contrato
+
+Si levantamos Ganache, veremos el puerto, el nombre de la red, el gas actual y la primera de las cuentas que coincide con el valor `from` de nuestra configuración de truffle:
+
+![image](../images/ganache.png)
+
 ## Ahora sí, nuestro primer smart contract
 
 Veamos el código
@@ -81,13 +138,34 @@ Algunas observaciones:
 * cuando ponemos o sacamos plata, no queremos recibir un valor negativo para ese tipo de operaciones. Lo interesante es que Solidity provee un **modifier**, un decorador que se puede incorporar a una función y que ejecuta código antes o después de ella. Los guiones bajos (`_;`) en el modificador delegan la ejecución a la función que la llamó. Esto permite que escribamos primero alguna validación, o hagamos algo posteriormente.
 * también es interesante la función `require` que es similar al `assert` de algunos frameworks, una forma declarativa de escribir una condición que queremos cumplir y un mensaje de error por el cual salir si esa condición no se satisface
 
-# Otros tutoriales
+## Migración
+
+Esta parte es necesaria para poder correr las migraciones a los diferentes entornos presentes, así que vamos a crear un archivo `2_deploy_wallet.js`, donde lo único necesario es el prefijo que indica a truffle el orden en el cual encarar las migraciones (por un tema de dependencias, si un smart contract depende de otro es importante migrarlos en el orden adecuado).
+
+El deploy se escribe de esta manera:
+
+```js
+var Wallet = artifacts.require("./Wallet.sol")
+
+module.exports = function(deployer) {
+   deployer.deploy(Wallet)
+}
+```
+
+Y lo ejecutamos de la siguiente manera
+
+```bash
+$ truffle compile
+$ truffle migrate
+```
+
+## Otros tutoriales
 
 * https://www.codementor.io/swader/developing-for-ethereum-getting-started-with-ganache-l6abwh62j
 * https://rubygarage.org/yblog/ethereum-smart-contract-tutorial
 * https://medium.com/bitclave/the-easy-way-to-upgrade-smart-contracts-ba30ba012784
 
-# Cómo sigo
+## Cómo sigo
 
 Podés
 
