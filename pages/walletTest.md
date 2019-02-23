@@ -86,7 +86,7 @@ async function testRejection(callback, errorMessage) {
 walletSmartContract = await Wallet.new()
 ```
 
-y no 
+y no
 
 ```js
 walletSmartContract = await Wallet.deployed()
@@ -94,7 +94,7 @@ walletSmartContract = await Wallet.deployed()
 
 ya que deployed retorna un **Singleton** y maneja siempre esa instancia, por lo que cuando saquemos o pongamos plata en la billetera eso tendrá efecto en el siguiente test, que es justamente lo que no queremos.
 
-* Otro dato interesante es que todas las llamadas a funciones de un smart contract son asincrónicas, por lo que debemos utilizar **Promises** o encerrarlas dentro de un **async/await**. 
+* Otro dato interesante es que todas las llamadas a funciones de un smart contract son asincrónicas, por lo que debemos utilizar **Promises** o encerrarlas dentro de un **async/await**.
 
 * Para acceder al mapa `wallet` que almacena los balances de cada cuenta, debemos utilizar el mensaje `call` de la siguiente manera: `await walletSmartContract.wallet.call(theAccount)` (por supuesto también en forma asincrónica). Esto evita definir una función que solamente devuelve la variable.
 
@@ -109,8 +109,8 @@ Debemos tener levantada la aplicación Ganache:
 En la consola escribimos
 
 ```bash
-$ cd truffle
-$ truffle test ./test/wallet.js
+cd truffle
+truffle test ./test/wallet.js
 ```
 
 Y eso nos devuelve

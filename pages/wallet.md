@@ -37,9 +37,9 @@ De hecho, [es la configuración que sugiere Truffle](https://truffleframework.co
 [Truffle](https://truffleframework.com/docs/truffle/overview) es un entorno de desarrollo para la EVM (Ethereum Virtual Machine) que nos va a facilitar la compilación, prueba y despliegue de nuestros smart contracts. Para eso, vamos a crear un directorio truffle y ejecutaremos el script de inicialización:
 
 ```bash
-$ mkdir truffle
-$ cd truffle
-$ truffle init
+mkdir truffle
+cd truffle
+truffle init
 ```
 
 Esto nos genera una carpeta truffle con los siguientes subdirectorios:
@@ -155,15 +155,15 @@ module.exports = function(deployer) {
 Y lo ejecutamos de la siguiente manera
 
 ```bash
-$ truffle compile
-$ truffle migrate
+truffle compile
+truffle migrate
 ```
 
 ## Otros tutoriales
 
-* https://www.codementor.io/swader/developing-for-ethereum-getting-started-with-ganache-l6abwh62j
-* https://rubygarage.org/yblog/ethereum-smart-contract-tutorial
-* https://medium.com/bitclave/the-easy-way-to-upgrade-smart-contracts-ba30ba012784
+* [Getting started with ganache](https://www.codementor.io/swader/developing-for-ethereum-getting-started-with-ganache-l6abwh62j)
+* [Ethereum Smart Contract Tutorial](https://rubygarage.org/yblog/ethereum-smart-contract-tutorial)
+* [How to upgrade smart contracts](https://medium.com/bitclave/the-easy-way-to-upgrade-smart-contracts-ba30ba012784)
 
 ## Cómo sigo
 
