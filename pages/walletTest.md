@@ -135,5 +135,5 @@ Compiling ./contracts/Wallet.sol...
 
 Podés
 
-* [Ver cómo se hace el deploy a un entorno](./deploy.md)
+* [Ver cómo se hace el deploy y pruebas manuales a un entorno](./walletDeploy.md)
 * [Volver a la página central](../README.md)

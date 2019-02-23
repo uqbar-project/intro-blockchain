@@ -9,3 +9,4 @@ El presente ejemplo consiste en una aplicación que muestra cómo se define un *
 * [Startup del entorno Ethereum local](pages/startupEthereumLocal.md)
 * [Primer ejemplo de un Smart Contract, la billetera](pages/wallet.md)
 * [Testeo unitario de la billetera](pages/walletTest.md)
+* [Deploy y pruebas manuales a un entorno](pages/walletDeploy.md)
