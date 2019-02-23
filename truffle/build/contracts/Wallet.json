@@ -2198,12 +2198,12 @@
     "58343": {
       "events": {},
       "links": {},
-      "address": "0xf3BBbF5F0EA62270f8D7a5857b520a65c9A2A62C",
-      "transactionHash": "0x33584f99fe77ecfb123382e04618cb47dfe9ebb90c4b202823ebb6ed9cf7dacc"
+      "address": "0x2E6DDED461CAfFFD4f51074Fa895ae87C060b8e0",
+      "transactionHash": "0x483f959418512fae36a507e14a63b6ab8e1675b04875b08a1a698661b5fccf2b"
     }
   },
   "schemaVersion": "3.0.1",
-  "updatedAt": "2019-02-23T03:12:09.397Z",
+  "updatedAt": "2019-02-23T23:05:01.588Z",
   "devdoc": {
     "methods": {}
   },

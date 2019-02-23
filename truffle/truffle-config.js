@@ -66,9 +66,9 @@ module.exports = {
       host: "localhost",
       port: 8543,             // Custom port
       network_id: 58343,      // Custom network
-      gas: 8500000,           // Gas sent with each transaction (default: ~6700000)
+      gas: 6721975,           // Gas sent with each transaction (default: ~6700000)
       gasPrice: 20000000000,  // 20 gwei (in wei) (default: 100 gwei)
-      from: '0x8dc398797aedb28e31aa475c8c3e3dc61365d4c5',      // Account to send txs from (default: accounts[0])
+      from: '0x884e8452cd8e45c0A117E6D666C6d1510160441F',      // Account to send txs from (default: accounts[0])
     },
     // Useful for deploying to a public network.
     // NB: It's important to wrap the provider as a function.

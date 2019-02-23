@@ -1381,12 +1381,12 @@
     "58343": {
       "events": {},
       "links": {},
-      "address": "0xb9666c24F0936563dB43ce1d04eA57C83e87915B",
-      "transactionHash": "0x5dc373650441dc5ea55a24cb3e1d495061f47afd481266974568edf51ef15850"
+      "address": "0xE540246681f819D0651b09b7265CD96e91Bd40DB",
+      "transactionHash": "0x656b8666d33b39b6f17c004c457722a71206a0263e737b6f1efcce4e61fe8cec"
     }
   },
   "schemaVersion": "3.0.1",
-  "updatedAt": "2019-02-23T03:12:09.391Z",
+  "updatedAt": "2019-02-23T23:05:01.589Z",
   "devdoc": {
     "methods": {}
   },

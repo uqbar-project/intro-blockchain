@@ -2,7 +2,27 @@
 
 Ahora que nuestro smart contract pasó las validaciones, podemos intentar deployar en una red privada y hacer pruebas manuales.
 
-Ya debemos tener levantado nuestro nodo y generada una cuenta según se cuenta [en esta página](./startupEthereumLocal.md).
+Para ello, vamos a regenerar nuestra blockchain desde cero. En la terminal nos posicionamos en el directorio raíz de este proyecto y hacemos
+
+```bash
+rm -rf data   // borramos el directorio data donde estaba la blockchain
+mkdir data    // creamos nuevamente el directorio
+geth --datadir data init genesis.json  // inicializamos la blockchain
+```
+
+## Configurando la red live en Ganache
+
+Detenemos el proceso geth iniciado manualmente con el comando `initEth.sh`. Luego desde Ganache GUI, Settings (la ruedita que está a la derecha) => cambiamos el puerto apuntado al 8543 (el que definimos como live)
+
+![image](../images/ganache-configPort.png)
+
+El cliente Ganache nos muestra que tenemos el bloque inicial creado mediante las especificaciones del archivo `genesis.json`:
+
+![image](../images/ganache-block0.png)
+
+En la solapa Accounts buscamos la primera cuenta, y vamos a copiarla para configurar Truffle:
+
+![image](../images/ganache-account0.png)
 
 ## Configuración adicional para Truffle
 
@@ -23,99 +43,109 @@ module.exports = {
       host: "localhost",
       port: 8543,             // Custom port
       network_id: 58343,      // Custom network
-      gas: 8500000,           // Gas sent with each transaction (default: ~6700000)
+      gas: 6721975,           // Gas sent with each transaction (default: ~6700000)
       gasPrice: 20000000000,  // 20 gwei (in wei) (default: 100 gwei)
-      from: '0x8dc398797aedb28e31aa475c8c3e3dc61365d4c5',      // La cuenta que crearon en el inicio
+      from: '0x884e8452cd8e45c0A117E6D666C6d1510160441F',      
+        // La primera cuenta que apareció en Ganache
     },
 ```
 
-## Migración de los contratos y troubleshooting
+
+A continuación vamos a deployar nuestro smart contract apuntando al nodo `live`:
 
 ```bash
-truffle migrate --network live
-```
-
-Si tuvieron algún tipo de error anterior, es posible que les aparezca el siguiente mensaje `Error: Returned values aren't valid, did it run Out of Gas?` en cuyo caso les aconsejamos que intenten
-
-```bash
+cd truffle
 truffle migrate --network live --reset
 ```
 
-Otro error que puede surgir es `"Migrations" -- Returned error: authentication needed: password or unlock.`. Eso quiere decir que no desbloquearon la cuenta que crearon cuando inicializaron la red, esto se corrige ejecutando el siguiente comando desde la consola Geth:
+Después de la migración veremos que hay nuevos bloques en nuestra blockchain `live`:
+
+![image](../images/ganache-block-after-deploy.png)
+
+También las transacciones que involucraron crear contractos y llamadas internas:
+
+![image](../images/ganache-transactions-deployed.png)
+
+### Troubleshooting: gas excede el límite del bloque
+
+Si te aparece este problema
+
+```
+Error:  *** Deployment Failed ***
+
+"Migrations" exceeded the block limit (with a gas value you set).
+   * Block limit:  6721975
+   * Gas sent:     8500000
+   * Try:
+      + Sending less gas.
+      + Setting a higher network block limit if you are on a
+        private network or test client (like ganache).
+
+    at /home/fernando/.nvm/versions/node/v8.10.0/lib/node_modules/truffle/build/webpack:/packages/truffle-deployer/src/deployment.js:364:1
+    at <anonymous>
+    at process._tickCallback (internal/process/next_tick.js:188:7)
+```
+
+es que la cantidad de gas enviada supera la que el bloque puede aceptar, entonces debemos cambiar la configuración en `truffle-config.js`
 
 ```js
-> personal.unlockAccount(web3.eth.coinbase, 's3cret', 15000)
-                                            // o la clave que hayan utilizado para crear la cuenta
+    live: {
+      host: "localhost",
+      port: 8543,
+      network_id: 58343,
+      gas: 6721975,   // <== ajustar al gas soportado por el bloque
 ```
 
-También es importante haber iniciado el proceso de minero, de lo contrario verán que el proceso quedará esperando a que la transacción se complete. En ese caso desde la consola Geth ejecutan
+## 1, 2, 3, probando...
+
+Iniciamos la consola truffle
 
 ```bash
-> miner.start()
+truffle console --network live
 ```
 
-y la transacción se completará exitosamente.
+Y podemos probar nuestra primera transacción
 
-```bash
-
-Starting migrations...
-======================
-> Network name:    'live'
-> Network id:      58343
-> Block gas limit: 26637486
-
-
-1_initial_migration.js
-======================
-
-   Replacing 'Migrations'
-   ----------------------
-   > transaction hash:    0x5dc373650441dc5ea55a24cb3e1d495061f47afd481266974568edf51ef15850
-   > Blocks: 2            Seconds: 80
-   > contract address:    0xb9666c24F0936563dB43ce1d04eA57C83e87915B
-   > account:             0x8dC398797aEdb28e31AA475c8c3E3dc61365d4C5
-   > balance:             8615
-   > gas used:            284908
-   > gas price:           20 gwei
-   > value sent:          0 ETH
-   > total cost:          0.00569816 ETH
-
-
-   > Saving migration to chain.
-   > Saving artifacts
-   -------------------------------------
-   > Total cost:          0.00569816 ETH
-
-
-2_deploy_wallet.js
-==================
-
-   Replacing 'Wallet'
-   ------------------
-   > transaction hash:    0x33584f99fe77ecfb123382e04618cb47dfe9ebb90c4b202823ebb6ed9cf7dacc
-   > Blocks: 0            Seconds: 0
-   > contract address:    0xf3BBbF5F0EA62270f8D7a5857b520a65c9A2A62C
-   > account:             0x8dC398797aEdb28e31AA475c8c3E3dc61365d4C5
-   > balance:             8640
-   > gas used:            336739
-   > gas price:           20 gwei
-   > value sent:          0 ETH
-   > total cost:          0.00673478 ETH
-
-
-   > Saving migration to chain.
-   > Saving artifacts
-   -------------------------------------
-   > Total cost:          0.00673478 ETH
-
-
-Summary
-=======
-> Total deployments:   2
-> Final cost:          0.01243294 ETH
+```js
+> var walletInstance = await Wallet.deployed()
+> walletInstance.put('0x827d7d9BE34748Fa7B146C7d26408580A181650C', 150)
 ```
 
-Como vemos, todo procesamiento tiene un costo, incluso el deploy es una operación para la EVM.
+Como resultado vemos el siguiente output
 
-## 1, 2, 3... probando
+```js
+{ tx: '0xb222ac9c6f1117956e7309365f778340a921fabd7f5b3c9550eed6137bfc8e84',
+  receipt: 
+   { transactionHash: '0xb222ac9c6f1117956e7309365f778340a921fabd7f5b3c9550eed6137bfc8e84',
+     transactionIndex: 0,
+     blockHash: '0xe01cb6cad5106d209f702b2814c57bb6fc44b045b5d47189bd9b5990e6f6888e',
+     blockNumber: 5,
+     from: '0x884e8452cd8e45c0a117e6d666c6d1510160441f',
+     to: '0x2e6dded461cafffd4f51074fa895ae87c060b8e0',
+     gasUsed: 43623,
+     cumulativeGasUsed: 43623,
+     contractAddress: null,
+     logs: [],
+     status: true,
+     logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+     v: '0x1c',
+     r: '0x36733eb9e01b64e1b4398f402e6000900199e0ca0030ae64b1a0b1e21686b676',
+     s: '0x433ff60193a17b8d25976b0ab4deab4424e0ff733a3ec111c9ff33f3bd45e28c',
+     rawLogs: [] },
+  logs: [] }
+```
 
+En Ganache, vemos un nuevo bloque que se incorporó a la blockchain
+
+![image](../images/ganache-blk-wallet-put.png)
+
+Y la transacción en la lista:
+
+![image](../images/ganache-tx-wallet-put.png)
+
+```js
+walletInstance.withdraw('0x827d7d9BE34748Fa7B146C7d26408580A181650C', 125)
+Error: Returned error: VM Exception while processing transaction: revert Not enough cash -- Reason given: Not enough cash.
+```
+
+Ver cómo queda en el log, transacciones y bloques.
