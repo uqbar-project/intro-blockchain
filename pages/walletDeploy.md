@@ -183,7 +183,7 @@ junto con un buen stack trace, algo bueno si vamos a desarrollar una aplicación
 * y se agregó una transacción
 * además en el log podemos ver el mensaje de error
 
-![image](../images/block-after-withdraw-failed.png)
+![image](../images/blocks-after-withdraw-failed.png)
 
 ![image](../images/tx-after-withdraw-failed.png)
 
