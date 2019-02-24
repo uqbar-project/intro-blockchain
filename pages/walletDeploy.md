@@ -135,17 +135,63 @@ Como resultado vemos el siguiente output
   logs: [] }
 ```
 
-En Ganache, vemos un nuevo bloque que se incorporó a la blockchain
+En Ganache, vemos un nuevo bloque que se incorporó a la blockchain (el quinto)
 
 ![image](../images/ganache-blk-wallet-put.png)
 
-Y la transacción en la lista:
+En la solapa transacción vemos la operación put reciente (podemos hacer click y nos lleva al detalle):
 
 ![image](../images/ganache-tx-wallet-put.png)
 
+## Retirar plata
+
+Ahora queremos retirar 25 pesos de esa cuenta:
+
 ```js
-walletInstance.withdraw('0x827d7d9BE34748Fa7B146C7d26408580A181650C', 125)
+walletInstance.withdraw('0x827d7d9BE34748Fa7B146C7d26408580A181650C', 25)
+```
+
+Eso produce la creación de un sexto bloque:
+
+![image](../images/ganache-withdraw.png)
+
+con su correspondiente transacción (que pueden ver en el mismo link del bloque o en la solapa transactions).
+
+Podemos acceder al valor actual de la billetera para esa cuenta:
+
+```js
+walletInstance.wallet.call('0x827d7d9BE34748Fa7B146C7d26408580A181650C')
+<BN: 7d>
+```
+
+`7d` en hexadecimal es 125 en decimal, es decir, el saldo de nuestra billetera tras poner 150 y retirar 25. Vemos que no se generó un bloque nuevo pero sí hubo una transacción asociada al bloque 6, por la operación de lectura
+
+![image](../images/mapping-get-tx.png)
+
+## Operaciones con error
+
+Qué sucede si queremos retirar 250 pesos?
+
+```js
+walletInstance.withdraw('0x827d7d9BE34748Fa7B146C7d26408580A181650C', 250)
 Error: Returned error: VM Exception while processing transaction: revert Not enough cash -- Reason given: Not enough cash.
 ```
 
-Ver cómo queda en el log, transacciones y bloques.
+junto con un buen stack trace, algo bueno si vamos a desarrollar una aplicación. Como resultado
+
+* se generó un séptimo bloque (aunque al revertirse la operación no hubo cambios)
+* y se agregó una transacción
+* además en el log podemos ver el mensaje de error
+
+![image](../images/block-after-withdraw-failed.png)
+
+![image](../images/tx-after-withdraw-failed.png)
+
+![image](../images/logs-after-withdraw-failed.png)
+
+## Cómo sigo
+
+Podés
+
+* [Ver cómo integrar un frontend react con blockchain](./app.md)
+* [Volver a la página central](../README.md)
