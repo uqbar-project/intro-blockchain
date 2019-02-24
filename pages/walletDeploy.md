@@ -45,11 +45,10 @@ module.exports = {
       network_id: 58343,      // Custom network
       gas: 6721975,           // Gas sent with each transaction (default: ~6700000)
       gasPrice: 20000000000,  // 20 gwei (in wei) (default: 100 gwei)
-      from: '0x884e8452cd8e45c0A117E6D666C6d1510160441F',      
+      from: '0x884e8452cd8e45c0A117E6D666C6d1510160441F',
         // La primera cuenta que apareció en Ganache
     },
 ```
-
 
 A continuación vamos a deployar nuestro smart contract apuntando al nodo `live`:
 
@@ -70,7 +69,7 @@ También las transacciones que involucraron crear contractos y llamadas internas
 
 Si te aparece este problema
 
-```
+```js
 Error:  *** Deployment Failed ***
 
 "Migrations" exceeded the block limit (with a gas value you set).
@@ -96,7 +95,7 @@ es que la cantidad de gas enviada supera la que el bloque puede aceptar, entonce
       gas: 6721975,   // <== ajustar al gas soportado por el bloque
 ```
 
-## 1, 2, 3, probando...
+## 1, 2, 3, probando
 
 Iniciamos la consola truffle
 
@@ -115,7 +114,7 @@ Como resultado vemos el siguiente output
 
 ```js
 { tx: '0xb222ac9c6f1117956e7309365f778340a921fabd7f5b3c9550eed6137bfc8e84',
-  receipt: 
+  receipt:
    { transactionHash: '0xb222ac9c6f1117956e7309365f778340a921fabd7f5b3c9550eed6137bfc8e84',
      transactionIndex: 0,
      blockHash: '0xe01cb6cad5106d209f702b2814c57bb6fc44b045b5d47189bd9b5990e6f6888e',

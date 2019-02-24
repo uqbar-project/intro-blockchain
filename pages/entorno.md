@@ -19,22 +19,21 @@ Las tecnologías que vamos a instalar son
 * [**Truffle**](https://truffleframework.com/): una herramienta que facilita el desarrollo, el testeo y la migración de smart contracts. Se instala mediante npm.
 
 ```bash
-$ npm install -g truffle
+npm install -g truffle
 ```
 
 Para más detalles recomendamos [ir a la página específica de instalación](https://truffleframework.com/docs/truffle/getting-started/installation).
 
-
 * [**Solidity**](https://solidity.readthedocs.io/en/v0.5.3/installing-solidity.html), el lenguaje que vamos a utilizar para crear _smart contracts_
 
 ```bash
-$ npm install -g solc
+npm install -g solc
 ```
 
 * [**Ganache**](https://truffleframework.com/ganache): una aplicación que permite visualizar cuentas, bloques, transacciones y logs en forma visual. También hay una versión por consola:
 
 ```bash
-$ npm install -g ganache-cli
+npm install -g ganache-cli
 ```
 
 Para más información recomendamos leer [esta página](https://truffleframework.com/docs/ganache/quickstart).
@@ -46,9 +45,9 @@ Para más información recomendamos leer [esta página](https://truffleframework
 Como hemos visto, todo bloque tiene un link a su bloque padre, el anterior, a excepción del primer bloque que se denomina **genesis block**. Este se configura en un archivo JSON:
 
 ```bash
-$ mkdir project1         # creamos un directorio project1 o cualquier otro nombre...
-$ cd project1            # ...y dentro de este directorio...
-$ touch genesis.json     # ...creamos un archivo de configuración genesis.json
+mkdir project1         # creamos un directorio project1 o cualquier otro nombre...
+cd project1            # ...y dentro de este directorio...
+touch genesis.json     # ...creamos un archivo de configuración genesis.json
 ```
 
 El archivo genesis.json puede tener esta apariencia
@@ -78,8 +77,8 @@ De todos estos parámetros, los más relevantes para comentar son
 A continuación debemos definir en qué dirección residirá la blockchain, para lo cual ejecutaremos comandos bastante sencillos:
 
 ```bash
-$ mkdir data                             # creamos el directorio data...
-$ geth --datadir data init genesis.json  # ...e inicializamos la blockchain en esa carpeta
+mkdir data                             # creamos el directorio data...
+geth --datadir data init genesis.json  # ...e inicializamos la blockchain en esa carpeta
 ```
 
 Aunque `data` es bastante representativo, pueden elegir otro nombre si quieren.
