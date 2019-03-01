@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Alert, Button, Col, Container, Form, FormGroup, Input, InputGroup, InputGroupAddon, Label, Row } from 'reactstrap'
+import { Button, Col, Container, Form, FormGroup, Input, InputGroup, InputGroupAddon, Label, Row } from 'reactstrap'
 import { syncAccount } from '../store/actions'
 import { accounts } from '../store/accounts'
 import { walletContract } from '../setup'
+import { ROUTE_WALLET } from '../App'
+import { ErrorMessage } from './errorMessage'
 
 class LoginForm extends Component {
 
@@ -50,11 +52,7 @@ class LoginForm extends Component {
                         <Col/>
                     </Row>
                     <br/>
-                        {this.state.errorMessage &&
-                            <Alert color="danger">
-                            {this.state.errorMessage}
-                            </Alert>
-                        }
+                    <ErrorMessage message={this.state.errorMessage}/>
                     <br/>
                 </Container>
             </div>
@@ -76,7 +74,7 @@ const mapDispatchToProps = dispatch => {
                     const balance = await walletContract.methods.balance(account.address).call()
                     account.balance = balance
                     dispatch(syncAccount(account))
-                    self.props.history.push('/wallet')
+                    self.props.history.push(ROUTE_WALLET)
                 } else {
                     errorMessage(self, 'Account ' + username + ' not found')
                 }

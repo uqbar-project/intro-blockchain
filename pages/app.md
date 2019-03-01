@@ -70,9 +70,6 @@ Levantamos Ganache y apuntamos al 8545
 
 ## TODO
 
-- manejo de errores de put / withdraw
-- validación de número
-- logout de la app
 - explicación de esta página
 
 ## Otros tutoriales
