@@ -30,4 +30,7 @@ contract Wallet {
         wallet[owner] = money;
     }
 
+    function balance(address owner) public view returns(int256) {
+        return wallet[owner];
+    }
 }

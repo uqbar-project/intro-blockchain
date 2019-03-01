@@ -58,22 +58,42 @@
       "stateMutability": "nonpayable",
       "type": "function",
       "signature": "0x7da7d3f1"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "balance",
+      "outputs": [
+        {
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0xe3d670d7"
     }
   ],
-  "bytecode": "0x608060405234801561001057600080fd5b50610447806100206000396000f3fe608060405260043610610057576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680637da7d3f11461005c578063a56cc439146100b7578063b129a94e1461011c575b600080fd5b34801561006857600080fd5b506100b56004803603604081101561007f57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919080359060200190929190505050610177565b005b3480156100c357600080fd5b50610106600480360360208110156100da57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291905050506102f9565b6040518082815260200191505060405180910390f35b34801561012857600080fd5b506101756004803603604081101561013f57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919080359060200190929190505050610311565b005b806000811315156101f0576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260168152602001807f56616c7565206d75737420626520706f7369746976650000000000000000000081525060200191505060405180910390fd5b60008060008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000205490508281121515156102ab576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252600f8152602001807f4e6f7420656e6f7567682063617368000000000000000000000000000000000081525060200191505060405180910390fd5b8281039050806000808673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000208190555050505050565b60006020528060005260406000206000915090505481565b8060008113151561038a576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260168152602001807f56616c7565206d75737420626520706f7369746976650000000000000000000081525060200191505060405180910390fd5b60008060008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000205490508281019050806000808673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020819055505050505056fea165627a7a7230582005becff8e16d96f9005931010315ccc15dc8f5bb089a45d741a1d40e30d358800029",
-  "deployedBytecode": "0x608060405260043610610057576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680637da7d3f11461005c578063a56cc439146100b7578063b129a94e1461011c575b600080fd5b34801561006857600080fd5b506100b56004803603604081101561007f57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919080359060200190929190505050610177565b005b3480156100c357600080fd5b50610106600480360360208110156100da57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291905050506102f9565b6040518082815260200191505060405180910390f35b34801561012857600080fd5b506101756004803603604081101561013f57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919080359060200190929190505050610311565b005b806000811315156101f0576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260168152602001807f56616c7565206d75737420626520706f7369746976650000000000000000000081525060200191505060405180910390fd5b60008060008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000205490508281121515156102ab576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252600f8152602001807f4e6f7420656e6f7567682063617368000000000000000000000000000000000081525060200191505060405180910390fd5b8281039050806000808673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000208190555050505050565b60006020528060005260406000206000915090505481565b8060008113151561038a576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260168152602001807f56616c7565206d75737420626520706f7369746976650000000000000000000081525060200191505060405180910390fd5b60008060008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000205490508281019050806000808673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020819055505050505056fea165627a7a7230582005becff8e16d96f9005931010315ccc15dc8f5bb089a45d741a1d40e30d358800029",
-  "sourceMap": "88:886:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;88:886:1;;;;;;;",
-  "deployedSourceMap": "88:886:1:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;713:258;;8:9:-1;5:2;;;30:1;27;20:12;5:2;713:258:1;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;713:258:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;234:41;;8:9:-1;5:2;;;30:1;27;20:12;5:2;234:41:1;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;234:41:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;473:199;;8:9:-1;5:2;;;30:1;27;20:12;5:2;473:199:1;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;473:199:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;713:258;778:7;386:1;378:5;:9;370:44;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;797:12;812:6;:13;819:5;812:13;;;;;;;;;;;;;;;;797:28;;873:7;864:5;:16;;856:44;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;926:7;918:5;:15;910:23;;959:5;943:6;:13;950:5;943:13;;;;;;;;;;;;;;;:21;;;;424:1;713:258;;;:::o;234:41::-;;;;;;;;;;;;;;;;;:::o;473:199::-;533:7;386:1;378:5;:9;370:44;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;552:12;567:6;:13;574:5;567:13;;;;;;;;;;;;;;;;552:28;;627:7;619:5;:15;611:23;;660:5;644:6;:13;651:5;644:13;;;;;;;;;;;;;;;:21;;;;424:1;473:199;;;:::o",
-  "source": "pragma solidity ^0.5.0;\n\n/**\n * Smart contract que representa una billetera virtual\n */\ncontract Wallet {\n    // mapa\n    //   clave => una dirección de Ethereum que representa una persona física\n    //   valor => $$$ que tiene\n    mapping (address => int256) public wallet;\n\n    // validación general para poner o sacar\n    modifier positive(int256 value) {\n        require(value > 0, \"Value must be positive\");\n        _;\n    }\n\n    // poner plata en la billetera\n    function put(address owner, int256 howMuch) public positive(howMuch) {\n        int256 money = wallet[owner];  // por defecto es 0\n        money = money + howMuch;\n        wallet[owner] = money;\n    }\n\n    // sacar plata de la billetera\n    function withdraw(address owner, int256 howMuch) public positive(howMuch) {\n        int256 money = wallet[owner];  // por defecto es 0\n        require(money >= howMuch, \"Not enough cash\");\n        money = money - howMuch;\n        wallet[owner] = money;\n    }\n\n}",
+  "bytecode": "0x608060405234801561001057600080fd5b506104ff806100206000396000f3fe608060405260043610610062576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680637da7d3f114610067578063a56cc439146100c2578063b129a94e14610127578063e3d670d714610182575b600080fd5b34801561007357600080fd5b506100c06004803603604081101561008a57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190803590602001909291905050506101e7565b005b3480156100ce57600080fd5b50610111600480360360208110156100e557600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610369565b6040518082815260200191505060405180910390f35b34801561013357600080fd5b506101806004803603604081101561014a57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919080359060200190929190505050610381565b005b34801561018e57600080fd5b506101d1600480360360208110156101a557600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505061048b565b6040518082815260200191505060405180910390f35b80600081131515610260576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260168152602001807f56616c7565206d75737420626520706f7369746976650000000000000000000081525060200191505060405180910390fd5b60008060008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002054905082811215151561031b576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252600f8152602001807f4e6f7420656e6f7567682063617368000000000000000000000000000000000081525060200191505060405180910390fd5b8281039050806000808673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000208190555050505050565b60006020528060005260406000206000915090505481565b806000811315156103fa576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260168152602001807f56616c7565206d75737420626520706f7369746976650000000000000000000081525060200191505060405180910390fd5b60008060008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000205490508281019050806000808673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000208190555050505050565b60008060008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002054905091905056fea165627a7a72305820c53d92b4cb7f1e688fc9baeb0d02e256509c8b99b3d30daaec3baf86d99d18080029",
+  "deployedBytecode": "0x608060405260043610610062576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680637da7d3f114610067578063a56cc439146100c2578063b129a94e14610127578063e3d670d714610182575b600080fd5b34801561007357600080fd5b506100c06004803603604081101561008a57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190803590602001909291905050506101e7565b005b3480156100ce57600080fd5b50610111600480360360208110156100e557600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610369565b6040518082815260200191505060405180910390f35b34801561013357600080fd5b506101806004803603604081101561014a57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919080359060200190929190505050610381565b005b34801561018e57600080fd5b506101d1600480360360208110156101a557600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505061048b565b6040518082815260200191505060405180910390f35b80600081131515610260576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260168152602001807f56616c7565206d75737420626520706f7369746976650000000000000000000081525060200191505060405180910390fd5b60008060008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002054905082811215151561031b576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252600f8152602001807f4e6f7420656e6f7567682063617368000000000000000000000000000000000081525060200191505060405180910390fd5b8281039050806000808673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000208190555050505050565b60006020528060005260406000206000915090505481565b806000811315156103fa576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260168152602001807f56616c7565206d75737420626520706f7369746976650000000000000000000081525060200191505060405180910390fd5b60008060008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000205490508281019050806000808673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000208190555050505050565b60008060008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002054905091905056fea165627a7a72305820c53d92b4cb7f1e688fc9baeb0d02e256509c8b99b3d30daaec3baf86d99d18080029",
+  "sourceMap": "88:988:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;88:988:1;;;;;;;",
+  "deployedSourceMap": "88:988:1:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;713:258;;8:9:-1;5:2;;;30:1;27;20:12;5:2;713:258:1;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;713:258:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;234:41;;8:9:-1;5:2;;;30:1;27;20:12;5:2;234:41:1;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;234:41:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;473:199;;8:9:-1;5:2;;;30:1;27;20:12;5:2;473:199:1;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;473:199:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;977:97;;8:9:-1;5:2;;;30:1;27;20:12;5:2;977:97:1;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;977:97:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;713:258;778:7;386:1;378:5;:9;370:44;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;797:12;812:6;:13;819:5;812:13;;;;;;;;;;;;;;;;797:28;;873:7;864:5;:16;;856:44;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;926:7;918:5;:15;910:23;;959:5;943:6;:13;950:5;943:13;;;;;;;;;;;;;;;:21;;;;424:1;713:258;;;:::o;234:41::-;;;;;;;;;;;;;;;;;:::o;473:199::-;533:7;386:1;378:5;:9;370:44;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;552:12;567:6;:13;574:5;567:13;;;;;;;;;;;;;;;;552:28;;627:7;619:5;:15;611:23;;660:5;644:6;:13;651:5;644:13;;;;;;;;;;;;;;;:21;;;;424:1;473:199;;;:::o;977:97::-;1029:6;1054;:13;1061:5;1054:13;;;;;;;;;;;;;;;;1047:20;;977:97;;;:::o",
+  "source": "pragma solidity ^0.5.0;\n\n/**\n * Smart contract que representa una billetera virtual\n */\ncontract Wallet {\n    // mapa\n    //   clave => una dirección de Ethereum que representa una persona física\n    //   valor => $$$ que tiene\n    mapping (address => int256) public wallet;\n\n    // validación general para poner o sacar\n    modifier positive(int256 value) {\n        require(value > 0, \"Value must be positive\");\n        _;\n    }\n\n    // poner plata en la billetera\n    function put(address owner, int256 howMuch) public positive(howMuch) {\n        int256 money = wallet[owner];  // por defecto es 0\n        money = money + howMuch;\n        wallet[owner] = money;\n    }\n\n    // sacar plata de la billetera\n    function withdraw(address owner, int256 howMuch) public positive(howMuch) {\n        int256 money = wallet[owner];  // por defecto es 0\n        require(money >= howMuch, \"Not enough cash\");\n        money = money - howMuch;\n        wallet[owner] = money;\n    }\n\n    function balance(address owner) public view returns(int256) {\n        return wallet[owner];\n    }\n}",
   "sourcePath": "/home/fernando/workspace/blockchain-2019/intro-blockchain/truffle/contracts/Wallet.sol",
   "ast": {
     "absolutePath": "/home/fernando/workspace/blockchain-2019/intro-blockchain/truffle/contracts/Wallet.sol",
     "exportedSymbols": {
       "Wallet": [
-        141
+        153
       ]
     },
-    "id": 142,
+    "id": 154,
     "nodeType": "SourceUnit",
     "nodes": [
       {
@@ -93,9 +113,9 @@
         "contractKind": "contract",
         "documentation": "Smart contract que representa una billetera virtual",
         "fullyImplemented": true,
-        "id": 141,
+        "id": 153,
         "linearizedBaseContracts": [
-          141
+          153
         ],
         "name": "Wallet",
         "nodeType": "ContractDefinition",
@@ -105,7 +125,7 @@
             "id": 62,
             "name": "wallet",
             "nodeType": "VariableDeclaration",
-            "scope": 141,
+            "scope": 153,
             "src": "234:41:1",
             "stateVariable": true,
             "storageLocation": "default",
@@ -239,10 +259,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        159,
-                        160
+                        171,
+                        172
                       ],
-                      "referencedDeclaration": 160,
+                      "referencedDeclaration": 172,
                       "src": "370:7:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -656,7 +676,7 @@
               "parameters": [],
               "src": "542:0:1"
             },
-            "scope": 141,
+            "scope": 153,
             "src": "473:199:1",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -827,10 +847,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        159,
-                        160
+                        171,
+                        172
                       ],
-                      "referencedDeclaration": 160,
+                      "referencedDeclaration": 172,
                       "src": "856:7:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -1115,27 +1135,161 @@
               "parameters": [],
               "src": "787:0:1"
             },
-            "scope": 141,
+            "scope": 153,
             "src": "713:258:1",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 151,
+              "nodeType": "Block",
+              "src": "1037:37:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "baseExpression": {
+                      "argumentTypes": null,
+                      "id": 147,
+                      "name": "wallet",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 62,
+                      "src": "1054:6:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_mapping$_t_address_$_t_int256_$",
+                        "typeString": "mapping(address => int256)"
+                      }
+                    },
+                    "id": 149,
+                    "indexExpression": {
+                      "argumentTypes": null,
+                      "id": 148,
+                      "name": "owner",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 142,
+                      "src": "1061:5:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "IndexAccess",
+                    "src": "1054:13:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "functionReturnParameters": 146,
+                  "id": 150,
+                  "nodeType": "Return",
+                  "src": "1047:20:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 152,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "balance",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 143,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 142,
+                  "name": "owner",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 152,
+                  "src": "994:13:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 141,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "994:7:1",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "993:15:1"
+            },
+            "returnParameters": {
+              "id": 146,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 145,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 152,
+                  "src": "1029:6:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  },
+                  "typeName": {
+                    "id": 144,
+                    "name": "int256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1029:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1028:8:1"
+            },
+            "scope": 153,
+            "src": "977:97:1",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
           }
         ],
-        "scope": 142,
-        "src": "88:886:1"
+        "scope": 154,
+        "src": "88:988:1"
       }
     ],
-    "src": "0:974:1"
+    "src": "0:1076:1"
   },
   "legacyAST": {
     "absolutePath": "/home/fernando/workspace/blockchain-2019/intro-blockchain/truffle/contracts/Wallet.sol",
     "exportedSymbols": {
       "Wallet": [
-        141
+        153
       ]
     },
-    "id": 142,
+    "id": 154,
     "nodeType": "SourceUnit",
     "nodes": [
       {
@@ -1155,9 +1309,9 @@
         "contractKind": "contract",
         "documentation": "Smart contract que representa una billetera virtual",
         "fullyImplemented": true,
-        "id": 141,
+        "id": 153,
         "linearizedBaseContracts": [
-          141
+          153
         ],
         "name": "Wallet",
         "nodeType": "ContractDefinition",
@@ -1167,7 +1321,7 @@
             "id": 62,
             "name": "wallet",
             "nodeType": "VariableDeclaration",
-            "scope": 141,
+            "scope": 153,
             "src": "234:41:1",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1301,10 +1455,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        159,
-                        160
+                        171,
+                        172
                       ],
-                      "referencedDeclaration": 160,
+                      "referencedDeclaration": 172,
                       "src": "370:7:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -1718,7 +1872,7 @@
               "parameters": [],
               "src": "542:0:1"
             },
-            "scope": 141,
+            "scope": 153,
             "src": "473:199:1",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -1889,10 +2043,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        159,
-                        160
+                        171,
+                        172
                       ],
-                      "referencedDeclaration": 160,
+                      "referencedDeclaration": 172,
                       "src": "856:7:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -2177,18 +2331,152 @@
               "parameters": [],
               "src": "787:0:1"
             },
-            "scope": 141,
+            "scope": 153,
             "src": "713:258:1",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 151,
+              "nodeType": "Block",
+              "src": "1037:37:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "baseExpression": {
+                      "argumentTypes": null,
+                      "id": 147,
+                      "name": "wallet",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 62,
+                      "src": "1054:6:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_mapping$_t_address_$_t_int256_$",
+                        "typeString": "mapping(address => int256)"
+                      }
+                    },
+                    "id": 149,
+                    "indexExpression": {
+                      "argumentTypes": null,
+                      "id": 148,
+                      "name": "owner",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 142,
+                      "src": "1061:5:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "IndexAccess",
+                    "src": "1054:13:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "functionReturnParameters": 146,
+                  "id": 150,
+                  "nodeType": "Return",
+                  "src": "1047:20:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 152,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "balance",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 143,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 142,
+                  "name": "owner",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 152,
+                  "src": "994:13:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 141,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "994:7:1",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "993:15:1"
+            },
+            "returnParameters": {
+              "id": 146,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 145,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 152,
+                  "src": "1029:6:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  },
+                  "typeName": {
+                    "id": 144,
+                    "name": "int256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1029:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1028:8:1"
+            },
+            "scope": 153,
+            "src": "977:97:1",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
           }
         ],
-        "scope": 142,
-        "src": "88:886:1"
+        "scope": 154,
+        "src": "88:988:1"
       }
     ],
-    "src": "0:974:1"
+    "src": "0:1076:1"
   },
   "compiler": {
     "name": "solc",
@@ -2198,12 +2486,12 @@
     "58343": {
       "events": {},
       "links": {},
-      "address": "0x2E6DDED461CAfFFD4f51074Fa895ae87C060b8e0",
-      "transactionHash": "0x483f959418512fae36a507e14a63b6ab8e1675b04875b08a1a698661b5fccf2b"
+      "address": "0x2C008875Ae8B76C71755a2F4b961Ecb08049C647",
+      "transactionHash": "0x75e6f3a305934c0413a0e3a9b683ba9da239eb5611663de0da2c8809a0494299"
     }
   },
   "schemaVersion": "3.0.1",
-  "updatedAt": "2019-02-23T23:05:01.588Z",
+  "updatedAt": "2019-03-01T02:12:15.056Z",
   "devdoc": {
     "methods": {}
   },
