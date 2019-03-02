@@ -68,7 +68,7 @@ Cuando levantemos una instancia de Ganache, en nuestro caso en el puerto 8545, t
 
 ![image](../images/demoWallet2.gif)
 
-## Cómo funciona el login
+### Cómo funciona el login
 
 ![image](../images/wallet-login.png)
 
@@ -81,7 +81,80 @@ Internamente el login maneja como estado usuario y password (tiene un binding bi
 
 Por motivos didácticos simplificamos el login, donde ni siquiera hay validación de contraseña.
 
-## Formulario que muestra la billetera
+### Formulario que muestra la billetera
+
+![image](../images/wallet-wallet.png)
+
+En el formulario de la billetera, tanto el nombre de usuario como el saldo salen del store de Redux. Además, tenemos como estado interno _amount_ (el monto a poner o sacar de la billetera) y un _errorMessage_ para las operaciones.
+
+En el caso de poner (put) o sacar (withdraw) plata, se dispara un método interno que
+
+* delega la acción put/withdraw al _walletContract_ de web3. Es decir, que el código de negocio está escrito en el Smart Contract, en el lenguaje Solidity. 
+* Esta es una decisión de diseño, para no repetir la misma operación en React: en ningún momento se suma o resta al saldo de la cuenta. Esto permite por ejemplo no duplicar las validaciones
+* Otro aspecto importante es que todas las llamadas a web3 **son asincrónicas**, por lo tanto, no pueden ser invocadas en las acciones de Redux que necesita mantener el sincronismo
+* La forma entonces de recuperar el saldo actual, es haciendo otra llamada para obtener el saldo, al igual que hicimos en el login
+* Una vez obtenido el saldo, disparamos la acción **syncAccount** de Redux, que produce el efecto en el store y provoca un render del label que muestra el saldo de la cuenta
+* Por último, inicializamos el state del formulario, blanqueando el monto a ingresar y el mensaje de error, lo que produce un render de dichos campos del formulario
+
+## Llamadas a web3: call vs. transaction
+
+Antes que nada, podríamos haber definido un backend para trabajar las llamadas a web3, pero preferimos mantener la arquitectura lo más simple posible. 
+
+### Call
+
+Veamos cómo se resuelve la llamada para obtener el balance:
+
+```js
+const balance = await walletContract.methods.balance(account.address).call()
+```
+
+En general [hay varias formas de resolver la llamada](https://web3js.readthedocs.io/en/1.0/web3-eth-contract.html#id12), pero la que mejor resultado nos dio fue seguir la sintaxis:
+
+```js
+objetoSmartContract.methods.metodoAEjecutar(parametros).call()
+```
+
+donde call() debe invocarse sin parámetros, que van seguidos al método a ejecutar. Recordemos que el objeto walletContract se obtiene en el archivo setup:
+
+```js
+const walletContract = new web3
+    .eth
+    .Contract(walletABI, walletAddress)
+```
+
+Esta es una operación que no produce un nuevo bloque en la blockchain, es simplemente una consulta, por eso se define en el Smart Contract como un método `view`:
+
+```js
+    function balance(address owner) public view returns(int256) {
+        return wallet[owner];
+    }
+```
+
+### Transaction
+
+Por otra parte, al poner plata en la billetera sí debemos utilizar el gas para pagar dicha transacción:
+
+```js
+await walletContract.methods.put(account.address, amount).send({ from: txAccount })
+```
+
+A partir de Web3 1.0.0 el método `sendTransaction` se reemplazó por `send`, donde es necesario pasar una dirección que tenga suficiente gas para pagar la operación. Para eso, hay que seguir estos pasos:
+
+1) Desde Ganache, solapa Accounts, buscamos alguna de las direcciones que viene cuando levanta la aplicación:
+
+![image](../images/ganache-accounts.png)
+
+Por ejemplo, podemos elegir la primera. Copiamos ese address.
+
+2) Lo pegamos en la variable `txAccount` del archivo `setup.js`
+
+```js
+export const txAccount = '0x884e8452cd8e45c0A117E6D666C6d1510160441F'
+```
+
+## TODO: Lista de pendientes
+
+* Hacer testeo unitario y testeo de los formularios con Jest
 
 ## Otros tutoriales
 
