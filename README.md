@@ -10,3 +10,4 @@ El presente ejemplo consiste en una aplicación que muestra cómo se define un *
 * [Primer ejemplo de un Smart Contract, la billetera](pages/wallet.md)
 * [Testeo unitario de la billetera](pages/walletTest.md)
 * [Deploy y pruebas manuales a un entorno](pages/walletDeploy.md)
+* [Aplicación React: Billetera contra una blockchain](pages/app.md)
