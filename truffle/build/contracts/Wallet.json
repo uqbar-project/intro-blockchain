@@ -2486,12 +2486,12 @@
     "58343": {
       "events": {},
       "links": {},
-      "address": "0x2C008875Ae8B76C71755a2F4b961Ecb08049C647",
-      "transactionHash": "0x75e6f3a305934c0413a0e3a9b683ba9da239eb5611663de0da2c8809a0494299"
+      "address": "0x2E6DDED461CAfFFD4f51074Fa895ae87C060b8e0",
+      "transactionHash": "0x5398504fafa40f2386c86d6df1edf23560437bd2ad9d90c357dac6cec75479f7"
     }
   },
   "schemaVersion": "3.0.1",
-  "updatedAt": "2019-03-01T02:12:15.056Z",
+  "updatedAt": "2019-03-02T03:09:40.940Z",
   "devdoc": {
     "methods": {}
   },

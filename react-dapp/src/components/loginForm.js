@@ -23,7 +23,6 @@ class LoginForm extends Component {
             <div>
                 <Container fluid>
                     <Row>
-                        <Col/>
                         <Col>
                             <Form>
                                 <br/>
@@ -49,7 +48,6 @@ class LoginForm extends Component {
                                 </FormGroup>
                             </Form>
                         </Col>
-                        <Col/>
                     </Row>
                     <br/>
                     <ErrorMessage message={this.state.errorMessage}/>

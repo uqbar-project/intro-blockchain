@@ -11,26 +11,16 @@ JSON.stringify(Wallet.abi) // abi => Application Binary Interface
 
 El output será importante en breve.
 
-## Creando la aplicación React
+## Aplicación React
 
-En la consola de nuestro sistema operativo escribimos
+La creamos mediante CRA (create-react-app), con los siguientes componentes
 
-```bash
-create-react-app react-dapp  // tienen que haber hecho npm i -g create-react-app previamente
-```
+* router de React
+* Redux store
+* Reactstrap o componentes React de Bootstrap
+* y la biblioteca web3, que nos permite conectarnos al nodo Ethereum
 
-Agregamos la biblioteca web3, que nos permite conectarnos al nodo Ethereum:
-
-```bash
-cd react-dapp
-npm i web3
-```
-
-Y además vamos a trabajar con componentes de frontend de ...
-
-```bash
-npm i antd
-```
+Pueden ver el archivo `package.json` para más información.
 
 ## Definiendo el setup
 
@@ -39,7 +29,7 @@ Crearemos un archivo setup, donde tomaremos la configuración según el archivo 
 ```js
 import Web3 from 'web3'
 
-const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8543"))
+const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"))
     // hay que usar el puerto y host que tiene truffle-config.js
 let walletABI = ... 
     // copiar el output de la consola truffle cuando se ejecutó el comando
@@ -48,10 +38,9 @@ let walletABI = ...
     // y copiarlo nuevamente porque no estarán publicadas las funciones
 
 ...
-let walletAddress = '0x2C008875Ae8B76C71755a2F4b961Ecb08049C647'
-    // la cuenta o valor que sale de
-
-![image](../images/deDondeSacarContractAddress.png)
+let walletAddress = ...
+    // la cuenta o valor que sale del contract address una vez deployado en la EVM como Ganache
+    // como veremos a continuación
 
 web3.eth.defaultAccount = web3.eth.accounts[0]
 
@@ -62,11 +51,22 @@ const walletContract = web3
 export {walletContract}
 ```
 
-## Agregamos una función más para obtener el balance en forma más cómoda
+![image](../images/deDondeSacarContractAddress.png)
 
-## Ganache
+## Repaso de tareas previas a levantar la app
 
-Levantamos Ganache y apuntamos al 8545
+Cuando levantemos una instancia de Ganache, en nuestro caso en el puerto 8545, tenemos que
+
+* como en este caso agregamos una función para recuperar el saldo de una _address_, debemos primero compilar el smart contract con `truffle compile` y recuperar el nuevo `abi` (o de lo contrario el componente web3 no encontrará las funciones nuevas que acabamos de crear)
+* deployar los smart contracts en la EVM con `truffle migrate --reset`
+* modificar en el archivo `setup.js` la variable `walletAddress` con el address del Smart Contract, para sincronizar nuestro `Wallet.sol` con la aplicación React
+* reiniciar la aplicación con `npm start`
+
+![image](../images/demoWallet1.gif)
+
+## Demo de la app
+
+![image](../images/demoWallet2.gif)
 
 ## TODO
 

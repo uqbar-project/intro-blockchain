@@ -77,7 +77,7 @@ let walletABI = [
     }
 ]
 
-export const walletAddress = '0x2C008875Ae8B76C71755a2F4b961Ecb08049C647'
+export const walletAddress = '0x2E6DDED461CAfFFD4f51074Fa895ae87C060b8e0'
 web3.eth.defaultAccount = web3.eth.accounts[0]
 
 const walletContract = new web3

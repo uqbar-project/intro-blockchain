@@ -24,7 +24,6 @@ class WalletForm extends Component {
             <div>
                 <Container fluid>
                     <Row>
-                        <Col/>
                         <Col>
                             <Form>
                                 <br/>
@@ -36,8 +35,8 @@ class WalletForm extends Component {
                                 <hr/>
                                 <FormGroup>
                                     <InputGroup>
-                                        <InputGroupAddon addonType="prepend">@</InputGroupAddon>
-                                        <Input placeholder="username"
+                                        <InputGroupAddon addonType="prepend">$</InputGroupAddon>
+                                        <Input placeholder="amount"
                                             type="number"
                                             value={this.state.amount}
                                             onChange={(e) => this.setState({
@@ -55,7 +54,6 @@ class WalletForm extends Component {
                             <br/>
                             <ErrorMessage message={this.state.errorMessage}/>
                         </Col>
-                        <Col/>
                     </Row>
                 </Container>
             </div>
