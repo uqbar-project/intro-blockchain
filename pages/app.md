@@ -132,13 +132,13 @@ Esta es una operación que no produce un nuevo bloque en la blockchain, es simpl
 
 ### Transaction
 
-Por otra parte, al poner plata en la billetera sí debemos utilizar el gas para pagar dicha transacción:
+Por otra parte, poner plata en la billetera es una operación que requiere una cuenta que pague la operación. Por lo tanto, no podemos utilizar el mensaje `call()`, sino `send()`:
 
 ```js
 await walletContract.methods.put(account.address, amount).send({ from: txAccount })
 ```
 
-A partir de Web3 1.0.0 el método `sendTransaction` se reemplazó por `send`, donde es necesario pasar una dirección que tenga suficiente gas para pagar la operación. Para eso, hay que seguir estos pasos:
+Para invocar al mensaje `send` (anteriormente `sendTransaction`), es necesario pasar una dirección que tenga suficiente gas para realizar la operación. Eso se consigue mediante estos pasos:
 
 1) Desde Ganache, solapa Accounts, buscamos alguna de las direcciones que viene cuando levanta la aplicación:
 
