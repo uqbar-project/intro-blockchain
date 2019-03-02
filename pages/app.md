@@ -68,9 +68,20 @@ Cuando levantemos una instancia de Ganache, en nuestro caso en el puerto 8545, t
 
 ![image](../images/demoWallet2.gif)
 
-## TODO
+## Cómo funciona el login
 
-- explicación de esta página
+![image](../images/wallet-login.png)
+
+Internamente el login maneja como estado usuario y password (tiene un binding bidireccional de ambos campos), además de mostrar mensajes de error con un componente custom. Al hacer click sobre el botón "Login" se dispara un método interno que
+
+* busca la cuenta asociada al username ingresado por el usuario
+* con el objeto cuenta encontrado, hace la consulta por _address_ a la billetera mediante una llamada al objeto _walletContract_ generado por web3 que como resultado nos devolverá el _balance_ (saldo) de la cuenta
+* esto dispara la acción **sync_account** que le asigna la cuenta (con el saldo actual) al _store_ de Redux
+* por último utilizamos el router de React para llevarnos a `/wallet`
+
+Por motivos didácticos simplificamos el login, donde ni siquiera hay validación de contraseña.
+
+## Formulario que muestra la billetera
 
 ## Otros tutoriales
 

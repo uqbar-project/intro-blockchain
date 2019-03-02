@@ -5,6 +5,6 @@ export const accountReducer = (state, { reducer = (state) => state }) => {
     return reducer(state)
 }
 
-const store = createStore(accountReducer, { account: EMPTY_ACCOUNT, errorMessage: '' })
+const store = createStore(accountReducer, { account: EMPTY_ACCOUNT })
 
 export default store

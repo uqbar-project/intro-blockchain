@@ -1,7 +1,5 @@
-export const LOGIN = 'LOGIN'
+export const SYNC_ACCOUNT = 'SYNC_ACCOUNT'
 export const LOGOUT = 'LOGOUT'
-export const PUT = 'PUT'
-export const WITHDRAW = 'WITHDRAW'
 
 export const EMPTY_ACCOUNT = {
     address: '',
@@ -12,7 +10,7 @@ export const EMPTY_ACCOUNT = {
 
 export function syncAccount(account) {
     return {
-        type: LOGIN,
+        type: SYNC_ACCOUNT,
         reducer: (state) => {
             return {
                 ...state,
