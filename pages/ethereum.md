@@ -48,7 +48,7 @@ Para poder procesar las transacciones, cuentan con una Virtual Machine propia de
 
 ### EVM: Ethereum Virtual Machine
 
-Es el ambiente donde se procesan las operaciones primitivas de los smart contracts: la Ethereum Virtual Machine (EVM), que trabaja a nivel bytecodes. Un Smart Contract puede estar escrito en diferentes lenguajes: [Solidity](https://solidity.readthedocs.io/en/v0.5.3/), [Serpent](https://github.com/ethereum/wiki/wiki/Serpent), [Viper](https://vyper.readthedocs.io/en/latest/), [Lisk](https://lisk.io/) o Chain, cualquiera de estos lenguajes se compila a un bytecode que la máquina virtual de Ethereum puede interpretar.
+El ambiente donde se procesan las operaciones primitivas de los smart contracts es la Ethereum Virtual Machine (EVM), que trabaja a nivel bytecodes. Un Smart Contract puede estar escrito en diferentes lenguajes: [Solidity](https://solidity.readthedocs.io/en/v0.5.3/), [Serpent](https://github.com/ethereum/wiki/wiki/Serpent), [Viper](https://vyper.readthedocs.io/en/latest/), [Lisk](https://lisk.io/) o Chain, cualquiera de estos lenguajes se compila a un bytecode que la máquina virtual de Ethereum puede interpretar.
 
 Algo interesante de remarcar es que la EVM está pensada para trabajar 
 
@@ -64,7 +64,7 @@ Recientemente se separó la idea de **full node** para nodos que contienen todo 
 
 ### Para el curioso...
 
-En https://etherscan.io/nodetracker pueden ver todos los nodos alrededor del mundo (en Argentina hay 22...)
+En https://etherscan.io/nodetracker pueden ver todos los nodos alrededor del mundo (en Argentina hay 25 aunque eso puede ir variando...)
 
 ## Ether
 
@@ -111,13 +111,13 @@ Cada una de las operaciones involucradas en una transacción tienen un determina
 
 ### Gas
 
-Dado que el ether como toda moneda puede fluctuar mucho su valor, se trabaja en un valor fijo llamado **gas**. De la misma manera que uno llena el tanque del auto en una estación de servicio, eso implica 20 litros de combustible, y el valor depende de cuánto esté el litro de nafta, de esa misma manera se le paga al minero la transacción en base a la cantidad de "combustible" que estuvo utilizando para las operaciones. En ese caso, el minero actúa como estación de servicio, el combustible es el **gas** (que en inglés no necesita traducción) y nuestro auto es el conjunto de operaciones provisto como código dentro de un smart contract.
+Dado que el ether como toda moneda puede fluctuar mucho su valor, se trabaja en un valor fijo llamado **gas**. De la misma manera que uno llena el tanque del auto en una estación de servicio, eso implica 20 litros de combustible, y el valor depende de cuánto esté el litro de nafta, de esa misma manera se le paga al minero la transacción en base a la cantidad de "combustible" que estuvo utilizando para las operaciones. En ese caso, el minero actúa como estación de servicio, el combustible es el **gas** y nuestro auto es el conjunto de operaciones provisto como código dentro de un smart contract.
 
 ### Gas price y Start gas
 
 La analogía anterior no es exacta, ya que la cantidad de ether que vamos a pagar para que un minero procese y firme la transacción no está regulada, sino que se define en el smart contract a partir de un valor que es **gas price**. Aquí indicamos cuánto estamos dispuestos de ether por unidad de `gas`: como resultado, mientras más estemos dispuestos a pagar, más rápidamente será procesada la transacción, ya que los mineros eligen primero las transacciones que más pagan.
 
-Por otra parte, como queremos evitar ciclos infinitos, tenemos otro valor importante, el **start gas** que indica la cantidad máxima de gas que vamos a pagar por una operación. Si nos encontramos haciendo un loop en donde nos olvidamos de incrementar el índice, en algún momento excederemos el máximo permitido y por lo tanto un smart contract que tiene vulnerabilidades solo nos costará un valor acotado, ya que la EVM hará un rollback de la transacción cobrando únicamente el gas máximo establecido como límite.
+Por otra parte, como queremos evitar ciclos infinitos, tenemos otro valor importante, el **start gas** que indica la cantidad máxima de gas que vamos a pagar por una operación. Si nos encontramos haciendo un loop en donde nos olvidamos de incrementar el índice, en algún momento excederemos el máximo permitido y la EVM hará un rollback de la transacción cobrando únicamente el gas máximo establecido como límite. Por lo tanto un smart contract que tiene vulnerabilidades solo nos costará un valor acotado en ether. 
 
 Para más información pueden ver este [artículo que cuenta en profundidad la diferencia entre gas y ether con ejemplos prácticos](https://blockgeeks.com/guides/ethereum-gas-step-by-step-guide/).
 
