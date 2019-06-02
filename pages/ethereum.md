@@ -150,7 +150,7 @@ Cuando una transacción se crea, es recibida por todos los nodos mineros de la r
 * un **hash**, acompañado de los campos **difficulty** y **nonce** que explicaremos a continuación
 * **gas used**, que se refiere a la cantidad de combustible utilizado para procesar las transacciones que están en el bloque
 * **gas limit**, el máximo de combustible permitido: esto evita que en un mismo bloque haya muchas transacciones que sean computacionalmente costosas, ya que pasarán a formar parte del próximo bloque. Por ejemplo, si el gas limit es 1.000, y el gas used es 800, si tenemos una transacción de 250 no formará parte de ese bloque.
-* **miner**, el proceso que a la larga será el ganador del proceso de minado
+* **miner**, el nodo que a la larga será el ganador del proceso de minado
 * **number**, el número correlativo que ocupa el bloque en la _blockchain_
 * **parent hash**, o puntero al bloque anterior
 * **transactions**, apuntando al conjunto de transacciones que conforman el bloque. Por una cuestión de optimización, se trabaja con un árbol binario o **Merkel tree** que permite rápidamente validar el conjunto de transacciones dentro del bloque. Para profundizar más pueden leer [este artículo](https://hackernoon.com/merkle-tree-introduction-4c44250e2da7)
@@ -201,11 +201,11 @@ En este caso el hacker intenta colar transacciones inválidas a un nodo minero q
 
 ### 51% Attack
 
-Otra de las formas posibles para hackear la blockchain consiste en interceptar una transacción y modificar información sensible. Por ejemplo, el usuario Jorge Luis paga 100 ether en concepto de una notebook usada a Fernando. Pero podría interceptar la transacción y modificar el 100 por un 0. Esto produciría que el hash de esa transacción variara drásticamente, con lo que como consecuencia también el hash del bloque se modificará (en el ejemplo de abajo, de W10 pasa a PP4).
+Otra de las formas posibles para hackear la blockchain consiste en interceptar una transacción y modificar información sensible. Por ejemplo, el usuario Jorge Luis paga 100 ether en concepto de una notebook usada a Fernando. Pero podría interceptar la transacción y modificar el 100 por un 0. Esto produciría que el hash de esa transacción variara drásticamente, con lo que como consecuencia también el hash del bloque se modificará (en el ejemplo de abajo, de 9BZ pasa a PP4).
 
 ![image](../images/blockchain_changed.png)
 
-Como los mineros rápidamente generan nuevos bloques que deben apuntar al bloque anterior, es fácilmente detectable el bloque fraudulento. Para tener éxito, el hacker debe generar tantos bloques falsos como bloques nuevos se hayan añadido a la blockchain:
+Como los mineros rápidamente generan nuevos bloques que deben apuntar al bloque anterior, es fácilmente detectable el segundo bloque como fraudulento. Para tener éxito, el hacker debe generar tantos bloques falsos como bloques nuevos se hayan añadido a la blockchain:
 
 ![image](../images/51_attack.png)
 
