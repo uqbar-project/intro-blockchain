@@ -236,7 +236,7 @@ Por otra parte, aun hay interrogantes que no quedan claros respecto a cómo resp
 Podés
 
 * [Volver a la página central](../README.md)
-* o ir a la [Instalación del entorno](pages/entorno.md)
+* o ir a la [Instalación del entorno](./entorno.md)
 
 ## Bibliografía
 
