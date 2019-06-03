@@ -209,11 +209,11 @@ Como los mineros rápidamente generan nuevos bloques que deben apuntar al bloque
 
 ![image](../images/51_attack.png)
 
-Para lograr este objetivo, debería tener una capacidad mayor a la del resto de los mineros del mundo: por este motivo se lo conoce como **"51% attack"**. No obstante, esta estrategia tiene muchos puntos en contra
+Eso requeriría tener una capacidad mayor a la del resto de los mineros del mundo: por este motivo se lo conoce como **"51% attack"**. No obstante, esta estrategia tiene muchos puntos en contra
 
-1) Necesita una capacidad de procesamiento cuyo costo excede notablemente el beneficio
-2) Dado que no es posible ejercer el control de la blockchain por tiempo indefinido, seguramente se darían de baja los nodos mineros, pero además se reconstruiría la blockchain partiendo de un backup anterior al ataque,
-3) sin contar que el perjuicio a la criptomoneda hace que pierda el sentido seguir invirtiendo tanto esfuerzo y dinero.
+1) El costo de tener el 51% del procesamiento tiene un costo que excede notablemente el beneficio
+2) Eventualmente, se detectarán los nodos mineros fraudulentos, y la blockchain se restaurará a partir de un backup anterior al ataque,
+3) sin contar que dado que esta criptomoneda está basada en la confianza, cualquier ataque hace que el valor de la criptomoneda caiga abruptamente, lo que es perjudicial especialmente para el hacker.
 
 Para más información pueden leer estos artículos
 
