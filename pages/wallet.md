@@ -19,9 +19,9 @@ A partir de aquí desarrollaremos
 
 ## Entorno de desarrollo
 
-### El lenguaje del smart contract
+### El lenguaje del Smart Contract
 
-Utilizaremos el lenguaje **Solidity** que es el más estable en la comunidad, y que tiene muchas reminiscencias de javascript. Toda la documentación se accede a partir de [este link](https://solidity.readthedocs.io/)).
+Utilizaremos el lenguaje **Solidity** que es el más estable en la comunidad, y que tiene muchas reminiscencias de javascript. Toda la documentación se accede a partir de [este link](https://solidity.readthedocs.io/).
 
 ### IDE
 

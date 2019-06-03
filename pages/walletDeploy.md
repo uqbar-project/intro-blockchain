@@ -169,7 +169,7 @@ walletInstance.wallet.call('0x827d7d9BE34748Fa7B146C7d26408580A181650C')
 
 ## Operaciones con error
 
-Qué sucede si queremos retirar 250 pesos?
+¿Qué sucede si queremos retirar 250 pesos?
 
 ```js
 walletInstance.withdraw('0x827d7d9BE34748Fa7B146C7d26408580A181650C', 250)
