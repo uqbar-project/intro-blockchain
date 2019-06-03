@@ -174,7 +174,9 @@ si le agregamos el valor "K", esto produce que el dato sea "Joni -> Dodain 4 eth
 00823dec910b4b60ee5d176bab6cc0f40e301b4d54727537de4973ab864b8e64
 ```
 
-Lo que hace cada minero es generar un hash del bloque combinando de a pares los hashes de todas las transacciones que lo conforman + un valor aleatorio de dígitos alfanuméricos y ver qué hash sale. El desafío se resuelve cuando encontramos un hash válido, es decir, cuando el hash **comienza con una serie de una determinada cantidad de ceros al comienzo de la cadena de caracteres**. Entonces la **dificultad** es la cantidad de ceros iniciales que buscamos y el campo **nonce** son los dígitos necesarios para crear un hash válido. Si la dificultad que buscamos es 2, entonces el valor _nonce_ posible para la transacción que acabamos de ver en el ejemplo puede ser "K".
+Lo que hace cada minero es generar un hash del bloque combinando de a pares los hashes de todas las transacciones que lo conforman + un valor aleatorio de dígitos alfanuméricos y ver qué hash sale. El desafío se resuelve cuando encontramos un hash válido, es decir, cuando el hash **comienza con una serie de una determinada cantidad de ceros al comienzo de la cadena de caracteres**. Entonces la **dificultad** es la cantidad de ceros iniciales que buscamos y el campo **nonce** son los dígitos necesarios para crear un hash válido. Si la dificultad (1) que buscamos es 2, entonces el valor _nonce_ posible para la transacción que acabamos de ver en el ejemplo puede ser "K".
+
+> (1) Aclaración: la dificultad no se anota con la cantidad de ceros, sino con el valor máximo que puede tener un hash válido. Por ejemplo, si tenemos un hash de 6 dígitos y queremos que los 3 primeros comiencen con 0, el máximo valor del hash válido sería 000999: esa será nuestra dificultad.
 
 La resolución de este desafío o **proof of work** (PoW) requiere únicamente fuerza bruta, lo que permite potencialmente a cualquier minero ganar el combate por el bloque.
 
