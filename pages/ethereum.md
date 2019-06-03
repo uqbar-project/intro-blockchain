@@ -115,7 +115,7 @@ Dado que el ether como toda moneda puede fluctuar mucho su valor, se trabaja en 
 
 ### Gas price y Start gas
 
-La analogía anterior no es exacta, ya que la cantidad de ether que vamos a pagar para que un minero procese y firme la transacción no está regulada, sino que se define en el smart contract a partir de un valor que es **gas price**. Aquí indicamos cuánto estamos dispuestos de ether por unidad de `gas`: como resultado, mientras más estemos dispuestos a pagar, más rápidamente será procesada la transacción, ya que los mineros eligen primero las transacciones que más pagan.
+La analogía anterior no es exacta, ya que la cantidad de ether que vamos a pagar para que un minero procese y firme la transacción no está regulada, sino que se define en el smart contract a partir de un valor que es **gas price**. Aquí indicamos cuánto estamos dispuestos a pagar de ether por unidad de `gas`: como resultado, mientras más paguemos, más rápidamente será procesada la transacción, ya que los mineros eligen primero las transacciones que más pagan.
 
 Por otra parte, como queremos evitar ciclos infinitos, tenemos otro valor importante, el **start gas** que indica la cantidad máxima de gas que vamos a pagar por una operación. Si nos encontramos haciendo un loop en donde nos olvidamos de incrementar el índice, en algún momento excederemos el máximo permitido y la EVM hará un rollback de la transacción cobrando únicamente el gas máximo establecido como límite. Por lo tanto un smart contract que tiene vulnerabilidades solo nos costará un valor acotado en ether. 
 
@@ -176,7 +176,7 @@ si le agregamos el valor "K", esto produce que el dato sea "Joni -> Dodain 4 eth
 
 Lo que hace cada minero es generar un hash del bloque combinando de a pares los hashes de todas las transacciones que lo conforman + un valor aleatorio de dígitos alfanuméricos y ver qué hash sale. El desafío se resuelve cuando encontramos un hash válido, es decir, cuando el hash **comienza con una serie de una determinada cantidad de ceros al comienzo de la cadena de caracteres**. Entonces la **dificultad** es la cantidad de ceros iniciales que buscamos y el campo **nonce** son los dígitos necesarios para crear un hash válido. Si la dificultad (1) que buscamos es 2, entonces el valor _nonce_ posible para la transacción que acabamos de ver en el ejemplo puede ser "K".
 
-> (1) Aclaración: la dificultad no se anota con la cantidad de ceros, sino con el valor máximo que puede tener un hash válido. Por ejemplo, si tenemos un hash de 6 dígitos y queremos que los 3 primeros comiencen con 0, el máximo valor del hash válido sería 000999: esa será nuestra dificultad.
+> (1) **Aclaración**: la dificultad no se anota con la cantidad de ceros, sino con el valor máximo que puede tener un hash válido. Por ejemplo, si tenemos un hash de 6 dígitos y queremos que los 3 primeros comiencen con 0, el máximo valor del hash válido sería 000999: esa será nuestra dificultad.
 
 La resolución de este desafío o **proof of work** (PoW) requiere únicamente fuerza bruta, lo que permite potencialmente a cualquier minero ganar el combate por el bloque.
 
