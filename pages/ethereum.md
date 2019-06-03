@@ -229,6 +229,12 @@ El objetivo que está detrás principalmente, es disminuir la necesidad de proce
 
 Por otra parte, aun hay interrogantes que no quedan claros respecto a cómo responderá ante ataques maliciosos (como un _51% attack_), o cómo se comporta para manejar un algoritmo de consenso descentralizado. Veremos a futuro cómo se desarrollan los avances en este sentido.
 
+## Cómo sigo
+
+Podés
+
+* [Volver a la página central](../README.md)
+* o ir a la [Instalación del entorno](pages/entorno.md)
 
 ## Bibliografía
 
