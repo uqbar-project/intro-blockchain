@@ -68,7 +68,7 @@ module.exports = {
       network_id: 58343,      // Custom network
       gas: 6721975,           // Gas sent with each transaction (default: ~6700000)
       gasPrice: 20000000000,  // 20 gwei (in wei) (default: 100 gwei)
-      from: '0x884e8452cd8e45c0A117E6D666C6d1510160441F',      // Account to send txs from (default: accounts[0])
+      from: '0x827d7d9BE34748Fa7B146C7d26408580A181650C',      // Account to send txs from (default: accounts[0])
     },
     // Useful for deploying to a public network.
     // NB: It's important to wrap the provider as a function.

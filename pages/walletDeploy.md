@@ -106,7 +106,7 @@ truffle console --network live
 Y podemos probar nuestra primera transacción
 
 ```js
-> var walletInstance = await Wallet.deployed()
+> var walletInstance = await Wallet.new()  // la primera vez, luego hay que hacer deployed()
 > walletInstance.put('0x827d7d9BE34748Fa7B146C7d26408580A181650C', 150)
 ```
 
