@@ -83,7 +83,7 @@ Por motivos didácticos simplificamos el login, donde ni siquiera hay validació
 
 ### Formulario que muestra la billetera
 
-![image](../images/wallet-wallet.png)
+![image](../images/wallet-wallet2.png)
 
 En el formulario de la billetera, tanto el nombre de usuario como el saldo salen del store de Redux. Además, tenemos como estado interno _amount_ (el monto a poner o sacar de la billetera) y un _errorMessage_ para las operaciones.
 
