@@ -70,7 +70,7 @@ Cuando levantemos una instancia de Ganache, en nuestro caso en el puerto 8545, t
 
 ### Cómo funciona el login
 
-![image](../images/wallet-login.png)
+![image](../images/wallet-login2.png)
 
 Internamente el login maneja como estado usuario y password (tiene un binding bidireccional de ambos campos), además de mostrar mensajes de error con un componente custom. Al hacer click sobre el botón "Login" se dispara un método interno que
 
