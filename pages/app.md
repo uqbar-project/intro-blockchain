@@ -55,7 +55,7 @@ export {walletContract}
 
 ## Repaso de tareas previas a levantar la app
 
-Cuando levantemos una instancia de Ganache, en nuestro caso en el puerto 8545, tenemos que
+Cuando levantemos una instancia de Ganache, en nuestro caso en el puerto 8545, tenemos que hacer algunas cosas.
 
 * como en este caso agregamos una función para recuperar el saldo de una _address_, debemos primero compilar el smart contract con `truffle compile` y recuperar el nuevo `abi` (o de lo contrario el componente web3 no encontrará las funciones nuevas que acabamos de crear)
 * deployar los smart contracts en la EVM con `truffle migrate --reset`

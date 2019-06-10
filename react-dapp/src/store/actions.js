@@ -4,7 +4,6 @@ export const LOGOUT = 'LOGOUT'
 export const EMPTY_ACCOUNT = {
     address: '',
     username: '',
-    password: '',
     balance: 0,
 }
 
