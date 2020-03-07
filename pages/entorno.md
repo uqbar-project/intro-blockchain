@@ -57,6 +57,7 @@ El archivo genesis.json puede tener esta apariencia
     "config": {
         "chainId": 143,
         "homesteadBlock": 0,
+        "eip150Block": 0,
         "eip155Block": 0,
         "eip158Block": 0
     },
@@ -80,6 +81,8 @@ A continuación debemos definir en qué dirección residirá la blockchain, para
 mkdir data                             # creamos el directorio data...
 geth --datadir data init genesis.json  # ...e inicializamos la blockchain en esa carpeta
 ```
+
+> **Nota:** es probable que necesites correr todos los comandos con `sudo` de acá en más.
 
 Aunque `data` es bastante representativo, pueden elegir otro nombre si quieren.
 
