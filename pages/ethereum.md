@@ -121,9 +121,9 @@ Por otra parte, como queremos evitar ciclos infinitos, tenemos otro valor import
 
 Para más información pueden ver este [artículo que cuenta en profundidad la diferencia entre gas y ether con ejemplos prácticos](https://blockgeeks.com/guides/ethereum-gas-step-by-step-guide/).
 
-## Circuito de flujo de una transacción
+## Diagrama de flujo de una transacción
 
-![image](../images/transactionWorkflow.png)
+![image](../images/transactionWorkflow2.png)
 
 ### Estructura de una transacción
 
