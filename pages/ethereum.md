@@ -213,9 +213,9 @@ Como los mineros rápidamente generan nuevos bloques que deben apuntar al bloque
 
 Eso requeriría tener una capacidad mayor a la del resto de los mineros del mundo: por este motivo se lo conoce como **"51% attack"**. No obstante, esta estrategia tiene muchos puntos en contra
 
-1) El costo de tener el 51% del procesamiento tiene un costo que excede notablemente el beneficio
+1) El costo de tener el 51% del procesamiento excede notablemente el beneficio de insertar una cadena inválida
 2) Eventualmente, se detectarán los nodos mineros fraudulentos, y la blockchain se restaurará a partir de un backup anterior al ataque,
-3) sin contar que dado que la blockchain es descentralizada porque está basada en la confianza, cualquier ataque hace que su valor caiga abruptamente, lo que es perjudicial especialmente para el hacker.
+3) sin contar que dado que la blockchain está basada en la confianza, cualquier ataque hace que su valor caiga abruptamente, lo que es perjudicial especialmente para el hacker.
 
 Para más información pueden leer estos artículos
 
