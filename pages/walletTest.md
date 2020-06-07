@@ -9,15 +9,15 @@ Algunas pruebas que podemos hacer
 * para probar el retiro de una billetera,
   * con una billetera de 100 pesos,
     * el caso feliz: retiramos 20 y nos quedan 80
-    * el caso borde: retiramos 100 y nos queda 0
-    * el caso borde 2: retiramos 0, esperamos un error
-    * el caso inválido 1: queremos retirar -10, esperamos un error
-    * el caso inválido 2: queremos retirar 120, esperamos un error
+    * el caso borde, retirar el total: retiramos 100 y nos queda 0 (podríamos anular el primer test con éste)
+    * el caso borde 2, monto cero: retiramos 0, esperamos un error
+    * el caso inválido 1, retiro de un monto negativo: queremos retirar -10, esperamos un error
+    * el caso inválido 2, retiro de más que la disponibilidad actual: queremos retirar 120, esperamos un error
 * para probar poner plata en una billetera,
   * con una billetera de 100 pesos,
     * el caso feliz: ponemos 200 y nos quedan 300
     * el caso borde: ponemos 0, esperamos un error
-    * el caso inválido: queremos poner -10, esperamos un error
+    * el caso inválido, monto negativo: queremos poner -10, esperamos un error
 
 ## Implementación de los tests
 
@@ -79,7 +79,7 @@ async function testRejection(callback, errorMessage) {
 }
 ```
 
-* La biblioteca que estamos utilizando para correr los tests es assert, podríamos utilizar chai, sinon o cualquier otra variante para javascript. En este caso hay un único describe porque solo probamos un fixture con una billetera virtual de 100 pesos, podría haber variantes y eso permitiría anidar describes.
+* La biblioteca que estamos utilizando para correr los tests es assert, podríamos utilizar chai, sinon o cualquier otra variante para javascript. En este caso hay un único describe porque solo probamos un fixture con una billetera virtual de 100 pesos, podría haber varios escenarios, en cuyo caso podemos anidar describes.
 * El método beforeEach se ejecuta antes de cada test, lo que permite evitar el efecto colateral y garantizar que cada test es independiente del otro. Para ello es importante enviar este mensaje
 
 ```js
