@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Button, Col, Container, Form, FormGroup, Input, InputGroup, InputGroupAddon, Label, Row } from 'reactstrap'
-import { walletContract, txAccount } from '../setup'
-import { syncAccount, logout } from '../store/actions'
+
 import { ROUTE_HOME } from '../App'
+import { txAccount, walletContract } from '../setup'
+import { logout, syncAccount } from '../store/actions'
 import { ErrorMessage } from './errorMessage'
 
 class WalletForm extends Component {
@@ -26,13 +27,13 @@ class WalletForm extends Component {
                     <Row>
                         <Col>
                             <Form>
-                                <br/>
-                                <b>User name</b><br/>
+                                <br />
+                                <b>User name</b><br />
                                 <Label>{this.props.username}</Label>
-                                <hr/>
-                                <b>Balance</b><br/>
+                                <hr />
+                                <b>Balance</b><br />
                                 <Label>{this.props.balance}</Label>
-                                <hr/>
+                                <hr />
                                 <FormGroup>
                                     <InputGroup>
                                         <InputGroupAddon addonType="prepend">$</InputGroupAddon>
@@ -42,7 +43,7 @@ class WalletForm extends Component {
                                             onChange={(e) => this.setState({
                                                 ...this.state,
                                                 amount: e.target.value
-                                            })}/>
+                                            })} />
                                     </InputGroup>
                                 </FormGroup>
                                 <FormGroup>
@@ -51,8 +52,8 @@ class WalletForm extends Component {
                                     <Button color="secondary" onClick={() => this.props.logout(this)}>Logout</Button>{' '}
                                 </FormGroup>
                             </Form>
-                            <br/>
-                            <ErrorMessage message={this.state.errorMessage}/>
+                            <br />
+                            <ErrorMessage message={this.state.errorMessage} />
                         </Col>
                     </Row>
                 </Container>
@@ -70,7 +71,7 @@ const mapDispatchToProps = dispatch => {
         put: async (account, amount, self) => {
             try {
                 await walletContract.methods.put(account.address, amount).send({ from: txAccount })
-                await updateBalance(Object.assign({}, account), dispatch)
+                await updateBalance({ ...account }, dispatch)
                 initState(self)
             } catch (e) {
                 handleError(e, self)
@@ -79,7 +80,7 @@ const mapDispatchToProps = dispatch => {
         withdraw: async (account, amount, self) => {
             try {
                 await walletContract.methods.withdraw(account.address, amount).send({ from: txAccount })
-                await updateBalance(Object.assign({}, account), dispatch)
+                await updateBalance({ ...account }, dispatch)
                 initState(self)
             } catch (e) {
                 handleError(e, self)
@@ -99,7 +100,7 @@ async function updateBalance(account, dispatch) {
 }
 
 function handleError(e, self) {
-    console.log(e.message)
+    console.log('Error', e.message)
     self.setState({
         ...self.state,
         errorMessage: e.message,

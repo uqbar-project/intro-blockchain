@@ -75,25 +75,20 @@ Vemos que el nodo tiene instalados los servicios eth, miner, net, personal, rpc 
 
 ## Creando una cuenta
 
-La consola geth permite escribir instrucciones en Javascript dentro de la red, por ejemplo para crear nuestra primera cuenta que represente a una persona:
+La consola geth permite escribir instrucciones en Javascript dentro de la red, por ejemplo para crear nuestra primera cuenta que represente a una persona. A partir de ahora deberías ver un `>` como prompt de la consola Geth:
 
 ```bash
-> nuevaCuenta = personal.newAccount('s3cret')
+nuevaCuenta = personal.newAccount('s3cret')
 ```
 
 El método [newAccount de personal](https://web3js.readthedocs.io/en/1.0/web3-eth-personal.html#newaccount) permite crear una cuenta, en este caso externa que representaría una persona, pasándole la contraseña (sí, no vamos a usarla en una aplicación http, lo sabemos :)).
 
 Lo que nos devuelve el método es el _address_ de la nueva cuenta: recordemos que las cuentas externas tienen una dirección y una clave privada.
 
-```bash
-> personal.unlockAccount(nuevaCuenta, 's3cret', 15000)
-true
-```
-
-La respuesta nos indica que hemos habilitado la cuenta exitosamente. Y ¿qué podemos hacer con eso? Podemos ver a qué apunta la variable personal
+Y ¿qué podemos hacer con eso? Podemos ver a qué apunta la variable personal
 
 ```bash
-> personal
+personal
 {
   listAccounts: ["0xf4a3829a9e96d6bff51fa5df7e409c4579669a39"],
   listWallets: [{
@@ -103,14 +98,14 @@ La respuesta nos indica que hemos habilitado la cuenta exitosamente. Y ¿qué po
 Esto nos da una idea de la estructura interna y de los mensajes que podemos enviarle (los que son funciones). Por ejemplo podemos preguntarle la lista de cuentas:
 
 ```bash
-> personal.listAccounts
+personal.listAccounts
 ["0xf4a3829a9e96d6bff51fa5df7e409c4579669a39"]
 ```
 
 Podemos chequear cuánto ether tiene la cuenta que acabamos de crear:
 
 ```bash
-> web3.fromWei(eth.getBalance(eth.coinbase), "ether")
+web3.fromWei(eth.getBalance(eth.coinbase), 'ether')
 ```
 
 ## Proceso de minado
