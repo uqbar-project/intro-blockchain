@@ -18,14 +18,14 @@ contract Wallet {
 
     // poner plata en la billetera
     function put(address owner, int256 howMuch) public positive(howMuch) {
-        int256 money = wallet[owner]; // por defecto es 0
+        int256 money = wallet[owner]; // por defecto es 0 si la clave no existe
         money = money + howMuch;
         wallet[owner] = money;
     }
 
     // sacar plata de la billetera
     function withdraw(address owner, int256 howMuch) public positive(howMuch) {
-        int256 money = wallet[owner]; // por defecto es 0
+        int256 money = wallet[owner]; // por defecto es 0 si la clave no existe
         require(money >= howMuch, "Not enough cash");
         money = money - howMuch;
         wallet[owner] = money;

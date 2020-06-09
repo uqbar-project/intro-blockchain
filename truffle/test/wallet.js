@@ -51,6 +51,6 @@ async function testRejection(callback, errorMessage) {
         assert.equal(e.reason, errorMessage)
     }
 }
-    
+
 
 
