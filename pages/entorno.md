@@ -14,7 +14,7 @@ Asumimos que tenés instalados en tu máquina
 
 Las tecnologías que vamos a instalar son
 
-* **Geth** (go-ethereum): la plataforma Ethereum implementada en el lenguaje [Go](https://golang.org/). Para instalarlo [seguí estos pasos](https://github.com/ethereum/go-ethereum/wiki/Installing-Geth)
+* **Geth** (go-ethereum): la plataforma Ethereum implementada en el lenguaje [Go](https://golang.org/). Para instalarlo [seguí estos pasos](https://geth.ethereum.org/docs/install-and-build/installing-geth)
 
 * [**Truffle**](https://truffleframework.com/): una herramienta que facilita el desarrollo, el testeo y la migración de smart contracts. Se instala mediante npm.
 
