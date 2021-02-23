@@ -30,7 +30,14 @@ Para más detalles recomendamos [ir a la página específica de instalación](ht
 npm install -g solc
 ```
 
-* [**Ganache**](https://truffleframework.com/ganache): una aplicación que permite visualizar cuentas, bloques, transacciones y logs en forma visual. También hay una versión por consola:
+* **Ganache**: una aplicación que permite visualizar cuentas, bloques, transacciones y logs en forma visual. Para instalarlo seguí [este link que te descarga el ejecutable en base a tu sistema operativo](https://truffleframework.com/ganache). Si estás en Linux tenés que darle permisos de ejecución al archivo:
+
+```bash
+cd {directorio de descarga}
+chmod +x *App*
+```
+
+También hay una versión por consola:
 
 ```bash
 npm install -g ganache-cli
