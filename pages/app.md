@@ -16,42 +16,52 @@ El output será importante en breve.
 La creamos mediante CRA (create-react-app), con los siguientes componentes
 
 * router de React
-* Redux store
-* Reactstrap o componentes React de Bootstrap
+* [Primereact](https://www.primefaces.org/primereact/)
 * y la biblioteca web3, que nos permite conectarnos al nodo Ethereum
 
 Pueden ver el archivo `package.json` para más información.
 
-## Definiendo el setup
+## Conexión a la blockchain
 
-Crearemos un archivo setup, donde tomaremos la configuración según el archivo `truffle-config.js`:
+Crearemos un servicio, donde tomaremos la configuración según el archivo `truffle-config.js`:
 
 ```js
 import Web3 from 'web3'
+import { cuentas } from './cuentas'
 
-const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"))
-    // hay que usar el puerto y host que tiene truffle-config.js
-let walletABI = ... 
+// hay que usar el puerto y host que tiene truffle-config.js
+const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
+
+const walletABI = ...
     // copiar el output de la consola truffle cuando se ejecutó el comando
     // JSON.stringify(Wallet.abi)
     // ojo si crean funciones adicionales, deben volver a ejecutar el comando JSON.stringify(Wallet.abi)
     // y copiarlo nuevamente porque no estarán publicadas las funciones
 
-...
-let walletAddress = ...
-    // la cuenta o valor que sale del contract address una vez deployado en la EVM como Ganache
-    // como veremos a continuación
-
+// Address que sale de la solapa Contracts en Ganache, correspondiente al Smart Contract Wallet
+// (con el que se deployó, como veremos a continuación)
+const walletAddress = '0x17B045f1CB1BA5C01acc019BbFfFb4171CC1246E'
 web3.eth.defaultAccount = web3.eth.accounts[0]
 
-const walletContract = web3
+const walletContract = new web3
     .eth
-    .contract(walletABI)
-    .at(walletAddress)
-export {walletContract}
+    .Contract(walletABI, walletAddress)
+
+// Address que sale de cualquiera de las cuentas de Ganache
+const txAccount = '0xFc0cf8AD2b9d7B6aa2836B267C35BBD5357D5876'
 ```
 
+Para obtener la address correspondiente al Smart Contract Wallet, podemos
+
+1. buscar la transacción asociada a la creación de dicho smart contract
+
 ![image](../images/deDondeSacarContractAddress.png)
+
+2. o, mucho más fácil, asociar nuestro proyecto Truffle y ver en la solapa Contracts cuáles son las addresses asociadas al Wallet
+
+![wallet address](../images/contratoWallet.png)
+
+TODO: Explicar cómo se asocia el proyecto Truffle.
 
 ## Repaso de tareas previas a levantar la app
 

@@ -1,6 +1,7 @@
 import Web3 from 'web3'
 import { cuentas } from './cuentas'
 
+// hay que usar el puerto y host que tiene truffle-config.js
 const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
 
 // Se obtiene de ingresar a `truffle console` y pedirle `JSON.stringify(Wallet.abi)`
