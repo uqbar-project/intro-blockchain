@@ -59,52 +59,57 @@ Para obtener la address correspondiente al Smart Contract Wallet, podemos
 
 2. o, mucho más fácil, asociar nuestro proyecto Truffle y ver en la solapa Contracts cuáles son las addresses asociadas al Wallet
 
-![wallet address](../images/contratoWallet.png)
-
-TODO: Explicar cómo se asocia el proyecto Truffle.
+![wallet address](../images/ganacheTruffle.gif)
 
 ## Repaso de tareas previas a levantar la app
 
-Cuando levantemos una instancia de Ganache, en nuestro caso en el puerto 8545, tenemos que hacer algunas cosas.
+- levantar Ganache en un puerto, supongamos 8545
+- si esa instancia no tiene nuestro Smart Contract, debemos compilar e instalarlo en dicha red mediante los comandos
 
-* como en este caso agregamos una función para recuperar el saldo de una _address_, debemos primero compilar el smart contract con `truffle compile` y recuperar el nuevo `abi` (o de lo contrario el componente web3 no encontrará las funciones nuevas que acabamos de crear)
-* deployar los smart contracts en la EVM con `truffle migrate --reset`
-* modificar en el archivo `setup.js` la variable `walletAddress` con el address del Smart Contract, para sincronizar nuestro `Wallet.sol` con la aplicación React
-* reiniciar la aplicación con `npm start`
+```bash
+truffle compile
+truffle migrate --reset
+```
 
-![image](../images/demoWallet1.gif)
+- modificar en el archivo `usuarioService.js` la variable `walletAddress` con el address del Smart Contract recientemente generado:
+
+```bash
+truffle console
+> JSON.stringify(Wallet.abi) // copiar el resultado y pegarlo en la referencia walletAddress
+```
+
+- iniciar la aplicación React con `yarn start`
 
 ## Demo de la app
 
-![image](../images/demoWallet2.gif)
+![image](../images/demoWallet3.gif)
 
 ### Cómo funciona el login
 
 ![image](../images/wallet-login2.png)
+TODO: CAMBIAR
 
-Internamente el login maneja como estado usuario y password (tiene un binding bidireccional de ambos campos), además de mostrar mensajes de error con un componente custom. Al hacer click sobre el botón "Login" se dispara un método interno que
+Internamente el login maneja como estado usuario y password, y se valida delegando al singleton usuarioService
 
-* busca la cuenta asociada al username ingresado por el usuario
-* con el objeto cuenta encontrado, hace la consulta por _address_ a la billetera mediante una llamada al objeto _walletContract_ generado por web3 que como resultado nos devolverá el _balance_ (saldo) de la cuenta
-* esto dispara la acción **sync_account** que le asigna la cuenta (con el saldo actual) al _store_ de Redux
-* por último utilizamos el router de React para llevarnos a `/wallet`
+- el nombre de la persona se asocia a un mapa de direcciones (addresses), por el momento está hardcodeado en un archivo local de la aplicación (esto podría externalizarse a cualquier medio persistente que ya hemos visto)
+- luego hacemos la consulta por _address_ a la billetera mediante una llamada al objeto _walletContract_ generado por web3 que como resultado nos devolverá el _balance_ (saldo) de la cuenta
+- el usuarioService como singleton de la aplicación nos sirve para almacenar los datos de la persona logueada: nombre, address de la blockchain y saldo actual
 
 Por motivos didácticos simplificamos el login, donde ni siquiera hay validación de contraseña.
 
 ### Formulario que muestra la billetera
 
 ![image](../images/wallet-wallet2.png)
+TODO: CAMBIAR
 
-En el formulario de la billetera, tanto el nombre de usuario como el saldo salen del store de Redux. Además, tenemos como estado interno _amount_ (el monto a poner o sacar de la billetera) y un _errorMessage_ para las operaciones.
+En el formulario de la billetera, recibimos la información del nombre y saldo de la cuenta, al que le agregamos como estado el monto a poner o sacar. Ambas operaciones se delegan en el usuarioService, que
 
-En el caso de poner (put) o sacar (withdraw) plata, se dispara un método interno que
-
-* delega la acción put/withdraw al _walletContract_ de web3. Es decir, que el código de negocio está escrito en el Smart Contract, en el lenguaje Solidity. 
-* Esta es una decisión de diseño, para no repetir la misma operación en React: en ningún momento se suma o resta al saldo de la cuenta. Esto permite por ejemplo no duplicar las validaciones
-* Otro aspecto importante es que todas las llamadas a web3 **son asincrónicas**, por lo tanto, no pueden ser invocadas en las acciones de Redux que necesita mantener el sincronismo
-* La forma entonces de recuperar el saldo actual, es haciendo otra llamada para obtener el saldo, al igual que hicimos en el login
-* Una vez obtenido el saldo, disparamos la acción **syncAccount** de Redux, que produce el efecto en el store y provoca un render del label que muestra el saldo de la cuenta
-* Por último, inicializamos el state del formulario, blanqueando el monto a ingresar y el mensaje de error, lo que produce un render de dichos campos del formulario
+- delega la acción put/withdraw al _walletContract_ de web3. Es decir, que el código de negocio está - escrito en el Smart Contract, en el lenguaje Solidity. 
+- Esta es una decisión de diseño, para no repetir la misma operación en React: en ningún momento se suma o resta al saldo de la cuenta. Esto permite por ejemplo no duplicar las validaciones
+- Otro aspecto importante es que todas las llamadas a web3 **son asincrónicas**
+- La forma entonces de recuperar el saldo actual, es haciendo otra llamada para obtener el saldo, al igual - que hicimos en el login
+- El nuevo saldo se refresca en el componente mediante la acción que setea el nuevo estado
+- Por último, inicializamos el state del formulario, blanqueando el monto a ingresar
 
 ## Llamadas a web3: call vs. transaction
 
@@ -134,7 +139,7 @@ const walletContract = new web3
 
 Esta es una operación que no produce un nuevo bloque en la blockchain, es simplemente una consulta, por eso se define en el Smart Contract como un método `view`:
 
-```js
+```solidity
     function balance(address owner) public view returns(int256) {
         return wallet[owner];
     }
@@ -161,10 +166,6 @@ Por ejemplo, podemos elegir la primera. Copiamos ese address.
 ```js
 export const txAccount = '0x884e8452cd8e45c0A117E6D666C6d1510160441F'
 ```
-
-## TODO: Lista de pendientes
-
-* Hacer testeo unitario y testeo de los formularios con Jest
 
 ## Otros tutoriales
 
