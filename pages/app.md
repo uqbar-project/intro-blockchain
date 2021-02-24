@@ -61,7 +61,7 @@ Para obtener la address correspondiente al Smart Contract Wallet, podemos
 
 ![wallet address](../images/ganacheTruffle.gif)
 
-## Repaso de tareas previas a levantar la app
+## Levantar la app
 
 - levantar Ganache en un puerto, supongamos 8545
 - si esa instancia no tiene nuestro Smart Contract, debemos compilar e instalarlo en dicha red mediante los comandos
@@ -71,23 +71,15 @@ truffle compile
 truffle migrate --reset
 ```
 
-- modificar en el archivo `usuarioService.js` la variable `walletAddress` con el address del Smart Contract recientemente generado:
-
-```bash
-truffle console
-> JSON.stringify(Wallet.abi) // copiar el resultado y pegarlo en la referencia walletAddress
-```
-
 - iniciar la aplicación React con `yarn start`
 
 ## Demo de la app
 
-![image](../images/demoWallet3.gif)
+![Demo Wallet](../images/demoWallet3.gif)
 
 ### Cómo funciona el login
 
-![image](../images/wallet-login2.png)
-TODO: CAMBIAR
+![Formulario Login](../images/WalletLoginForm.png)
 
 Internamente el login maneja como estado usuario y password, y se valida delegando al singleton usuarioService
 
@@ -99,8 +91,7 @@ Por motivos didácticos simplificamos el login, donde ni siquiera hay validació
 
 ### Formulario que muestra la billetera
 
-![image](../images/wallet-wallet2.png)
-TODO: CAMBIAR
+![Formulario Wallet](../images/WalletForm.png)
 
 En el formulario de la billetera, recibimos la información del nombre y saldo de la cuenta, al que le agregamos como estado el monto a poner o sacar. Ambas operaciones se delegan en el usuarioService, que
 
