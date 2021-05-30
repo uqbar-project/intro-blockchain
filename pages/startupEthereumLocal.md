@@ -128,15 +128,7 @@ Claro, por el momento no tenemos transacciones (`txs=0`), esto vendrá a continu
 
 ## Preparar la configuración para desarrollar Smart Contracts
 
-Por último, vamos a crear un directorio donde podremos desarrollar nuestros smart contracts con la herramienta **Truffle**:
-
-```bash
-mkdir truffle   # truffle o cualquier otro nombre que elijan para la carpeta
-cd truffle
-truffle init    # inicialización de los archivos y directorios de truffle
-```
-
-Podemos ver la estructura de nuestro directorio truffle, donde tendremos:
+Podemos ver la estructura de nuestro directorio truffle (que inicializamos con `truffle init`), donde tendremos:
 
 * un archivo `truffle-config.js` que nos permitirá elegir el lenguaje para compilar los smart contracts (**Solidity**), el framework de testeo unitario (**Mocha**), el puerto y el host al que nos conectaremos para hacer los deploys de los smart contracts, entre otras cosas.
 * un directorio `contracts` donde hay un smart contract que generó Truffle: `Migrations.sol`, y donde estaremos escribiendo nuestras propias definiciones

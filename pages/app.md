@@ -98,8 +98,7 @@ En el formulario de la billetera, recibimos la información del nombre y saldo d
 - delega la acción put/withdraw al _walletContract_ de web3. Es decir, que el código de negocio está - escrito en el Smart Contract, en el lenguaje Solidity. 
 - Esta es una decisión de diseño, para no repetir la misma operación en React: en ningún momento se suma o resta al saldo de la cuenta. Esto permite por ejemplo no duplicar las validaciones
 - Otro aspecto importante es que todas las llamadas a web3 **son asincrónicas**
-- La forma entonces de recuperar el saldo actual, es haciendo otra llamada para obtener el saldo, al igual - que hicimos en el login
-- El nuevo saldo se refresca en el componente mediante la acción que setea el nuevo estado
+- La forma entonces de recuperar el saldo actual, es haciendo otra llamada para obtener el saldo, al igual que hicimos en el login (en este caso llamamos al hook `setSaldo` cuando lo obtenemos y eso renderiza nuevamente la vista)
 - Por último, inicializamos el state del formulario, blanqueando el monto a ingresar
 
 ## Llamadas a web3: call vs. transaction

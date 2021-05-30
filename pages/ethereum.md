@@ -170,8 +170,8 @@ Todo comienza cuando se genera una transacción, que contiene la siguiente estru
 * **value:** la cantidad de ether a transferir, en el caso de una transferencia
 * **input:** apunta al bytecode a ejecutar dentro de la EVM para controlar la transacción
 * **blockhash** y **blocknumber**, inicialmente vacíos, cuando una transacción luego se agrupa contiene el identificador o hash del bloque y qué orden ocupa (blocknumber).
-* **gas** o **start gas**: la cantidad de gas que quien origina la transacción envía para procesar el smart contract. Es conveniente proveer el suficiente gas para hacer todas las operaciones, de lo contrario la transacción se echará para atrás e igualmente será necesario pagar a los mineros el costo computacional.
-* **gas price**: el precio que estamos dispuesto a pagar por el gas, como hemos visto anteriormente.
+* **gas** o **start gas**
+* **gas price**, ambos explicados anteriormente.
 
 entre otros datos.
 
@@ -189,7 +189,7 @@ Cuando una transacción se crea, es recibida por todos los nodos mineros de la r
 * **miner**, el nodo que a la larga será el ganador del proceso de minado
 * **number**, el número correlativo que ocupa el bloque en la _blockchain_
 * **parent hash**, o puntero al bloque anterior
-* **transactions**, apuntando al conjunto de transacciones que conforman el bloque. Por una cuestión de optimización, se trabaja con un árbol binario o **Merkel tree** que permite rápidamente validar el conjunto de transacciones dentro del bloque. Para profundizar más pueden leer [este artículo](https://hackernoon.com/merkle-tree-introduction-4c44250e2da7)
+* **transactions**, apuntando al conjunto de transacciones que conforman el bloque. Por una cuestión de optimización, se trabaja con un árbol binario o **Merkle tree** que permite rápidamente validar el conjunto de transacciones dentro del bloque. Para profundizar más pueden ver [este video](https://www.youtube.com/watch?v=fB41w3JcR7U)
 * **timestamp**, con el momento de creación del bloque
 
 Podés navegar por la página etherscan hasta llegar a un bloque, como el https://etherscan.io/block/7221830:
@@ -263,7 +263,7 @@ Para más información pueden leer estos artículos
 
 Recientemente Ethereum informó que va a reemplazar el sistema _Proof of Work_ por un algoritmo llamado **Proof of Stake** (PoS), que consiste en eliminar la competencia de mineros y elegir por algún mecanismo determinístico quién genera los nuevos bloques en base a su "prosperidad", asumiendo que el principal interesado en conservar la confianza (y por tanto, el valor) de la criptomoneda es el mejor responsable posible para garantizar las transacciones. Dado que los poseedores de criptomonedas cuentan con una ventaja comparativa enorme respecto de sus competidores, algunas variantes más recientes tratan de democratizar la elección del creador tomando en cuenta el tiempo en el que no fueron seleccionados, números al azar, etc. Es importante señalar que **no hay recompensa por agregar bloques a la cadena**.
 
-El objetivo que está detrás principalmente, es disminuir la necesidad de procesamiento que implica una altísima cantidad de consumo energético (se prevé que en 2020 se estará usando la misma cantidad de energía que Dinamarca). 
+El objetivo que está detrás es disminuir la necesidad de procesamiento que implica una altísima cantidad de consumo energético (para el 2020 se preveía usar la misma cantidad de energía en minar que el consumo en Dinamarca). 
 
 Por otra parte, aun hay interrogantes que no quedan claros respecto a cómo responderá ante ataques maliciosos (como un _51% attack_), o cómo se comporta para manejar un algoritmo de consenso descentralizado. Veremos a futuro cómo se desarrollan los avances en este sentido.
 
