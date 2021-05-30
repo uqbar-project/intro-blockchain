@@ -15,8 +15,10 @@ A continuación vamos a contar los principales conceptos de esta arquitectura:
   * Medidas
 * Cuentas
 * Transacciones
-  * Gas
-  * Gas price y start gas
+  * Gas, gas price y start gas (gas limit)
+  * Start gas mayor al requerido
+  * Start gas menor al requerido
+  * Sobre el start gas
 * Circuito de una Transacción en la Blockchain
   * Proof of Work
 * Ataques a la seguridad
@@ -30,7 +32,7 @@ ____
 
 Los objetivos de Ethereum son descentralizar la web, eliminando intermediarios y organismos reguladores. Por lo tanto la arquitectura tiene un esquema _peer-to-peer_, donde cada nodo tiene la misma importancia que los demás en una red Ethereum (en lugar de tener un servidor como fuente central de información).
 
-Un smart contract define una relación contractual entre pares, que se instancia con datos a partir de una **transacción**. Algunos ejemplos posibles son: votar a un candidato, el valor de venta de una propiedad, el currículum de una persona, el sueldo promedio de un oficio determinado, una billetera electrónica, etc.
+Un smart contract define una relación contractual entre pares, que se instancia con datos a partir de una **transacción**. Algunos ejemplos posibles son: el voto por un candidato en una elección, el valor de venta de una propiedad, el currículum de una persona, el sueldo promedio de un oficio determinado, una billetera electrónica, etc.
 
 ## Nodos
 
@@ -48,7 +50,7 @@ Para poder procesar las transacciones, cuentan con una Virtual Machine propia de
 
 ### EVM: Ethereum Virtual Machine
 
-El ambiente donde se procesan las operaciones primitivas de los smart contracts es la Ethereum Virtual Machine (EVM), que trabaja a nivel bytecodes. Un Smart Contract puede estar escrito en diferentes lenguajes: [Solidity](https://solidity.readthedocs.io/en/v0.5.3/), [Serpent](https://github.com/ethereum/wiki/wiki/Serpent), [Viper](https://vyper.readthedocs.io/en/latest/), [Lisk](https://lisk.io/) o Chain, cualquiera de estos lenguajes se compila a un bytecode que la máquina virtual de Ethereum puede interpretar.
+El ambiente donde se procesan las operaciones primitivas de los smart contracts es la Ethereum Virtual Machine (EVM), que trabaja a nivel bytecode. Un Smart Contract puede estar escrito en diferentes lenguajes: [Solidity](https://solidity.readthedocs.io/en/v0.5.3/), [Viper](https://vyper.readthedocs.io/en/latest/) o [Lisk](https://lisk.io/), cualquiera de estos lenguajes se compila a un bytecode que la máquina virtual de Ethereum puede interpretar. Pueden investigar más en la [wiki de Ethereum](https://eth.wiki/).
 
 Algo interesante de remarcar es que la EVM está pensada para trabajar 
 
@@ -105,21 +107,55 @@ Las transacciones son funciones que toman un estado inicial (S) y producen un ca
 
 Cuando repasemos el circuito de una transacción veremos su estructura.
 
-### Costo computacional
+### Gas, gas price y gas limit (start gas)
 
-Cada una de las operaciones involucradas en una transacción tienen un determinado costo computacional, por ejemplo leer un valor y asignarlo en la memoria, crear una cuenta, transferir ether, o incluso realizar un ciclo o _loop_, tienen distintos valores que se miden en **gas**, como explicaremos a continuación.
+El valor del ether no es fijo, sino que fluctúa en base a lo que cada persona está dispuesta a pagar para que se procese su Smart Contract. Por eso existe el concepto de **gas**, que permite medir el costo computacional de cada operación que pedimos ejecutar. Consideremos el siguiente ejemplo:
 
-### Gas
+- asignamos el valor 25 en una variable => 45 gas
+- sumamos uno a la variable del paso anterior => 10 gas
+- guardamos el resultado en una nueva variable => 45 gas
 
-Dado que el ether como toda moneda puede fluctuar mucho su valor, se trabaja en un valor fijo llamado **gas**. De la misma manera que uno llena el tanque del auto en una estación de servicio, eso implica 20 litros de combustible, y el valor depende de cuánto esté el litro de nafta, de esa misma manera se le paga al minero la transacción en base a la cantidad de "combustible" que estuvo utilizando para las operaciones. En ese caso, el minero actúa como estación de servicio, el combustible es el **gas** y nuestro auto es el conjunto de operaciones provisto como código dentro de un smart contract.
+El total de gas necesario para ejecutar la transacción es 100 gas. Para procesar el smart contract nosotros enviamos dos valores:
 
-### Gas price y Start gas
+- **gas price**: el valor que estamos dispuestos a pagar por unidad de gas para que un minero procese y firme la transacción. Mientras más paguemos, más rápidamente será procesada la transacción, ya que los mineros eligen primero las transacciones que más pagan.
+- **start gas**: indica la cantidad máxima de gas que vamos a pagar por una operación. Si nos encontramos haciendo un loop en donde nos olvidamos de incrementar el índice, en algún momento excederemos el máximo permitido y la EVM hará un rollback de la transacción cobrando únicamente el gas máximo establecido como límite. Por lo tanto un smart contract que tiene vulnerabilidades solo nos costará un valor acotado en ether.
 
-La analogía anterior no es exacta, ya que la cantidad de ether que vamos a pagar para que un minero procese y firme la transacción no está regulada, sino que se define en el smart contract a partir de un valor que es **gas price**. Aquí indicamos cuánto estamos dispuestos a pagar de ether por unidad de `gas`: como resultado, mientras más paguemos, más rápidamente será procesada la transacción, ya que los mineros eligen primero las transacciones que más pagan.
+### Caso 1: Start Gas < al requerido para ejecutar la transacción
 
-Por otra parte, como queremos evitar ciclos infinitos, tenemos otro valor importante, el **start gas** que indica la cantidad máxima de gas que vamos a pagar por una operación. Si nos encontramos haciendo un loop en donde nos olvidamos de incrementar el índice, en algún momento excederemos el máximo permitido y la EVM hará un rollback de la transacción cobrando únicamente el gas máximo establecido como límite. Por lo tanto un smart contract que tiene vulnerabilidades solo nos costará un valor acotado en ether. 
+Si queremos procesar la transacción de nuestro ejemplo y enviamos:
 
-Para más información pueden ver este [artículo que cuenta en profundidad la diferencia entre gas y ether con ejemplos prácticos](https://blockgeeks.com/guides/ethereum-gas-step-by-step-guide/).
+- start gas: 125
+- gas price: 2 Gwei (1 Gigawei son 1^9 wei)
+- y la transacción que requiere 100 gas
+
+una vez que haya sido procesado, los efectos serán:
+
+- la transacción se procesará exitosamente y se agregará a la blockchain de Ethereum
+- el minero recibirá el gas requerido * gas price = 100 * 2Gwei = 200 Gwei como recompensa por sus servicios
+- a la persona que envió la transacción se le devuelve el (start gas - gas requerido) = 125 - 100 = 25 gas (que lo usará en otra transacción al precio que fije)
+
+
+### Caso 2: Start Gas > al requerido para ejecutar la transacción
+
+Si queremos procesar la transacción de nuestro ejemplo y enviamos:
+
+- start gas: 80
+- gas price: 2 Gwei (1 Gigawei son 1^9 wei)
+- y la transacción que requiere 100 gas
+
+una vez que haya sido procesado, los efectos serán:
+
+- la transacción no se puede completar, sin embargo se agregará a la blockchain de Ethereum y se marcará como "no procesada"
+- el minero recibirá todo el gas price como recompensa = 80 * 2Gwei = 160 Gwei
+
+### Sobre el valor del start gas
+
+Como hemos visto, asignar un valor de start gas muy bajo nos hace gastar ese combustible sin poder procesar nuestra transacción. Pero por otra parte, tampoco es conveniente fijar un start gas muy grande:
+
+- si tenemos un smart contract que entra en _loop infinito_, mayor será el costo que paguemos
+- pero además, las transacciones se agrupan en un **bloque** que a su vez tiene un **gas limit**. Esto significa que si tenemos 3 transacciones: A con start gas 300, B con start gas 400 y C de 500, y el bloque tiene un gas limit de 1100, solo podremos procesar las transacciones A y B en ese bloque. Si bajamos el start gas de la transacción C de 500 a 400, el minero puede incluirla dentro del bloque y procesarla.
+
+Para más información pueden ver este [artículo que cuenta en profundidad la diferencia entre gas y ether con ejemplos prácticos](https://blockgeeks.com/guides/ethereum-gas-step-by-step-guide/) y [esta consulta](https://ethereum.stackexchange.com/questions/30944/start-gas-vs-gas-limit).
 
 ## Diagrama de flujo de una transacción
 
