@@ -16,9 +16,6 @@ const walletContract = new web3
     .eth
     .Contract(walletABI, walletAddress)
 
-// Address que sale de cualquiera de las cuentas de Ganache
-const txAccount = '0xFc0cf8AD2b9d7B6aa2836B267C35BBD5357D5876'
-
 class UsuarioService {
   constructor() {
     this.init()
@@ -31,7 +28,7 @@ class UsuarioService {
     }
     this.usuario = usuario
     this.address = account.address
-    this.saldo = await billeteraService.getBalance()
+    this.saldo = await billeteraService.getSaldo()
   }
 
   init() {
@@ -44,23 +41,26 @@ class UsuarioService {
 
 class BilleteraService {
   async poner(monto) {
-    await walletContract.methods.put(usuarioService.address, monto).send({ from: txAccount })
-    const balance = this.getBalance()
+    await walletContract.methods
+      .put(usuarioService.address, monto)
+      .send({ from: usuarioService.address })
+    const balance = this.getSaldo()
     return balance
   }
 
   async sacar(monto) {
-    await walletContract.methods.withdraw(usuarioService.address, monto).send({ from: txAccount })
-    const balance = await this.getBalance()
+    await walletContract.methods
+      .withdraw(usuarioService.address, monto)
+      .send({ from: usuarioService.address })
+    const balance = await this.getSaldo()
     return balance
   }
 
-  async getBalance() {
+  async getSaldo() {
     return walletContract.methods.balance(usuarioService.address).call()
   }
 
 }
-
 
 export const usuarioService = new UsuarioService()
 export const billeteraService = new BilleteraService()
