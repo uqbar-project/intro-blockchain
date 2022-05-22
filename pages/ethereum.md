@@ -66,7 +66,7 @@ Recientemente se separó la idea de **full node** para nodos que contienen todo 
 
 ### Para el curioso...
 
-En https://etherscan.io/nodetracker pueden ver todos los nodos alrededor del mundo (en Argentina hay 25 aunque eso puede ir variando...)
+En https://etherscan.io/nodetracker pueden ver todos los nodos alrededor del mundo (en Argentina hay 2 aunque eso puede ir variando...)
 
 ## Ether
 
@@ -90,7 +90,7 @@ Para más información recomendamos ver [esta tabla](https://etherconverter.onli
 
 ## Cuentas
 
-Por el momento existen dos tipos de cuentas de Ethereum:
+Por el momento existen [dos tipos de cuentas de Ethereum](https://ethereum.org/en/developers/docs/accounts/):
 
 * **cuentas externas** (EOA: Externally Owned Accounts), que pertenecen a personas físicas, se identifican por la clave privada de dicha cuenta (técnicamente por los primeros 160 caracteres).
 * **cuentas de contrato** (Contract Accounts), las que pertenecen a un Smart Contract, no tienen clave privada sino una dirección pública o _address_ y almacenan código.
@@ -115,45 +115,71 @@ El valor del ether no es fijo, sino que fluctúa en base a lo que cada persona e
 - sumamos uno a la variable del paso anterior => 10 gas
 - guardamos el resultado en una nueva variable => 45 gas
 
-El total de gas necesario para ejecutar la transacción es 100 gas. Para procesar el smart contract nosotros enviamos dos valores:
+El total de gas necesario para ejecutar la transacción es 100 gas. Para procesar el smart contract hay algunos valores que son importantes:
 
 - **gas price**: el valor que estamos dispuestos a pagar por unidad de gas para que un minero procese y firme la transacción. Mientras más paguemos, más rápidamente será procesada la transacción, ya que los mineros eligen primero las transacciones que más pagan.
-- **start gas**: indica la cantidad máxima de gas que vamos a pagar por una operación. Si nos encontramos haciendo un loop en donde nos olvidamos de incrementar el índice, en algún momento excederemos el máximo permitido y la EVM hará un rollback de la transacción cobrando únicamente el gas máximo establecido como límite. Por lo tanto un smart contract que tiene vulnerabilidades solo nos costará un valor acotado en ether.
+- **gas limit/start gas**: indica la cantidad máxima de gas que vamos a pagar por una operación. Si nos encontramos haciendo un loop en donde nos olvidamos de incrementar el índice, en algún momento excederemos el máximo permitido y la EVM hará un rollback de la transacción cobrando únicamente el gas máximo establecido como límite. Por lo tanto un smart contract que tiene vulnerabilidades solo nos costará un valor acotado en ether.
 
 ### Caso 1: Start Gas < al requerido para ejecutar la transacción
 
 Si queremos procesar la transacción de nuestro ejemplo y enviamos:
 
-- start gas: 125
+- gas limit: 125
 - gas price: 2 Gwei (1 Gigawei son 1^9 wei)
 - y la transacción que requiere 100 gas
 
-una vez que haya sido procesado, los efectos serán:
+Hasta agosto del 2021, cuando se procesaba la transacción exitosamente...
 
-- la transacción se procesará exitosamente y se agregará a la blockchain de Ethereum
-- el minero recibirá el gas requerido * gas price = 100 * 2Gwei = 200 Gwei como recompensa por sus servicios
-- a la persona que envió la transacción se le devuelve el (start gas - gas requerido) = 125 - 100 = 25 gas (que lo usará en otra transacción al precio que fije)
+- se agregaba a la blockchain de Ethereum
+- el minero recibía el gas requerido * gas price = 100 * 2Gwei = 200 Gwei como recompensa por sus servicios
+- a la persona que envió la transacción se le quitaban 200 Gwei por el servicio de procesamiento (125 - 100 = 25 de gas quedaban para utilizar en la próxima transacción a un precio que fijara).
 
+### London fork - EIP 1559
+
+El [precio del Gas de Ethereum parecía haberse disparado](https://www.statista.com/statistics/1221821/gas-price-ethereum/). Para ayudar a hacerlo más estable, se implementó un fork en donde cada transacción define a partir de ahora:
+
+- un **base fee**, que es el valor base determinado por la oferta/demanda de mineros.
+- un **tip fee**: es la propina que vamos a darle al minero.
+
+Para el mismo ejemplo anterior, si enviamos
+
+- start gas/gas limit: 125
+- gas price: 2 Gwei
+- base fee: 1,5 Gwei
+- tip fee: 0,5 Gwei
+- transacción requiere: 100 gas
+
+Cuando se procese exitosamente la transacción:
+
+- se agregará a la blockchain de Ethereum
+- se cobrará (100 gas x 2 Gwei) = 200 Gwei a la persona que originó la transacción...
+- ... (100 gas x 1,5 Gwei) = 150 Gwei **se queman** (es decir, desaparecen)
+- ... (100 gas x 0,5 Gwei) = 50 Gwei se transfieren al minero como recompensa por sus servicios.
+
+Pueden ver [un ejemplo de una transacción](https://etherscan.io/tx/0x6d3f4539dccec4293f18ef8ad036f2b4f66d3fd719d17fb7096557cb930b9731).\
 
 ### Caso 2: Start Gas > al requerido para ejecutar la transacción
 
 Si queremos procesar la transacción de nuestro ejemplo y enviamos:
 
-- start gas: 80
+- start gas/gas limit: 80
 - gas price: 2 Gwei (1 Gigawei son 1^9 wei)
+- base fee: 1,5 Gwei
+- tip fee: 0,5 Gwei
 - y la transacción que requiere 100 gas
 
 una vez que haya sido procesado, los efectos serán:
 
 - la transacción no se puede completar, sin embargo se agregará a la blockchain de Ethereum y se marcará como "no procesada"
-- el minero recibirá todo el gas price como recompensa = 80 * 2Gwei = 160 Gwei
+- el minero recibirá como recompensa = (80 * 0,5Gwei = 40 Gwei)
+- y se **queman** los (80 x 1,5Gwei) = 120 Gwei
 
 ### Sobre el valor del start gas
 
 Como hemos visto, asignar un valor de start gas muy bajo nos hace gastar ese combustible sin poder procesar nuestra transacción. Pero por otra parte, tampoco es conveniente fijar un start gas muy grande:
 
 - si tenemos un smart contract que entra en _loop infinito_, mayor será el costo que paguemos
-- pero además, las transacciones se agrupan en un **bloque** que a su vez tiene un **gas limit**. Esto significa que si tenemos 3 transacciones: A con start gas 300, B con start gas 400 y C de 500, y el bloque tiene un gas limit de 1100, solo podremos procesar las transacciones A y B en ese bloque. Si bajamos el start gas de la transacción C de 500 a 400, el minero puede incluirla dentro del bloque y procesarla.
+- además, las transacciones se agrupan en un **bloque** que a su vez tiene un **gas limit**. Esto significa que si tenemos 3 transacciones: A con start gas 300, B con start gas 400 y C de 500, y el bloque tiene un gas limit de 1100, solo podremos procesar las transacciones A y B en ese bloque. Si bajamos el start gas de la transacción C de 500 a 400, el minero puede incluirla dentro del bloque y procesarla.
 
 Para más información pueden ver este [artículo que cuenta en profundidad la diferencia entre gas y ether con ejemplos prácticos](https://blockgeeks.com/guides/ethereum-gas-step-by-step-guide/) y [esta consulta](https://ethereum.stackexchange.com/questions/30944/start-gas-vs-gas-limit).
 

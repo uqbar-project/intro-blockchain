@@ -7,7 +7,7 @@ Un _smart contract_ se libra entre dos partes al igual que un contrato pero al s
 Algunos ejemplos:
 
 - una billetera virtual, que no permite transferir más fondos de lo que tiene la cuenta
-- en un sistema de votación, un voto se representa con un _smart contract_ que impide votar a una persona legalmente incapacitada, o que sufrague dos veces a una persona que ya emitió su voto
+- en un sistema de votación, un voto se representa con un _smart contract_ que impide votar a una persona legalmente incapacitada, o que sufrague nuevamente una persona que ya emitió su voto
 
 ![smart contract](../images/smartContract2.png)
 
