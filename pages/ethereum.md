@@ -194,8 +194,7 @@ Todo comienza cuando se genera una transacción, que contiene la siguiente estru
 * **value:** la cantidad de ether a transferir, en el caso de una transferencia
 * **input:** apunta al bytecode a ejecutar dentro de la EVM para controlar la transacción
 * **blockhash** y **blocknumber**, inicialmente vacíos, cuando una transacción luego se agrupa contiene el identificador o hash del bloque y qué orden ocupa (blocknumber).
-* **gas** o **start gas**
-* **gas price**, ambos explicados anteriormente.
+* **gas price**, **gas price**, **gas fees**, explicados anteriormente.
 
 entre otros datos.
 
@@ -208,17 +207,20 @@ Si querés investigar, podés ingresar a la dirección https://etherscan.io/txs,
 Cuando una transacción se crea, es recibida por todos los nodos mineros de la red, que las agrupan hasta formar un bloque. Cada bloque contiene
 
 * un **hash**, acompañado de los campos **difficulty** y **nonce** que explicaremos a continuación
+
+![image](../images/block-structure.png)
+
 * **gas used**, que se refiere a la cantidad de combustible utilizado para procesar las transacciones que están en el bloque
 * **gas limit**, el máximo de combustible permitido: esto evita que en un mismo bloque haya muchas transacciones que sean computacionalmente costosas, ya que pasarán a formar parte del próximo bloque. Por ejemplo, si el gas limit es 1.000, y el gas used es 800, si tenemos una transacción de 250 no formará parte de ese bloque.
-* **miner**, el nodo que a la larga será el ganador del proceso de minado
-* **number**, el número correlativo que ocupa el bloque en la _blockchain_
+* **mined by**, el nodo que a la larga será el ganador del proceso de minado
+* **block height**, el número correlativo que ocupa el bloque en la _blockchain_
 * **parent hash**, o puntero al bloque anterior
 * **transactions**, apuntando al conjunto de transacciones que conforman el bloque. Por una cuestión de optimización, se trabaja con un árbol binario o **Merkle tree** que permite rápidamente validar el conjunto de transacciones dentro del bloque. Para profundizar más pueden ver [este video](https://www.youtube.com/watch?v=fB41w3JcR7U)
 * **timestamp**, con el momento de creación del bloque
 
 Podés navegar por la página etherscan hasta llegar a un bloque, como el https://etherscan.io/block/7221830:
 
-![image](../images/block_structure.png)
+![image](../images/block-structure-2.png)
 
 ### Proof of work para un bloque
 
@@ -246,7 +248,7 @@ Cuando un minero obtiene el hash adecuado para el bloque
 
 * actualiza el campo _nonce_ en el bloque con el valor que resolvió la _proof of work_ (hay otro campo _nonce_ en la transacción pero permite evitar duplicados en el envío)
 * luego agrega el nuevo bloque a la blockchain, esto implica relacionar el último bloque con el anterior y viceversa
-* cobra su comisión o _fee_ (esta es la única forma de generar ether de la nada, por eso la palabra minero recuerda la idea de "extracción" de un mineral escaso)
+* cobra su comisión o _fee_ como hemos visto (ésta es la única forma de generar ether de la nada, por eso la palabra minero recuerda la idea de "extracción" de un mineral escaso)
 * y por último dispara un broadcast a todos los otros nodos mineros, quienes ejecutarán la validación del bloque con el nuevo campo _nonce_ (operación que es rápida contra lo costoso que es encontrar la _proof of work_) y agregarán el bloque en la blockchain propia de cada nodo.
 
 ![image](../images/overallProcess.png)
