@@ -156,8 +156,6 @@ Cuando se procese exitosamente la transacción:
 - ... (100 gas x 1,5 Gwei) = 150 Gwei **se queman** (es decir, desaparecen)
 - ... (100 gas x 0,5 Gwei) = 50 Gwei se transfieren al minero como recompensa por sus servicios.
 
-Pueden ver [un ejemplo de una transacción](https://etherscan.io/tx/0x6d3f4539dccec4293f18ef8ad036f2b4f66d3fd719d17fb7096557cb930b9731).\
-
 ### Caso 2: Start Gas > al requerido para ejecutar la transacción
 
 Si queremos procesar la transacción de nuestro ejemplo y enviamos:
@@ -203,7 +201,7 @@ entre otros datos.
 
 Si querés investigar, podés ingresar a la dirección https://etherscan.io/txs, y buscar por ejemplo la última transacción haciendo click sobre ella:
 
-![image](../images/trx_structure.png)
+![image](../images/trx-structure-2.png)
 
 ### Agrupando la transacción en un bloque
 
