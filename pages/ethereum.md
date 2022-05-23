@@ -265,7 +265,7 @@ En este caso el hacker intenta colar transacciones inválidas a un nodo minero q
 
 ### 51% Attack
 
-Otra de las formas posibles para hackear la blockchain consiste en interceptar una transacción y modificar información sensible. Por ejemplo, el usuario Jorge Luis paga 100 ether en concepto de una notebook usada a Fernando. Pero podría interceptar la transacción y modificar el 100 por un 0. Esto produciría que el hash de esa transacción variara drásticamente, con lo que como consecuencia también el hash del bloque se modificará (en el ejemplo de abajo, de 9BZ pasa a PP4).
+Otra de las formas posibles para hackear la blockchain consiste en interceptar una transacción y modificar información sensible. Por ejemplo, el usuario Jorge Luis paga 100 Gwei en concepto de una notebook usada a Fernando. Pero podría interceptar la transacción y modificar el 100 por un 0. Esto produciría que el hash de esa transacción variara drásticamente, afectando también al hash del bloque (en el ejemplo de abajo, de 9BZ pasa a PP4).
 
 ![image](../images/blockchain_changed.png)
 
@@ -287,7 +287,7 @@ Para más información pueden leer estos artículos
 
 ### Proof of Stake
 
-Recientemente Ethereum informó que va a reemplazar el sistema _Proof of Work_ por un algoritmo llamado **Proof of Stake** (PoS), que consiste en eliminar la competencia de mineros y elegir por algún mecanismo determinístico quién genera los nuevos bloques en base a su "prosperidad", asumiendo que el principal interesado en conservar la confianza (y por tanto, el valor) de la criptomoneda es el mejor responsable posible para garantizar las transacciones. Dado que los poseedores de criptomonedas cuentan con una ventaja comparativa enorme respecto de sus competidores, algunas variantes más recientes tratan de democratizar la elección del creador tomando en cuenta el tiempo en el que no fueron seleccionados, números al azar, etc. Es importante señalar que **no hay recompensa por agregar bloques a la cadena**.
+Ethereum informó que está evaluando reemplazar el sistema _Proof of Work_ por un algoritmo llamado **Proof of Stake** (PoS), que consiste en eliminar la competencia de mineros y elegir por algún mecanismo determinístico quién genera los nuevos bloques en base a su "prosperidad", asumiendo que el principal interesado en conservar la confianza (y por tanto, el valor) de la criptomoneda es el mejor responsable posible para garantizar las transacciones. Dado que los poseedores de criptomonedas cuentan con una ventaja comparativa enorme respecto de sus competidores, algunas variantes más recientes tratan de democratizar la elección del creador tomando en cuenta el tiempo en el que no fueron seleccionados, números al azar, etc. Es importante señalar que **no hay recompensa por agregar bloques a la cadena**.
 
 El objetivo que está detrás es disminuir la necesidad de procesamiento que implica una altísima cantidad de consumo energético (para el 2020 se preveía usar la misma cantidad de energía en minar que el consumo en Dinamarca). 
 
