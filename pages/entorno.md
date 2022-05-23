@@ -14,7 +14,20 @@ Asumimos que tenés instalados en tu máquina
 
 Las tecnologías que vamos a instalar son
 
+### Geth - instalación local
+
 * **Geth** (go-ethereum): la plataforma Ethereum implementada en el lenguaje [Go](https://golang.org/). Para instalarlo [seguí estos pasos](https://geth.ethereum.org/docs/install-and-build/installing-geth)
+
+### Geth - instalación por Docker
+
+Otra opción es bajarte [la imagen oficial de Ethereum en Dockerhub]() y luego ejecutar
+
+```bash
+docker run -d --name ethereum-node -v ~/ethereum:/root \
+           -p 8544:8544 -p 30303:30303 \
+           ethereum/client-go
+
+### Truffle
 
 * [**Truffle**](https://truffleframework.com/): una herramienta que facilita el desarrollo, el testeo y la migración de smart contracts. Se instala mediante npm.
 
@@ -24,11 +37,15 @@ npm install -g truffle
 
 Para más detalles recomendamos [ir a la página específica de instalación](https://truffleframework.com/docs/truffle/getting-started/installation).
 
+### Solidity
+
 * [**Solidity**](https://solidity.readthedocs.io/en/v0.5.3/installing-solidity.html), el lenguaje que vamos a utilizar para crear _smart contracts_
 
 ```bash
 npm install -g solc
 ```
+
+### Ganache
 
 * **Ganache**: una aplicación que permite visualizar cuentas, bloques, transacciones y logs en forma visual. Para instalarlo seguí [este link que te descarga el ejecutable en base a tu sistema operativo](https://truffleframework.com/ganache). Si estás en Linux tenés que darle permisos de ejecución al archivo:
 
@@ -47,6 +64,7 @@ Para más información recomendamos leer [esta página](https://truffleframework
 
 ## Configuración
 
+```
 ### Creación del bloque inicial de la blockchain
 
 Como hemos visto, todo bloque tiene un link a su bloque padre, el anterior, a excepción del primer bloque que se denomina **genesis block**. Este se configura en un archivo JSON:
