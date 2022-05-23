@@ -65,7 +65,6 @@ Para más información recomendamos leer [esta página](https://truffleframework
 
 ## Configuración
 
-```
 ### Creación del bloque inicial de la blockchain
 
 Como hemos visto, todo bloque tiene un link a su bloque padre, el anterior, a excepción del primer bloque que se denomina **genesis block**. Este se configura en un archivo JSON:
