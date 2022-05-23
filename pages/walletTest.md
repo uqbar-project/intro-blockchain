@@ -13,8 +13,7 @@ Algunas pruebas que podemos hacer
     * el caso borde 2, monto cero: retiramos 0, esperamos un error
     * el caso inválido 1, retiro de un monto negativo: queremos retirar -10, esperamos un error
     * el caso inválido 2, retiro de más que la disponibilidad actual: queremos retirar 120, esperamos un error
-* para probar poner plata en una billetera,
-  * con una billetera de 100 pesos,
+* para probar el depósito de plata en una billetera,
     * el caso feliz: ponemos 200 y nos quedan 300
     * el caso borde: ponemos 0, esperamos un error
     * el caso inválido, monto negativo: queremos poner -10, esperamos un error
