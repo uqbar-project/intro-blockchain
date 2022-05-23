@@ -26,6 +26,7 @@ Otra opción es bajarte [la imagen oficial de Ethereum en Dockerhub]() y luego e
 docker run -d --name ethereum-node -v ~/ethereum:/root \
            -p 8544:8544 -p 30303:30303 \
            ethereum/client-go
+```
 
 ### Truffle
 
