@@ -21,16 +21,19 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-    - name: Go deep inside dapp folder
-      run: cd monedero-react
     - name: Download dependencies with npm
       run: npm install
+      working-directory: ./monedero-react
     - run: npm ci
+      working-directory: ./monedero-react    
     - run: npm run lint && npm run build --if-present
+      working-directory: ./monedero-react    
     - name: Run the tests and generate coverage report
       run: npm test -- --coverage
+      working-directory: ./monedero-react
     - name: Adding coverage badge
       uses: demyanets/angular-coverage-badges-action@v1
+      working-directory: ./monedero-react
       with:
         coverage-summary-path: ./coverage/coverage-summary.json
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}        
