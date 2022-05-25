@@ -33,7 +33,6 @@ jobs:
       working-directory: ./monedero-react
     - name: Adding coverage badge
       uses: demyanets/angular-coverage-badges-action@v1
-      working-directory: ./monedero-react
       with:
         coverage-summary-path: ./coverage/coverage-summary.json
-        github_token: ${{ secrets.GITHUB_TOKEN }}        
+        github_token: ${{ secrets.GITHUB_TOKEN }}
