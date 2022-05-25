@@ -25,6 +25,13 @@
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
 module.exports = {
+  compilers: {
+    solc: {
+      version: "0.8.0"  // A version or constraint - Ex. "^0.5.0"
+                        // Can be set to "native" to use a native solc or
+                        // "pragma" which attempts to autodetect compiler versions
+    }
+  },
   /**
    * Networks define how you connect to your ethereum client and let you set the
    * defaults web3 uses to send transactions. If you don't specify one truffle
@@ -34,7 +41,6 @@ module.exports = {
    *
    * $ truffle test --network <network-name>
    */
-
   networks: {
     rpc: {
       host: "localhost",
@@ -49,11 +55,11 @@ module.exports = {
       gas: 2000000
     },
 
-    falopa: {
+    local: {
       host: "localhost", //our network is running on localhost
-      port: 8547, // port where your blockchain is running
+      port: 7545, // port where your blockchain is running
       network_id: '*',
-      from: '0xd8C38007C5196775BeF149B21265Bd6ae45cF20A', // use the account-id generated during the setup process
+      from: '0x5b5637d9e875F571cFd1dBebEb1A6Be556D38338', // use the account-id generated during the setup process
       gas: 2000000
     },
 
@@ -76,7 +82,7 @@ module.exports = {
       network_id: 58343,      // Custom network
       gas: 6721975,           // Gas sent with each transaction (default: ~6700000)
       gasPrice: 20000000000,  // 20 gwei (in wei) (default: 100 gwei)
-      from: '0x873F8ae37e466A51874cDd8A13e19227BeC2d0Bb',      // Account to send txs from (default: accounts[0])
+      from: '0x5b5637d9e875F571cFd1dBebEb1A6Be556D38338',      // Account to send txs from (default: accounts[0])
     },
     // Useful for deploying to a public network.
     // NB: It's important to wrap the provider as a function.

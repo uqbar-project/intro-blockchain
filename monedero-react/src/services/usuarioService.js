@@ -21,7 +21,8 @@ class UsuarioService {
     this.init()
   }
 
-  async validar(usuario, password) {
+  // El segundo parámetro es password
+  async validar(usuario) {
     const account = cuentas.find((acc) => acc.username === usuario)
     if (!account) {
       throw new Error('El usuario no existe')

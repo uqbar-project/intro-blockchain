@@ -23,7 +23,7 @@ Las tecnologías que vamos a instalar son
 Otra opción es bajarte [la imagen oficial de Ethereum en Dockerhub]() y luego ejecutar
 
 ```bash
-docker run -d --name ethereum-node -v ~/ethereum:/root \
+docker run -d --name ethereum-node2 -v ~/ethereum:/root \
            -p 8544:8544 -p 30303:30303 \
            ethereum/client-go
 ```
