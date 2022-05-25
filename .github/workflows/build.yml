@@ -31,8 +31,6 @@ jobs:
     - name: Run the tests and generate coverage report
       run: npm test -- --coverage
       working-directory: ./monedero-react
-    - name: check directory folder
-      run: find . -type f | grep coverage      
     - name: Adding coverage badge
       uses: demyanets/angular-coverage-badges-action@v1
       with:
