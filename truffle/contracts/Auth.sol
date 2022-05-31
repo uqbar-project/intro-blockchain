@@ -21,7 +21,7 @@ contract Auth {
         users[user.name] = user;
     }
 
-    // Login al sistema, si funciona ok devuelve la dirección de la persona
+    // Login al sistema, devuelve si funciona ok/nok
     function login(string memory name, string memory password) public view returns (bool) {
         User memory user = users[name];
         return user.existing && 

@@ -12,7 +12,7 @@ export function LoginForm() {
   
   async function login() {
     try {
-      await usuarioService.validar(usuario, password)
+      await usuarioService.login(usuario, password)
       navigate('/wallet')
     } catch (e) {
       console.log(e)

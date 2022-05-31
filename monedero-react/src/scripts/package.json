@@ -1,0 +1,15 @@
+{
+  "name": "crear-cuentas-node",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Carga datos iniciales de usuarios",
+  "main": "crearCuentas.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "web3": "^1.7.3"
+  }
+}

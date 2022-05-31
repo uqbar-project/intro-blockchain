@@ -1,4 +1,4 @@
-import { billeteraService, usuarioService } from '../services/usuarioService'
+import { usuarioService } from '../services/usuarioService'
 import { Chip } from 'primereact/chip'
 import { Knob } from 'primereact/knob'
 import { InputText } from 'primereact/inputtext'
@@ -6,6 +6,7 @@ import { Button } from 'primereact/button'
 import { Toast } from 'primereact/toast'
 import { useNavigate } from 'react-router-dom'
 import { createRef, useState } from 'react'
+import { billeteraService } from '../services/billeteraService'
 
 export function WalletForm() {
   const usuario = usuarioService.usuario
@@ -15,19 +16,16 @@ export function WalletForm() {
   const navigate = useNavigate()
   
   async function poner() {
-    try {
-      const nuevoSaldo = await billeteraService.poner(monto)
-      setSaldo(nuevoSaldo)
-      setMonto(0)
-    } catch (e) {
-      console.log(e)
-      toast.current.show({severity: 'error', summary: 'Error al poner plata en la billetera virtual', detail: e.message})
-    }    
+    await actualizarBilletera(() => billeteraService.poner(monto))
   }
 
   async function sacar() {
+    await actualizarBilletera(() => billeteraService.sacar(monto))
+  }
+
+  async function actualizarBilletera(operacion) {
     try {
-      const nuevoSaldo = await billeteraService.sacar(monto)
+      const nuevoSaldo = await operacion()
       setSaldo(nuevoSaldo)
       setMonto(0)
     } catch (e) {
@@ -48,7 +46,7 @@ export function WalletForm() {
         <Chip label={usuario} icon="pi pi-user" />
       </div>
       <div className="section-group">
-        <Knob value={saldo} readonly={true} max={saldo > 1000 ? saldo * 2 : 1000}/>
+        <Knob value={saldo} readOnly={true} max={Math.max(saldo * 2, 1000)}/>
       </div>
       <div className="section-group">
       <InputText placeholder="Monto en pesos (debe ser positivo)" value={monto} onChange={(e) => setMonto(e.target.value)} />
