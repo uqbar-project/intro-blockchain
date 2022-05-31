@@ -1,4 +1,4 @@
-import { authContract, smartContractAccount } from "./web3Wrapper.js"
+import { authContract, smartContractAccount } from "../services/web3Wrapper.js"
 
 // Hay que sacarlas de Ganache
 export const users = [
@@ -17,13 +17,23 @@ export const users = [
       password: '123',
       wallet_address: '0x8C99F0689008471A43545b713f0c9a44dD0eE295',
   },
+  {
+    name: 'jorgito',
+    password: '123',
+    wallet_address: '0x0904d75a810a06CD953774ffFAEc46b7B5bEF6bc',
+},
 ]
 
 async function crearUsuarios() {
     for (const user of users) {
         try {
-            await authContract.methods.register(user).send({ from: smartContractAccount, gas: 3000000 })
-            console.info(`Usuario ${user.name} creado`)
+            const userExist = await authContract.methods.exists(user.name).call()
+            if (userExist) {
+                console.info(`Usuario ${user.name} ya existe`)
+            } else {
+                await authContract.methods.register(user).send({ from: smartContractAccount, gas: 3000000 })
+                console.info(`Usuario ${user.name} creado`)
+            }
         } catch (e) {
             console.error(e)
         }
@@ -32,5 +42,5 @@ async function crearUsuarios() {
 
 console.info('Creando usuarios')
 crearUsuarios().then(() => {
-    console.info('Usuarios creados')
+    console.info('Script finalizado')
 })
