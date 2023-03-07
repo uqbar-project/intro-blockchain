@@ -73,7 +73,7 @@ truffle migrate --reset
 
 ## Creación de usuarios
 
-Para crear los usuarios utilizamos un script escrito en Node en la carpeta [scripts](./../monedero-react/src/scripts/):
+Para crear los usuarios evaluamos en la carpeta `monedero-react` el siguiente comando:
 
 ```bash
 npm run seed
