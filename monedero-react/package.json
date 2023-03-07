@@ -34,7 +34,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "seed": "cd src/scripts && npm run seed"
+    "seed": "cd ./src/scripts && npm run seed"
   },
   "eslintConfig": {
     "extends": [

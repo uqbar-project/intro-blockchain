@@ -23,32 +23,62 @@ Pueden ver el archivo `package.json` para más información.
 
 ## Conexión a la blockchain
 
-Crearemos un servicio, donde tomaremos la configuración según el archivo `truffle-config.js`:
+La configuración del archivo `truffle-config.js` nos permitirá crear un archivo donde definimos
+
+- las direcciones válidas para usar
+- cada smart contract fue creado utilizando una dirección, vamos a definirlo aquí
+- y para poder obtener una referencia a cada smart contract (Wallet, Auth) vamos a utilizar el abi que define los tipos de cada función que podemos ejecutar
+
+Esto aparece enn el archivo [blockchainService](./src/../../monedero-react/src/services/blockchainService.js).
 
 ```js
-import Web3 from 'web3'
-import { cuentas } from './cuentas'
+export const addresses = [
+  '0xE9BbA9735f430156eB563C793Dc53b8F42C783DE',
+  '0x59283dd5EBF26705f135A3d0d7dDc9deEA45ef68',
+  '0x3A5123002c4546dE724C79B10F610930B2Ec2207',
+  '0x77D63C08b727cA038EB943BAa3B37c7De48BB208',
+  '0xbB0b6deBABeAae893fe34f0A9dD2a411248b94B1',
+]
+
+// Cuentas a generar
+export const cuentas = [
+  {
+      address: addresses[0],
+      balance: 0,
+      username: 'dodain'
+  },
+  {
+      address: addresses[1],
+      balance: 0,
+      username: 'juan'
+  },
+  {
+      address: addresses[2],
+      balance: 0,
+      username: 'dini'
+  },
+]
+
+// Se obtiene de ingresar a `truffle console` y pedirle `JSON.stringify(Wallet.abi)` y `JSON.stringify(Auth.abi)`
+const walletABI = [...]
+const authABI = [...]
 
 // hay que usar el puerto y host que tiene truffle-config.js
 const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
 
-const walletABI = ...
-    // copiar el output de la consola truffle cuando se ejecutó el comando
-    // JSON.stringify(Wallet.abi)
-    // ojo si crean funciones adicionales, deben volver a ejecutar el comando JSON.stringify(Wallet.abi)
-    // y copiarlo nuevamente porque no estarán publicadas las funciones
+// Importante, cuando deployemos hay que registrar el contract address que nos da la truffle console
+// Replacing 'Wallet'
+// ------------------
+// > transaction hash:    0x32a69f7151fc988f3dbeaf9132dc5492704dac7889fc8f03dfdc27585ddbc30d
+// > Blocks: 0            Seconds: 0
+// > contract address:    0x84F39C6a769ffBFBb8F88f03c989f0584c71F718
+export const walletContract = new web3
+  .eth
+  .Contract(walletABI, '0xf4C0837214122137BC675a5b719D6c18582a1580')
 
-// Address que sale de la solapa Contracts en Ganache, correspondiente al Smart Contract Wallet
-// (con el que se deployó, como veremos a continuación)
-const walletAddress = '0x17B045f1CB1BA5C01acc019BbFfFb4171CC1246E'
-web3.eth.defaultAccount = web3.eth.accounts[0]
-
-const walletContract = new web3
-    .eth
-    .Contract(walletABI, walletAddress)
-
-// Address que sale de cualquiera de las cuentas de Ganache
-const txAccount = '0xFc0cf8AD2b9d7B6aa2836B267C35BBD5357D5876'
+export const authContract = new web3
+  .eth
+  .Contract(authABI, '0x5B50e99C6519F0563c752ebeF473a49F24101532')
 ```
 
 Para obtener la address correspondiente al Smart Contract Wallet, podemos
@@ -63,12 +93,12 @@ Para obtener la address correspondiente al Smart Contract Wallet, podemos
 
 ## Levantar la app
 
-- levantar Ganache en un puerto, supongamos 8545
+- levantar Ganache en un puerto, el que venimos usando es el 8545
 - si esa instancia no tiene nuestro Smart Contract, debemos compilar e instalarlo en dicha red mediante los comandos
 
 ```bash
-truffle compile
-truffle migrate --reset
+truffle compile --network development           # o el nombre de la red definido en truffle-config.js
+truffle migrate --reset --network development
 ```
 
 ## Creación de usuarios
@@ -79,7 +109,7 @@ Para crear los usuarios evaluamos en la carpeta `monedero-react` el siguiente co
 npm run seed
 ```
 
-Tenemos que verificar previamente que el contrato de Auth referencie a la cuenta correcta como explicamos anteriormente (la cuenta del Smart Contract Auth se puede ver importando el proyecto y buscando la cuenta asociada). En [este archivo](./../monedero-react/src/scripts/crearCuentas.js) podés fijarte los usuarios y contraseñas que se crean.
+En [este archivo](./../monedero-react/src/scripts/crearCuentas.js) podés fijarte los usuarios y contraseñas que se crean, tomando como base el mismo archivo [blockchainService.js](./../monedero-react/src/scripts/blockchainService.js) que tiene un soft link hacia el que define la aplicación React.
 
 ## Demo de la app
 
@@ -129,7 +159,7 @@ En general [hay varias formas de resolver la llamada](https://web3js.readthedocs
 objetoSmartContract.methods.metodoAEjecutar(parametros).call()
 ```
 
-donde call() debe invocarse sin parámetros, que van seguidos al método a ejecutar. Recordemos que el objeto walletContract se obtiene en el archivo setup:
+donde call() debe invocarse sin parámetros, que van seguidos al método a ejecutar. Recordemos que el objeto walletContract se obtiene en el archivo `blockchainService.js`:
 
 ```js
 const walletContract = new web3

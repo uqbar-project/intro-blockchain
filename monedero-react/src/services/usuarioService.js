@@ -1,5 +1,5 @@
 import { billeteraService } from './billeteraService'
-import { authContract } from './web3Wrapper'
+import { authContract } from './blockchainService'
 
 class UsuarioService {
   constructor() {

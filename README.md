@@ -16,7 +16,7 @@ El presente ejemplo consiste en una aplicación que muestra cómo se define un *
 
 ## TODO
 
-- Fix CI
+X- Fix CI
 - Ver si se puede fijar las cuentas de los smart contracts y de ganache
 - Tener los nombres de las cuentas en una lista única y utilizar esas referencias
 - Automatizar la creación de los
