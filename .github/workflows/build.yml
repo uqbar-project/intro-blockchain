@@ -32,5 +32,6 @@ jobs:
     - name: Run the tests and generate coverage report
       run: npm test -- --coverage
     - name: Generating coverage badges
-      working-directory: ./monedero-react
       uses: jpb06/jest-badges-action@latest
+        with:
+            coverage-summary-path: ./monedero-react/coverage/coverage-summary.json
