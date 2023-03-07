@@ -71,9 +71,19 @@ truffle compile
 truffle migrate --reset
 ```
 
-- iniciar la aplicación React con `yarn start`
+## Creación de usuarios
+
+Para crear los usuarios utilizamos un script escrito en Node en la carpeta [scripts](./../monedero-react/src/scripts/):
+
+```bash
+npm run seed
+```
+
+Tenemos que verificar previamente que el contrato de Auth referencie a la cuenta correcta como explicamos anteriormente (la cuenta del Smart Contract Auth se puede ver importando el proyecto y buscando la cuenta asociada). En [este archivo](./../monedero-react/src/scripts/crearCuentas.js) podés fijarte los usuarios y contraseñas que se crean.
 
 ## Demo de la app
+
+Iniciar la aplicación React con el comando `npm start`:
 
 ![Demo Wallet](../images/demoWallet3.gif)
 

@@ -16,21 +16,21 @@ export function WalletForm() {
   const navigate = useNavigate()
   
   async function poner() {
-    await actualizarBilletera(() => billeteraService.poner(monto))
+    await actualizarBilletera(() => billeteraService.poner(monto), 'poner')
   }
 
   async function sacar() {
-    await actualizarBilletera(() => billeteraService.sacar(monto))
+    await actualizarBilletera(() => billeteraService.sacar(monto), 'sacar')
   }
 
-  async function actualizarBilletera(operacion) {
+  async function actualizarBilletera(operacion, nombreOperacion) {
     try {
       const nuevoSaldo = await operacion()
       setSaldo(nuevoSaldo)
       setMonto(0)
     } catch (e) {
       console.log(e)
-      toast.current.show({severity: 'error', summary: 'Error al sacar plata en la billetera virtual', detail: e.message})
+      toast.current.show({severity: 'error', summary: `Error al ${nombreOperacion} plata en la billetera virtual`, detail: e.message})
     }    
   }
 
