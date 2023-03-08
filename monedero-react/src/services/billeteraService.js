@@ -1,7 +1,9 @@
 import { usuarioService } from "./usuarioService"
-import { handleRPCError, walletContract } from "./web3Wrapper"
+import { walletContract } from "./blockchainService"
+import { handleRPCError } from "./errorHandling"
 
 class BilleteraService {
+  
   async poner(monto) {
     try {
       await walletContract.methods

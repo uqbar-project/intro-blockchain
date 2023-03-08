@@ -128,6 +128,15 @@ truffle compile
 truffle migrate
 ```
 
+## Auth
+
+En el ejemplo tenemos un segundo smart contract llamado **auth** que tiene como servicios
+
+- validar un usuario y contraseña
+- registrar un nuevo usuario
+
+Podés ver su implementación en [este archivo](../truffle/contracts/Auth.sol).
+
 ## Otros tutoriales
 
 * [Getting started with ganache](https://www.codementor.io/swader/developing-for-ethereum-getting-started-with-ganache-l6abwh62j)

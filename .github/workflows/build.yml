@@ -25,6 +25,12 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
+    - name: Start Blockchain container
+      working-directory: docker
+      run: docker-compose -f "docker-compose.yml" up -d --build
+    - name: Test Smart contract
+      working-directory: truffle
+      run: npm install -g truffle && truffle test ./test/wallet.js && truffle test ./test/auth.js
     - name: Download dependencies with npm
       run: npm install
     - run: npm ci
@@ -35,3 +41,7 @@ jobs:
       uses: jpb06/jest-badges-action@latest
       with:
           coverage-summary-path: ./monedero-react/coverage/coverage-summary.json
+    - name: Stop containers
+      working-directory: docker
+      if: always()
+      run: docker-compose -f "docker-compose.yml" down
