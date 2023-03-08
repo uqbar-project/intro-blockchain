@@ -201,3 +201,10 @@ export const txAccount = '0x884e8452cd8e45c0A117E6D666C6d1510160441F'
 
 * [Ratings de peliculas](https://medium.com/@takleakshar/how-to-build-a-decentralized-full-stack-app-in-ethereum-and-react-42e63d45a208)
 * [Aplicaciones React descentralizadas](http://reactdapps.com/)
+
+## Cómo sigo
+
+Ahora podés
+
+* [Ver cómo se configura CI](./ci.md)
+* [Volver a la página central](../README.md)
