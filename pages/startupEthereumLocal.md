@@ -14,7 +14,7 @@ Los pasos para tener una red levantada son
 Continuando con este [buen tutorial](https://hackernoon.com/set-up-a-private-ethereum-blockchain-and-deploy-your-first-solidity-smart-contract-on-the-caa8334c343d), una vez que [hayas instalado todos los componentes necesarios](./entorno.md), podemos levantar la red Ethereum localmente. Para hacer esto debemos ir al directorio raíz de este proyecto, abrir una terminal y escribir
 
 ```bash
-geth --port 4000 --networkid 58343 --nodiscover --datadir=./data --maxpeers=0  --rpc --rpcport 8543 --rpcaddr 127.0.0.1 --rpccorsdomain "*" --rpcapi "eth,net,web3,personal,miner" --syncmode full --gcmode=archive
+geth --port 3100 --networkid 58343 --nodiscover --datadir=./data --maxpeers=0  --http --http.port 8543 --htpp.addr 127.0.0.1 --http.corsdomain "*" --http.api "eth,net,web3,personal,miner" --syncmode full --gcmode=archive --allow-insecure-unlock
 ```
 
 Geth recordamos que es la implementación de Ethereum en este caso en el lenguaje Go, y lo que estamos haciendo es levantar la red en el equipo local (127.0.0.1) diferentes servicios. Además de eth y net (la red privada), estaremos trabajando con
