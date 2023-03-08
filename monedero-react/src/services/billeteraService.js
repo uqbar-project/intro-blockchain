@@ -3,6 +3,7 @@ import { walletContract } from "./blockchainService"
 import { handleRPCError } from "./errorHandling"
 
 class BilleteraService {
+  
   async poner(monto) {
     try {
       await walletContract.methods

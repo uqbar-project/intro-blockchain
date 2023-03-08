@@ -43,17 +43,17 @@ export function WalletForm() {
     <div>
       <div className="titulo">Billetera virtual</div>
       <div className="section-group">
-        <Chip label={usuario} icon="pi pi-user" />
+        <Chip label={usuario} icon="pi pi-user" data-testid="usuario" />
       </div>
       <div className="section-group">
-        <Knob value={saldo} readOnly={true} max={Math.max(saldo * 2, 1000)}/>
+        <Knob value={saldo} readOnly={true} max={Math.max(saldo * 2, 1000)} data-testid="saldo"/>
       </div>
       <div className="section-group">
-      <InputText placeholder="Monto en pesos (debe ser positivo)" value={monto} onChange={(e) => setMonto(e.target.value)} />
+      <InputText placeholder="Monto en pesos (debe ser positivo)" value={monto} data-testid="monto" onChange={(e) => setMonto(e.target.value)} />
       </div>
       <div className="section-group">
-        <Button label="Poner" className="p-button-secondary" icon="pi pi-plus" onClick={poner} />
-        <Button label="Sacar" className="p-button-warning" icon="pi pi-minus" onClick={sacar} />
+        <Button label="Poner" className="p-button-secondary" icon="pi pi-plus" data-testid="poner" onClick={poner} />
+        <Button label="Sacar" className="p-button-warning" icon="pi pi-minus" data-testid="sacar" onClick={sacar} />
         <Button label="Salir" className="p-button-success" icon="pi pi-user" onClick={logout} />
       </div>
       <div className="section-group">
