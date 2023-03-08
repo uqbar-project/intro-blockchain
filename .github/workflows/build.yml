@@ -25,12 +25,12 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-    - name: Start Neo4J
+    - name: Start Blockchain container
       working-directory: docker
       run: docker-compose -f "docker-compose.yml" up -d --build
     - name: Test Smart contract
       working-directory: truffle
-      run: truffle test ./test/wallet.js && truffle test ./test/auth.js
+      run: npm install -g truffle && truffle test ./test/wallet.js && truffle test ./test/auth.js
     - name: Download dependencies with npm
       run: npm install
     - run: npm ci
