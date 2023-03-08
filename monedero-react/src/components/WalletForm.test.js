@@ -1,12 +1,10 @@
-import { render, screen, waitFor } from '@testing-library/react'
-import React from 'react'
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { act } from 'react-dom/test-utils'
 import { BrowserRouter } from 'react-router-dom'
 import { billeteraService } from '../services/billeteraService'
 import { usuarioService } from '../services/usuarioService'
 import { WalletForm } from './WalletForm'
-import userEvent from '@testing-library/user-event'
-import { walletContract } from '../services/blockchainService'
-import { act } from 'react-dom/test-utils'
 
 const saldoInicial = 150
 
