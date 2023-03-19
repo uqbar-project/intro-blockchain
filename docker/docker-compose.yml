@@ -1,25 +1,24 @@
 version: "3.9"
-
 services:
-  node:
-    image: trufflesuite/ganache-cli:latest
-    ports:
-      - "8545:8545"
+  truffle:
+    build:
+      context: .
+      target: truffle
+    depends_on:
+      - ganache
+    networks:
+      - backend
     volumes:
-      - ./ganache_data:/ganache_data
-
-    entrypoint: 
-      - node
-      - /app/ganache-core.docker.cli.js
-      - --db=/ganache_data
-      - --deterministic
-      - --db=/ganache_data
-      - --mnemonic
-      - 'live genius aerobic observe remain husband allow main disorder protect oak powder'
-      - --networkId
-      - '5777'
-      - --hostname
-      - '0.0.0.0'
-      - --debug
-# ENTRYPOINT ["node", "./build/cli.node.js"]
-# ENTRYPOINT ["node", "/app/ganache-core.docker.cli.js"]
+      - .:/home/app
+      - /home/app/node_modules
+  ganache:
+    build:
+      context: .
+      target: ganache
+    ports:
+      - 8545:8545
+    networks:
+      - backend
+networks:
+  backend:
+    driver: "bridge"
