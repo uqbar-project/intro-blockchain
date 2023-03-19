@@ -27,7 +27,7 @@ jobs:
           ${{ runner.os }}-node-
     - name: Start Blockchain container
       working-directory: ./
-      run: docker compose -f "docker-compose.yml" up -d --build
+      run: docker build . -t ganache-cli && docker run -d -p 8545:8545 ganache-cli
     - name: Test Smart contract
       working-directory: truffle
       run: npm install -g truffle && truffle test ./test/wallet.js && truffle test ./test/auth.js
