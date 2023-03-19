@@ -24,7 +24,6 @@ Para levantar una blockchain tenemos un contenedor docker con un archivo [docker
       working-directory: ./
       run: docker build . -t ganache-cli && docker run -d -p 8545:8545 ganache-cli
     - name: Test Smart contract
-    - name: Test Smart contract
       working-directory: truffle
       run: npm install -g truffle && truffle test ./test/wallet.js && truffle test ./test/auth.js
 ```
