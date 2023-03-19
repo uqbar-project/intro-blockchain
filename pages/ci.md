@@ -17,12 +17,12 @@ Esto lo dejamos para una iteración futura, dado que necesitamos tener control s
 
 ## Pruebas sobre la blockchain
 
-Para levantar una blockchain tenemos un contenedor docker con un archivo [docker-compose](./../docker/docker-compose.yml) que levanta `ganache-cli` (la aplicación Ganache por consola, sin una interfaz gráfica). Eso nos garantiza tener al menos 10 cuentas y el servicio de minado, para luego ejecutar los tests de los smart contracts. Para eso necesitamos tener instalado truffle y lo hacemos vía npm.
+Para levantar una blockchain tenemos un contenedor docker con un archivo [docker-compose.yml](./../docker/docker-compose.yml) que levanta `ganache-cli` (la aplicación Ganache por consola, sin una interfaz gráfica). Eso nos garantiza tener al menos 10 cuentas y el servicio de minado, para luego ejecutar los tests de los smart contracts. Para eso necesitamos tener instalado truffle y lo hacemos vía npm.
 
 ```yml
     - name: Start Blockchain container
       working-directory: docker
-      run: docker-compose -f "docker-compose.yml" up -d --build
+      run: docker compose -f "docker-compose.yml" up -d --build
     - name: Test Smart contract
       working-directory: truffle
       run: npm install -g truffle && truffle test ./test/wallet.js && truffle test ./test/auth.js

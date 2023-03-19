@@ -27,7 +27,7 @@ jobs:
           ${{ runner.os }}-node-
     - name: Start Blockchain container
       working-directory: docker
-      run: docker-compose -f "docker-compose.yml" up -d --build
+      run: docker compose -f "docker-compose.yml" up -d --build
     - name: Test Smart contract
       working-directory: truffle
       run: npm install -g truffle && truffle test ./test/wallet.js && truffle test ./test/auth.js
@@ -44,4 +44,4 @@ jobs:
     - name: Stop containers
       working-directory: docker
       if: always()
-      run: docker-compose -f "docker-compose.yml" down
+      run: docker compose -f "docker-compose.yml" down
