@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.19;
+pragma solidity ^0.8.24;
 
 /**
  * Smart contract que representa una billetera virtual
@@ -9,6 +9,10 @@ contract Wallet {
     //   clave => una dirección de Ethereum que representa una persona física
     //   valor => $$$ que tiene
     mapping(address => int256) public wallet;
+
+    // Versiones más nuevas requieren un constructor vacío o va a tirar un error
+    // críptico "TransactionExecutionError: An unknown RPC error occurred"
+    constructor() payable {}
 
     // validación general para poner o sacar
     modifier positive(int256 value) {

@@ -1,9 +1,13 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-pragma solidity ^0.8.19;
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.8.24;
+// pragma experimental ABIEncoderV2;
 
 contract Auth {
     mapping(string => User) public users;
+
+    // Versiones más nuevas requieren un constructor vacío o va a tirar un error
+    // críptico "TransactionExecutionError: An unknown RPC error occurred"
+    constructor() payable {}
 
     struct User {
         string name;

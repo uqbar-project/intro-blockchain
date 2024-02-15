@@ -1,0 +1,15 @@
+{
+  "name": "hardhat-project",
+  "dependencies": {
+    "@nomicfoundation/hardhat-toolbox-viem": "^2.0.0",
+    "hardhat": "^2.19.5"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-ignition-ethers": "^0.13.2",
+    "@nomicfoundation/hardhat-ignition-viem": "^0.13.2",
+    "@typescript-eslint/eslint-plugin": "^7.0.1",
+    "@typescript-eslint/parser": "^7.0.1",
+    "eslint": "^8.56.0",
+    "hardhat-abi-exporter": "^2.10.1"
+  }
+}
