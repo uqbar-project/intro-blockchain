@@ -24,6 +24,6 @@ jobs:
       - name: Generating coverage badges
         uses: jpb06/jest-badges-action@latest
         with:
-            coverage-summary-path: ./monedero-hardhat/coverage/coverage-final.json
+            coverage-summary-path: coverage/coverage-final.json
             output-folder: badges-hardhat
         
