@@ -17,6 +17,5 @@ jobs:
       - name: Environment
         uses: actions/setup-node@v4
       - name: Test
-        uses: ambersun1234/hardhat-test-action@v1
-        with:
-          network: hardhat
+        run: 
+          npx hardhat test
