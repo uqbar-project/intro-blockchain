@@ -29,7 +29,8 @@ class BilleteraService {
 }
 
   async getSaldo() {
-    return walletContract.methods.balance(usuarioService.address).call()
+    const billeteraSaldo = await walletContract.methods.balance(usuarioService.address).call()
+    return Number(billeteraSaldo ?? 0)
   }
 
 }
