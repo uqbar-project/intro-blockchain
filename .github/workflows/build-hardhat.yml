@@ -17,6 +17,6 @@ jobs:
       - name: Environment
         uses: actions/setup-node@v4
       - name: Test
-        run: 
+        run: |
           npm i
           npx hardhat test
