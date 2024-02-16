@@ -18,4 +18,5 @@ jobs:
         uses: actions/setup-node@v4
       - name: Test
         run: 
+          npm i
           npx hardhat test
