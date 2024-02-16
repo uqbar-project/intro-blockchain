@@ -23,47 +23,21 @@ La propuesta oficial de Ethereum es trabajar con un IDE online llamado [Remix](h
 * [Visual Studio Code](https://code.visualstudio.com/)
 * con el plugin [Solidity](https://github.com/juanfranblanco/vscode-solidity)
 
-De hecho, [es la configuración que sugiere Truffle](https://truffleframework.com/tutorials/configuring-visual-studio-code).
+De hecho, es la configuración que sugiere Hardhat.
 
-## Configuración de Truffle
+## Configuración de Hardhat
 
-El archivo `truffle-config.js` contiene información importante, como a cuál EVM nos vamos a conectar para trabajar. Una vez que hayamos instalado ganache, la configuración que debemos seguir es la siguiente
+En el archivo `hardhat-config.ts` podemos decir
 
-```js
-module.exports = {
-  networks: {
-    rpc: {
-      host: "localhost",
-      port: 8543
-    },
-
-    development: {
-      host: "localhost", //our network is running on localhost
-      port: 8545, // port where your blockchain is running
-      network_id: "*",
-      from: "0x884e8452cd8e45c0A117E6D666C6d1510160441F", // use the account-id generated during the setup process
-      gas: 2000000
-    },
-
-    ...
-```
-
-Dejamos toda la configuración por defecto, pero debemos revisar
-
-* el puerto donde esté levantado Ganache (8545 en nuestro caso)
-* la configuración **from** debe utilizar la primera cuenta que aparezca en la lista de cuentas de Ganache
-* el gas puede ser necesario ajustarlo en base a la complejidad computacional del contrato
-
-Si levantamos Ganache, veremos el puerto, el nombre de la red, el gas actual y la primera de las cuentas que coincide con el valor `from` de nuestra configuración de truffle:
-
-![image](../images/ganache.png)
+- a cuál EVM nos vamos a conectar para trabajar
+- qué plugins vamos a usar dentro del EVM
 
 ## Ahora sí, nuestro primer smart contract
 
 Veamos el código
 
 ```js
-pragma solidity ^0.5.0;
+pragma solidity ^0.8.24;
 
 /**
  * Smart contract que representa una billetera virtual
@@ -72,30 +46,36 @@ contract Wallet {
     // mapa
     //   clave => una dirección de Ethereum que representa una persona física
     //   valor => $$$ que tiene
-    // wallet es el nombre de la variable con visibilidad pública
-    mapping (address => int256) public wallet;
+    mapping(address => int256) public wallet;
+
+    // Versiones más nuevas requieren un constructor vacío o va a tirar un error
+    // críptico "TransactionExecutionError: An unknown RPC error occurred"
+    constructor() payable {}
 
     // validación general para poner o sacar
     modifier positive(int256 value) {
         require(value > 0, "Value must be positive");
-        _;  // delegamos la ejecución a la función que la llamó
+        _;
     }
 
     // poner plata en la billetera
     function put(address owner, int256 howMuch) public positive(howMuch) {
-        int256 money = wallet[owner];  // por defecto es 0
+        int256 money = wallet[owner]; // por defecto es 0
         money = money + howMuch;
         wallet[owner] = money;
     }
 
     // sacar plata de la billetera
     function withdraw(address owner, int256 howMuch) public positive(howMuch) {
-        int256 money = wallet[owner];  // por defecto es 0
+        int256 money = wallet[owner]; // por defecto es 0
         require(money >= howMuch, "Not enough cash");
         money = money - howMuch;
         wallet[owner] = money;
     }
 
+    function balance(address owner) public view returns (int256) {
+        return wallet[owner];
+    }
 }
 ```
 
@@ -107,26 +87,9 @@ Algunas observaciones:
 * cuando ponemos o sacamos plata, no queremos recibir un valor negativo para ese tipo de operaciones. Lo interesante es que Solidity provee un **modifier**, un decorador que se puede incorporar a una función y que ejecuta código antes o después de ella. Los guiones bajos (`_;`) en el modificador delegan la ejecución a la función que la llamó. Esto permite que escribamos primero alguna validación, o hagamos algo posteriormente.
 * también es interesante la función `require` que es similar al `assert` de algunos frameworks, una forma declarativa de escribir una condición que queremos cumplir y un mensaje de error por el cual salir si esa condición no se satisface
 
-## Migración
+## Deploy
 
-Esta parte es necesaria para poder correr las migraciones a los diferentes entornos presentes, así que vamos a crear un archivo `2_deploy_wallet.js`, donde lo único necesario es el prefijo que indica a truffle el orden en el cual encarar las migraciones (por un tema de dependencias, si un smart contract depende de otro es importante migrarlos en el orden adecuado).
-
-El deploy se escribe de esta manera:
-
-```js
-var Wallet = artifacts.require("./Wallet.sol")
-
-module.exports = function(deployer) {
-   deployer.deploy(Wallet)
-}
-```
-
-Y lo ejecutamos de la siguiente manera
-
-```bash
-truffle compile
-truffle migrate
-```
+Esta parte es necesaria para poder correr las migraciones a los diferentes entornos presentes, así que vamos a crear un archivo `deploy.ts`, donde ejecutamos en orden los deploys (por un tema de dependencias, si un smart contract depende de otro es importante desplegarlos en el orden adecuado).
 
 ## Auth
 
@@ -135,7 +98,7 @@ En el ejemplo tenemos un segundo smart contract llamado **auth** que tiene como 
 - validar un usuario y contraseña
 - registrar un nuevo usuario
 
-Podés ver su implementación en [este archivo](../truffle/contracts/Auth.sol).
+Podés ver su implementación en [este archivo](../monedero-hardhat/contracts/Auth.sol).
 
 ## Otros tutoriales
 
