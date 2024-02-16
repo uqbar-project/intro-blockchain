@@ -1,8 +1,6 @@
 
 # Instalación y configuración del entorno
 
-Vamos a seguir los pasos de [este tutorial](https://hackernoon.com/set-up-a-private-ethereum-blockchain-and-deploy-your-first-solidity-smart-contract-on-the-caa8334c343d), para lo cual debemos entender cuáles son las herramientas necesarias para tener un entorno de blockchain local.
-
 ## Pre-requisitos
 
 Asumimos que tenés instalados en tu máquina
@@ -14,30 +12,6 @@ Asumimos que tenés instalados en tu máquina
 
 Las tecnologías que vamos a instalar son
 
-### Geth - instalación local
-
-* **Geth** (go-ethereum): la plataforma Ethereum implementada en el lenguaje [Go](https://golang.org/). Para instalarlo [seguí estos pasos](https://geth.ethereum.org/docs/install-and-build/installing-geth)
-
-### Geth - instalación por Docker
-
-Otra opción es bajarte [la imagen oficial de Ethereum en Dockerhub]() y luego ejecutar
-
-```bash
-docker run -d --name ethereum-node2 -v ~/ethereum:/root \
-           -p 8544:8544 -p 30303:30303 \
-           ethereum/client-go
-```
-
-### Truffle
-
-* [**Truffle**](https://truffleframework.com/): una herramienta que facilita el desarrollo, el testeo y la migración de smart contracts. Se instala mediante npm.
-
-```bash
-npm install -g truffle
-```
-
-Para más detalles recomendamos [ir a la página específica de instalación](https://truffleframework.com/docs/truffle/getting-started/installation).
-
 ### Solidity
 
 * [**Solidity**](https://solidity.readthedocs.io/en/v0.5.3/installing-solidity.html), el lenguaje que vamos a utilizar para crear _smart contracts_
@@ -46,70 +20,28 @@ Para más detalles recomendamos [ir a la página específica de instalación](ht
 npm install -g solc
 ```
 
-### Ganache
+### Hardhat
 
-* **Ganache**: una aplicación que permite visualizar cuentas, bloques, transacciones y logs en forma visual. Para instalarlo seguí [este link que te descarga el ejecutable en base a tu sistema operativo](https://truffleframework.com/ganache). Si estás en Linux tenés que darle permisos de ejecución al archivo:
+Desde septiembre 2023, Hardhat es la opción más utilizada para trabajar en proyectos con Smart Contract dentro de la tecnología JS/TS. Es el reemplazo de Truffle + Ganache (por si estuviste buscando en los navegadores).
 
-```bash
-cd {directorio de descarga}
-chmod +x *App*
-```
+Hardhat provee
 
-También hay una versión por consola:
+- un entorno de programación, con el cual podés crear muy fácilmente un proyecto Javascript o Typescript
+- un **runner** que te permite ejecutar tareas: compilar, desplegar, testear e incluso medir la cobertura de tus tests
+- una **red** (network) donde viven tus smart contracts (aquí es donde podés levantar una consola y probarlos manualmente o bien ejecutar los tests automatizados). En esa red corre la VM llamada HRE (Hardhat Runtime Environment)
 
-```bash
-npm install -g ganache-cli
-```
+La página principal es [Hardhat](https://hardhat.org/hardhat-runner/docs/getting-started).
 
-Para más información recomendamos leer [esta página](https://truffleframework.com/docs/ganache/quickstart).
-
-## Configuración
-
-### Creación del bloque inicial de la blockchain
-
-Como hemos visto, todo bloque tiene un link a su bloque padre, el anterior, a excepción del primer bloque que se denomina **genesis block**. Este se configura en un archivo JSON:
+Todo se engloba en una carpeta donde está la configuración de Hardhat, tus smart contracts, los tests y otras cosas más que veremos luego. Para generar un proyecto desde cero podés escribir en la consola:
 
 ```bash
-mkdir project1         # creamos un directorio project1 o cualquier otro nombre...
-cd project1            # ...y dentro de este directorio...
-touch genesis.json     # ...creamos un archivo de configuración genesis.json
+npm init -y
+npm install --save-dev hardhat
+npx hardhat init
+# y seleccionar las opciones que quieras
 ```
 
-El archivo genesis.json puede tener esta apariencia
-
-```json
-{
-    "config": {
-        "chainId": 143,
-        "homesteadBlock": 0,
-        "eip150Block": 0,
-        "eip155Block": 0,
-        "eip158Block": 0
-    },
-    "alloc": {},
-    "difficulty": "0x20000",
-    "gasLimit": "0x8880000"
-}
-```
-
-De todos estos parámetros, los más relevantes para comentar son
-
-* `chainId` define un identificador del bloque inicial que es privado
-* `difficulty` establece la dificultad del algoritmo a resolver para los mineros (mientras más difícil más tardarán los mineros en poblar la blockchain)
-* `gasLimit` será el máximo que estaremos dispuesto a pagar para procesar el smart contract, es importante en caso de que haya un error en la programación de nuestro contrato (como un loop infinito)
-
-### Creación de la blockchain propiamente dicha
-
-A continuación debemos definir en qué dirección residirá la blockchain, para lo cual ejecutaremos comandos bastante sencillos:
-
-```bash
-mkdir data                             # creamos el directorio data...
-geth --datadir data init genesis.json  # ...e inicializamos la blockchain en esa carpeta
-```
-
-> **Nota:** es probable que necesites correr todos los comandos con `sudo` de acá en más.
-
-Aunque `data` es bastante representativo, pueden elegir otro nombre si quieren.
+Para más información podés ver [esta página](https://hardhat.org/hardhat-runner/docs/guides/project-setup).
 
 ## Cómo sigo
 

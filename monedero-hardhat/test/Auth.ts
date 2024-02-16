@@ -8,14 +8,11 @@ describe('Auth', function () {
   // We use loadFixture to run this setup once, snapshot that state,
   // and reset Hardhat Network to that snapshot in every test.
   async function deployAuthWithOneUser() {
-    const lockedAmount = parseGwei('1')
-
     // Contracts are deployed using the first signer/account by default
     const [userAccount] = await hre.viem.getWalletClients()
-
-    const auth = await hre.viem.deployContract('Auth', [], {
-      value: lockedAmount,
-    })
+    
+    const lockedAmount = parseGwei('1')
+    const auth = await hre.viem.deployContract('Auth', [], { value: lockedAmount, })
 
     const user = {
       name: 'jperalta',
