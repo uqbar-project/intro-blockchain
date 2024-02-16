@@ -3,16 +3,11 @@ import Web3 from 'web3'
 // hay que usar el puerto y host que tiene truffle-config.js
 const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
 
-// Se obtiene de ingresar a `truffle console` y pedirle `JSON.stringify(Wallet.abi)` y `JSON.stringify(Auth.abi)`
 import walletABI from './Wallet.json' 
 import authABI from './Auth.json'
 import { crearUsuarios } from './crearUsuarios'
 
-// Address que sale de la solapa Contracts en Ganache, correspondiente al Smart Contract Wallet
-// (con el que se deployó)
 web3.eth.defaultAccount = web3.eth.accounts[0]
-// Bug de web3 no se puede obtener
-// web3.eth.handleRevert = true
 
 // Importante, cuando deployemos hay que registrar el contract address que nos de la consola de hardhat
 //
@@ -36,7 +31,6 @@ export const authContract = new web3
   .eth
   .Contract(authABI, '0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0')
 
-// Hay que sacarlas de Ganache (están fijas por lo que si reseteamos el workspace no deberían cambiar)
 web3.eth.getAccounts().then((addresses) => {
   crearUsuarios(addresses, authContract)
 })

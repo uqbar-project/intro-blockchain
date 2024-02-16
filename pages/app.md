@@ -3,17 +3,33 @@
 
 ## Cómo conectar nuestro smart contract
 
-En la consola Truffle escribimos
+## Cómo exportar a un ABI
 
-```js
-JSON.stringify(Wallet.abi) // abi => Application Binary Interface
+Instalamos el [abi-exporter](https://www.npmjs.com/package/hardhat-abi-exporter) y ejecutamos
+
+```bash
+npx hardhat export-abi
 ```
 
-El output será importante en breve.
+Levantamos el entorno:
+
+```bash
+npx hardhat node
+```
+
+En la carpeta `abi` están los JSON, podemos generar links simbólicos a los archivos en nuestro proyecto React:
+
+```bash
+# parados en la carpeta monedero-react/src/services
+ln ../../../monedero-hardhat/abi/contracts/Wallet.sol/Wallet.json Wallet.json
+ln ../../../monedero-hardhat/abi/contracts/Auth.sol/Auth.json Auth.json
+```
+
+Estos jsons que se generan contienen la interfaz para saber qué parámetros tiene cada uno de los métodos de nuestros smart contracts.
 
 ## Aplicación React
 
-La creamos mediante CRA (create-react-app), con los siguientes componentes
+La creamos mediante vite, con los siguientes componentes
 
 * router de React
 * [Primereact](https://www.primefaces.org/primereact/)
@@ -23,93 +39,39 @@ Pueden ver el archivo `package.json` para más información.
 
 ## Conexión a la blockchain
 
-La configuración del archivo `truffle-config.js` nos permitirá crear un archivo donde definimos
+En el archivo [blockchainService](../monedero-react/src/services/blockchainService.js) accedemos a los links de los jsons y le attachamos una cuenta, que es la que va a pagar cada función `payable` (la que produce efectos colaterales, como put y withdraw):
 
-- las direcciones válidas para usar
-- cada smart contract fue creado utilizando una dirección, vamos a definirlo aquí
-- y para poder obtener una referencia a cada smart contract (Wallet, Auth) vamos a utilizar el abi que define los tipos de cada función que podemos ejecutar
+```ts
+import walletABI from './Wallet.json' 
+import authABI from './Auth.json'
+import { crearUsuarios } from './crearUsuarios'
 
-Esto aparece enn el archivo [blockchainService](./src/../../monedero-react/src/services/blockchainService.js).
+web3.eth.defaultAccount = web3.eth.accounts[0]
 
-```js
-export const addresses = [
-  '0xE9BbA9735f430156eB563C793Dc53b8F42C783DE',
-  '0x59283dd5EBF26705f135A3d0d7dDc9deEA45ef68',
-  '0x3A5123002c4546dE724C79B10F610930B2Ec2207',
-  '0x77D63C08b727cA038EB943BAa3B37c7De48BB208',
-  '0xbB0b6deBABeAae893fe34f0A9dD2a411248b94B1',
-]
-
-// Cuentas a generar
-export const cuentas = [
-  {
-      address: addresses[0],
-      balance: 0,
-      username: 'dodain'
-  },
-  {
-      address: addresses[1],
-      balance: 0,
-      username: 'juan'
-  },
-  {
-      address: addresses[2],
-      balance: 0,
-      username: 'dini'
-  },
-]
-
-// Se obtiene de ingresar a `truffle console` y pedirle `JSON.stringify(Wallet.abi)` y `JSON.stringify(Auth.abi)`
-const walletABI = [...]
-const authABI = [...]
-
-// hay que usar el puerto y host que tiene truffle-config.js
-const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
-
-// Importante, cuando deployemos hay que registrar el contract address que nos da la truffle console
-// Replacing 'Wallet'
-// ------------------
-// > transaction hash:    0x32a69f7151fc988f3dbeaf9132dc5492704dac7889fc8f03dfdc27585ddbc30d
-// > Blocks: 0            Seconds: 0
-// > contract address:    0x84F39C6a769ffBFBb8F88f03c989f0584c71F718
+// Importante, cuando deployemos hay que registrar el contract address que nos de la consola de hardhat
+//
+// Por ejemplo:
+//
+// eth_sendTransaction
+//   Contract deployment: Wallet
+//   Contract address:    0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+//   Transaction:         0xe9422757135956f4c9052db48e0e07253fcf247f6cea2e350fad21e70727c2fc
+//   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+//   Value:               0 ETH
+//   Gas used:            399536 of 399536
+//   Block #2:            0x08ab3ac6cc3937bf415af52340f821f78fbf840d4346d334b4fa03b4ab3caaff
+//
+// nos quedamos con el contract address
 export const walletContract = new web3
   .eth
-  .Contract(walletABI, '0xf4C0837214122137BC675a5b719D6c18582a1580')
-
-export const authContract = new web3
-  .eth
-  .Contract(authABI, '0x5B50e99C6519F0563c752ebeF473a49F24101532')
+  .Contract(walletABI, '0xe7f1725e7734ce288f8367e1bb143e90bb3f0512')
 ```
-
-Para obtener la address correspondiente al Smart Contract Wallet, podemos
-
-1. buscar la transacción asociada a la creación de dicho smart contract
-
-![image](../images/deDondeSacarContractAddress.png)
-
-2. o, mucho más fácil, asociar nuestro proyecto Truffle y ver en la solapa Contracts cuáles son las addresses asociadas al Wallet
-
-![wallet address](../images/ganacheTruffle.gif)
 
 ## Levantar la app
 
-- levantar Ganache en un puerto, el que venimos usando es el 8545
-- si esa instancia no tiene nuestro Smart Contract, debemos compilar e instalarlo en dicha red mediante los comandos
+- recordá que tiene que estar levantado el nodo: `npx hardhat node`
+- si esa instancia no tiene nuestro/s Smart Contract/s, debemos compilar e instalarlo en dicha red mediante el comando: `npx hardhat run scripts/deploy.ts`
 
-```bash
-truffle compile --network development           # o el nombre de la red definido en truffle-config.js
-truffle migrate --reset --network development
-```
-
-## Creación de usuarios
-
-Para crear los usuarios evaluamos en la carpeta `monedero-react` el siguiente comando:
-
-```bash
-npm run seed
-```
-
-En [este archivo](./../monedero-react/src/scripts/crearCuentas.js) podés fijarte los usuarios y contraseñas que se crean, tomando como base el mismo archivo [blockchainService.js](./../monedero-react/src/scripts/blockchainService.js) que tiene un soft link hacia el que define la aplicación React.
 
 ## Demo de la app
 
@@ -183,19 +145,7 @@ Por otra parte, poner plata en la billetera es una operación que requiere una c
 await walletContract.methods.put(account.address, amount).send({ from: txAccount })
 ```
 
-Para invocar al mensaje `send` (anteriormente `sendTransaction`), es necesario pasar una dirección que tenga suficiente gas para realizar la operación. Eso se consigue mediante estos pasos:
-
-1) Desde Ganache, solapa Accounts, buscamos alguna de las direcciones que viene cuando levanta la aplicación:
-
-![image](../images/ganache-accounts.png)
-
-Por ejemplo, podemos elegir la primera. Copiamos ese address.
-
-2) Lo pegamos en la variable `txAccount` del archivo `setup.js`
-
-```js
-export const txAccount = '0x884e8452cd8e45c0A117E6D666C6d1510160441F'
-```
+Recordá que para invocar al mensaje `send` (anteriormente `sendTransaction`), es necesario pasar una dirección que tenga suficiente gas para realizar la operación. Nosotros le pasamos una de las cuentas que te genera hardhat inicialmente, con 100 ethers (es suficiente como para hacer pruebas tranquilos).
 
 ## Otros tutoriales
 

@@ -105,5 +105,5 @@ Y eso nos devuelve
 
 Podés
 
-* [Ver cómo se hace el deploy y pruebas manuales a un entorno](./walletDeploy.md)
+* [Ver cómo integrar un frontend react con blockchain](./app.md)
 * [Volver a la página central](../README.md)

@@ -102,7 +102,6 @@ Podés ver su implementación en [este archivo](../monedero-hardhat/contracts/Au
 
 ## Otros tutoriales
 
-* [Getting started with ganache](https://www.codementor.io/swader/developing-for-ethereum-getting-started-with-ganache-l6abwh62j)
 * [Ethereum Smart Contract Tutorial](https://rubygarage.org/yblog/ethereum-smart-contract-tutorial)
 * [How to upgrade smart contracts](https://medium.com/bitclave/the-easy-way-to-upgrade-smart-contracts-ba30ba012784)
 

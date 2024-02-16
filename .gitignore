@@ -30,7 +30,6 @@ yarn-error.log*
 
 # blockchain
 data
-ganache_data
 blkchain
 node_modules/
 semantic/
