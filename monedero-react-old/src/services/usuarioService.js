@@ -13,11 +13,11 @@ class UsuarioService {
     }
 
     const address = await authContract.methods.get_address(usuario).call()
+    console.info('address', address)
 
     this.usuario = usuario
     this.address = address
-    const saldoBilletera = await billeteraService.getSaldo()
-    this.saldo = Number(saldoBilletera ?? 0)
+    this.saldo = await billeteraService.getSaldo()
   }
 
   init() {
