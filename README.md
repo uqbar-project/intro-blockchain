@@ -1,7 +1,7 @@
 
 # Blockchain - Introducción
 
-[![Build React App](https://github.com/uqbar-project/intro-blockchain/actions/workflows/build.yml/badge.svg)](https://github.com/uqbar-project/intro-blockchain/actions/workflows/build.yml) ![coverage](./badges/coverage-jest%20coverage.svg)
+[![Build React App](https://github.com/uqbar-project/intro-blockchain/actions/workflows/build.yml/badge.svg)](https://github.com/uqbar-project/intro-blockchain/actions/workflows/build.yml) ![coverage react](./badges-react/coverage-jest%20coverage.svg) | [![Test Smart Contracts](https://github.com/uqbar-project/intro-blockchain/actions/workflows/build-hardhat.yml/badge.svg)](https://github.com/uqbar-project/intro-blockchain/actions/workflows/build-hardhat.yml) ![coverage hardhat](./badges-hardhat/coverage-jest%20coverage.svg)
 
 El presente ejemplo consiste en una aplicación que muestra cómo se define un **Smart Contract** en Solidity y cómo se puede integrar con un front-end web.
 

@@ -35,3 +35,5 @@ jobs:
       uses: jpb06/jest-badges-action@latest
       with:
           coverage-summary-path: ./monedero-react/coverage/coverage-summary.json
+          output-folder: badges-react
+        
