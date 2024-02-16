@@ -1,9 +1,9 @@
 # Configuración de la integración continua
 
-El build que ejecuta Github Actions tiene por el momento estas integraciones:
+Github Actions tiene dos builds diferentes:
 
-- Levantar el entorno Blockchain
-- Levantar la aplicación React y ejecutar los tests de frontend
+- uno ejecuta las pruebas y la cobertura de los smart contracts
+- el segundo ejecuta los tests de frontend de React
 
 Por supuesto, una prueba exhaustiva end-to-end en Cypress debería levantar una blockchain en el entorno de GH actions, luego la aplicación React y tratar de hacer un flujo normal de
 
@@ -13,22 +13,28 @@ Por supuesto, una prueba exhaustiva end-to-end en Cypress debería levantar una 
 - sacar plata
 - y desloguearse
 
-Esto lo dejamos para una iteración futura, dado que necesitamos tener control sobre las cuentas que se generan en el ganache-cli que son las que necesitamos para loguearnos a la aplicación y también para poder ejecutar transacciones contra los smart contracts. Por ahora nos manejamos con estas pruebas que nos parecen más que aceptables para detectar inconvenientes.
+Esto lo dejamos para una iteración futura. Por ahora nos manejamos con estas pruebas que nos parecen más que aceptables para detectar inconvenientes.
 
-## Pruebas sobre la blockchain
+## Pruebas sobre los smart contracts
 
-Para levantar una blockchain tenemos un contenedor docker con un archivo [docker-compose.yml](./../docker/docker-compose.yml) que levanta `ganache-cli` (la aplicación Ganache por consola, sin una interfaz gráfica). Eso nos garantiza tener al menos 10 cuentas y el servicio de minado, para luego ejecutar los tests de los smart contracts. Para eso necesitamos tener instalado truffle y lo hacemos vía npm.
+Lo único que hay que tener en cuenta es un archivo de configuración para que los tests de cobertura dejen un archivo json-summary que luego levanta el action que genera el badge que publica el README. Para eso creamos el archivo `.solcover.js` donde agregamos el reporter específico:
 
-```yml
-    - name: Start Blockchain container
-      working-directory: ./
-      run: docker build . -t ganache-cli && docker run -d -p 8545:8545 ganache-cli
-    - name: Test Smart contract
-      working-directory: truffle
-      run: npm install -g truffle && truffle test ./test/wallet.js && truffle test ./test/auth.js
+```js
+module.exports = {
+  istanbulReporter: ['json', 'json-summary']
+}
 ```
 
-Por último detenemos el contenedor que levantamos anteriormente.
+El resto es sencillo, solo llamamos a un action común de node que ejecuta los tests de cobertura:
+
+```yml
+      - name: Environment
+        uses: actions/setup-node@v4
+      - name: Test
+        run: |
+          npm i
+          npx hardhat coverage
+```
 
 ## Pruebas sobre la app React
 

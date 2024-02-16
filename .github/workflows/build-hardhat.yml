@@ -20,7 +20,6 @@ jobs:
         run: |
           npm i
           npx hardhat coverage
-          ls -laR coverage
       - name: Generating coverage badges
         uses: jpb06/jest-badges-action@latest
         with:
