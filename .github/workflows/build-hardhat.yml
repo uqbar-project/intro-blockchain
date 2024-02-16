@@ -20,9 +20,10 @@ jobs:
         run: |
           npm i
           npx hardhat coverage
+          ls -laR coverage
       - name: Generating coverage badges
         uses: jpb06/jest-badges-action@latest
         with:
-            coverage-summary-path: ./monedero-hardhat/coverage/coverage.json
+            coverage-summary-path: ./coverage/coverage-final.json
             output-folder: badges-hardhat
         
