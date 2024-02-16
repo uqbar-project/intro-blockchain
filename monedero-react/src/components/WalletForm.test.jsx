@@ -10,6 +10,14 @@ const saldoInicial = 150
 
 describe('WalletForm', () => {
 
+  beforeAll(() => {
+    vi.mock('src/services/blockchainService', () => ({}))
+  })
+
+  afterAll(() => {
+    vi.clearAllMocks()
+  })
+
   billeteraService.poner = async (monto) => {
     usuarioService.saldo = usuarioService.saldo + +monto
     return usuarioService.saldo

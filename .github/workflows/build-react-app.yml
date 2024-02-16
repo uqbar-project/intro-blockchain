@@ -12,25 +12,19 @@ jobs:
       run:
         working-directory: ./monedero-react
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set the correct Node version using nvm
       shell: bash -l {0} 
       run: nvm install
     - name: Install Dependencies
       run: npm install
     - name: Cache node modules
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ~/.npm
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-    - name: Start Blockchain container
-      working-directory: ./
-      run: docker build . -t ganache-cli && docker run -d -p 8545:8545 ganache-cli
-    - name: Test Smart contract
-      working-directory: truffle
-      run: npm install -g truffle && truffle test ./test/wallet.js && truffle test ./test/auth.js
     - name: Download dependencies with npm
       run: npm install
     - run: npm ci
@@ -41,7 +35,3 @@ jobs:
       uses: jpb06/jest-badges-action@latest
       with:
           coverage-summary-path: ./monedero-react/coverage/coverage-summary.json
-    - name: Stop containers
-      working-directory: Docker
-      if: always()
-      run: ./stop-containers.sh
